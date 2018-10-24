@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.book.pojos.Book" table="books">
+
+		<!-- 主键 -->
+		<id name="id" column="id">
+			<generator class="uuid.hex" />
+		</id>
+
+		<!-- 教材名 -->
+		<property name="name" column="book_name" type="java.lang.String"
+			length="20"  />
+
+		<!-- 所属课程 -->
+		<property name="className" column="book_class_name" type="java.lang.String"
+			length="20"  />
+
+		<!-- 作者 -->
+		<property name="author" column="book_author" type="java.lang.String"
+			length="20" />
+
+		<!-- 价格 -->
+		<property name="price" column="book_price" type="java.lang.Float"
+			  />
+
+		<!-- 折扣价格 -->
+		<property name="discount" column="book_discount" type="java.lang.Float"
+			  />
+
+		<!-- 教材简介 -->
+		<property name="description" column="book_description" type="java.lang.String"
+			length="255" />
+
+		<!-- 教材图片 -->
+		<property name="bookImage" column="book_image" type="java.lang.String"
+			length="255" />
+
+		<!-- ISBN -->
+		<property name="ISBN" column="book_isbn" type="java.lang.String"
+			length="17"  />
+
+		<!-- 出版社 -->
+		<property name="press" column="book_press" type="java.lang.String"
+			length="50" />
+
+		<many-to-one name="bookType" column="booktype_id" cascade="save-update" class="com.book.pojos.BookType" />
+
+		<!-- 1-N关系 -->
+		<set name="orderitems" inverse="true" lazy="false" cascade="save-update" table="orderItems">
+			<key column="book_id" />
+			<one-to-many class="com.book.pojos.OrderItem" />
+		</set>
+
+	</class>
+</hibernate-mapping>

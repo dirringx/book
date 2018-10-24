@@ -1,0 +1,109 @@
+html,
+body,
+div,
+ul,
+li,
+span,
+img,
+a,
+button,
+input,
+select,
+table,
+td,
+tr,
+th,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+header,
+section {
+    margin: 0;
+    padding: 0;
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+img {
+    border: 0;
+}
+
+input,
+button,
+select,
+a {
+    outline: 0;
+    border: 0;
+}
+
+.clear {
+    clear: both;
+}
+
+@media only screen and (max-width: 361px) {
+    html {
+        font-size: 100%!important;
+    }
+}
+
+
+@media only screen and (min-width: 362px) and (max-width: 561px) {
+    html {
+        font-size: 125%!important;
+    }
+}
+
+@media only screen and (min-width: 561px) and (max-width: 640px) {
+    html {
+        font-size: 150%!important;
+    }
+}
+
+@media only screen and (min-width: 641px) {
+    html {
+        font-size: 175%!important;
+    }
+}
+
+@media only screen and (min-width: 750px) {
+    html {
+        font-size: 187.5%!important;
+    }
+}
+
+html,body{
+    width: 100%;
+    height: 100%;
+    font-family: "微软雅黑";
+    text-align: center;
+}
+.success-img{
+    display: block;
+    width: 8em;
+    margin: 0 auto;
+    padding-top: 30%;
+}
+.text{
+    display: block;
+    margin-top: 1.2em;
+    font-size: 1.5em;
+    color: #f4bf6a;
+}
+.return-text{
+    position: absolute;
+    bottom: 3em;
+    width: 100%;
+    font-size: 0.9em;
+    color: #666;
+    text-align: center;
+}

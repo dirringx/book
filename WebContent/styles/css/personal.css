@@ -1,0 +1,155 @@
+html,
+body,
+div,
+ul,
+li,
+span,
+img,
+a,
+button,
+input,
+select,
+table,
+td,
+tr,
+th,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+header,
+section {
+    margin: 0;
+    padding: 0;
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+img {
+    border: 0;
+}
+
+input,
+button,
+select,
+a {
+    outline: 0;
+    border: 0;
+}
+
+.clear {
+    clear: both;
+}
+
+@media only screen and (max-width: 361px) {
+    html {
+        font-size: 100%!important;
+    }
+}
+
+
+@media only screen and (min-width: 362px) and (max-width: 561px) {
+    html {
+        font-size: 125%!important;
+    }
+}
+
+@media only screen and (min-width: 561px) and (max-width: 640px) {
+    html {
+        font-size: 150%!important;
+    }
+}
+
+@media only screen and (min-width: 641px) {
+    html {
+        font-size: 175%!important;
+    }
+}
+
+@media only screen and (min-width: 750px) {
+    html {
+        font-size: 187.5%!important;
+    }
+}
+
+html,body{
+    width: 100%;
+    height: 100%;
+    font-family: "微软雅黑";
+}
+.message{
+    padding-top: 2.5em;
+    padding-bottom: 1.5em;
+    font-size: 1em;
+    color: #fff;
+    text-align: center;
+    background-color: #d5b8b8;
+}
+#headPortrait{
+    margin-bottom: 0.8em;
+    width: 8em;
+    height: 8em;
+}
+.list{
+    padding-top: 0.8em;
+}
+.list>li{
+    padding-right: 0.5em;
+    height: 3em;
+    line-height: 3em;
+    font-size: 1.2em;
+    color: #444;
+    text-indent: 3em;
+}
+#change{
+    background: url(../img/changepsd.png) no-repeat;
+}
+#problem{
+    background: url(../img/feedback.png) no-repeat;
+}
+#exit{
+    background: url(../img/exit.png) no-repeat;
+}
+#change,#problem,#exit{
+    background-position: 1em 50%;
+    background-size: 1.3em 1.3em;
+}
+.arrow{
+    float: right;
+    width: 1.3em;
+    margin-top: 0.8em;
+}
+
+.nav-list{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    box-shadow: 2px 1px 5px 2px #c4c4c4;
+    width: 100%;
+    height: 3.3em;
+    background-color: #f8f8f8;
+}
+.nav-list>li{
+    display: inline-block;
+    padding:0.4em 0;
+    width: 32%;
+    font-size: 0.8em;
+    color: #444;
+    text-align: center;
+}
+.nav-img{
+    width: 1.8em;
+    height: 1.9em;
+}
+.nav-text{
+    display: block;
+}

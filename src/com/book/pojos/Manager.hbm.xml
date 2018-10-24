@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.book.pojos.Manager" table="mangers">
+
+		<!-- 主键 -->
+		<id name="id" column="id">
+			<generator class="uuid.hex" />
+		</id>
+
+		<!-- 姓名 -->
+		<property name="name" column="man_name" type="java.lang.String"
+			length="10"  />
+
+		<!-- 密码 -->
+		<property name="password" column="man_password" type="java.lang.String"
+			length="32"  />
+
+		<!-- 工好 -->
+		<property name="workNumber" column="man_workNumber" type="java.lang.String"
+			length="8"  />
+
+		<!-- 权限 -->
+		<property name="permission" column="man_permission" type="java.lang.Integer"
+			length="2"  />
+
+	</class>
+</hibernate-mapping>

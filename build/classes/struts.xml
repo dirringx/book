@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+	"http://struts.apache.org/dtds/struts-2.5.dtd">
+<struts>
+	<constant name="struts.objectFactory" value="spring" />
+	<constant name="struts.enable.DynamicMethodInvocation" value="true" />
+	<package name="book-default" namespace="/" extends="struts-default"
+		abstract="true">
+		<!-- 全局结果转发 -->
+		<global-results>
+			<result name="index">/jsp/book.jsp</result>
+			<result name="error">/comm/error.jsp</result>
+			<result name="login">/jsp/login.jsp</result>
+		</global-results>
+		<global-exception-mappings>
+			<exception-mapping result="error" exception="java.lang.Exception" />
+		</global-exception-mappings>
+	</package>
+
+	<!-- 学生 -->
+	<package name="student" extends="book-default" namespace="/stu">
+		<action name="l" class="com.book.login.LoginAction">
+			<result type="redirect">/book/b.action?method=bookList</result>
+			<result name="main">/jsp/login.jsp</result>
+			<!-- 学生登陆界面 -->
+			<result name="toLogin">/jsp/login.jsp</result>
+		</action>
+		<!-- 个人中心 -->
+		<action name="i" class="com.book.action.StudentActoin">
+			<result name="success">/jsp/student.jsp</result>
+		</action>
+	</package>
+
+	<!-- 订单 -->
+	<package name="order" extends="book-default" namespace="/order">
+		<action name="o" class="com.book.action.OrderAction">
+			<result name="success">/jsp/order.jsp</result>
+			<result name="admin">/jsp/admin/order.jsp</result>
+			<result name="show">/jsp/order.jsp</result>
+			<result name="login">/jsp/login.jsp</result>
+		</action>
+	</package>
+
+	<!-- 书籍选购 -->
+	<package name="book" extends="book-default" namespace="/book">
+		<action name="b" class="com.book.action.BookAction">
+			<result name="success">/jsp/book.jsp</result>
+			<result name="successjson">/jsp/main.jsp</result>
+		</action>
+	</package>
+
+	<!-- 管理员 -->
+	<package name="manager" extends="book-default" namespace="/admin">
+		<action name="a" class="com.book.login.LoginAction">
+			<result name="success">/jsp/admin/operation.jsp</result>
+			<result name="main">/jsp/admin/login.jsp</result>
+			<result name="mam">/jsp/admin/order.jsp</result>
+			<!-- 管理员登录界面 -->
+			<result name="toLogin">/jsp/admin/login.jsp</result>
+		</action>
+
+		<action name="m" class="com.book.action.ManagerAction">
+			<result name="success">/jsp/admin/operation.jsp</result>
+			<result name="order">/jsp/admin/order.jsp</result>
+			<result name="book">/jsp/admin/book.jsp</result>
+			<result name="mam">/jsp/admin/order.jsp</result>
+			<result name="authorize" type="redirect">
+				/admin/auth.action?method=auth
+			</result>
+		</action>
+		
+		<action name="b" class="com.book.action.BookAction">
+			<result name="testJson">/jsp/main.jsp</result>
+		</action>
+
+		<action name="t" class="com.book.action.BookTypeAction">
+			<result name="book">/jsp/admin/book.jsp</result>
+		</action>
+
+		<action name="i" class="com.book.action.StudentActoin">
+			<result name="success">/jsp/student.jsp</result>
+		</action>
+
+		<action name="auth" class="com.book.action.AuthorizeAction">
+			<result name="success">/jsp/admin/authorize.jsp</result>
+		</action>
+	</package>
+
+</struts>

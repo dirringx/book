@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.book.pojos.Student" table="students">
+
+		<!-- 主键 -->
+		<id name="id" column="id">
+			<generator class="native" />
+		</id>
+
+		<!-- 学号 -->
+		<property name="studentID" column="stu_id" type="java.lang.String"
+			length="12" />
+
+		<!-- 姓名 -->
+		<property name="studentName" column="stu_name" type="java.lang.String"
+			length="10" />
+
+		<!-- 学院 -->
+		<property name="college" column="stu_college" type="java.lang.String"
+			length="15" />
+
+		<!-- 年级 -->
+		<property name="grade" column="stu_grade" type="java.lang.String"
+			length="4" />
+
+		<!-- 专业 -->
+		<property name="major" column="stu_major" type="java.lang.String"
+			length="10" />
+
+		<!-- 班级 -->
+		<property name="studentClass" lazy="false" column="stu_class"
+			type="java.lang.String" length="10" />
+
+		<!-- 密码 -->
+		<property name="password" column="stu_pwd" type="java.lang.String"
+			length="32" />
+
+		<!-- 权限 -->
+		<property name="permission" column="permission" type="java.lang.String" />
+
+		<!-- 1-N关联关系 -->
+		<set name="orders" inverse="true" cascade="save-update">
+			<key column="student_id" />
+			<one-to-many class="com.book.pojos.Order" />
+		</set>
+
+	</class>
+</hibernate-mapping>

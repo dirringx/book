@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans 
+  		http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+  		http://www.springframework.org/schema/aop 
+  		http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+  		http://www.springframework.org/schema/tx 
+  		http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
+  		http://www.springframework.org/schema/context
+  		http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+	<!-- 配置C3P0数据库连接池 -->
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<property name="driverClass" value="com.mysql.jdbc.Driver" />
+		<property name="jdbcUrl" value="jdbc:mysql://127.0.0.1:3306/book" />
+		<property name="user" value="root" />
+		<property name="password" value="mima123147" />
+	</bean>
+
+	<!-- LocalSessionFactoryBean加载配置 -->
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL55Dialect</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<!--
+				<prop key="hibernate.use_sql_comments">update</prop>
+				  -->
+				<prop key="hibernate.temp.use_jdbc_metadata_defaults">false</prop>
+				<prop key="cache.use_second_level_catch">false</prop>
+				<prop key="connection.autocommit">true</prop>
+			</props>
+		</property>
+		<!-- 映入实体映射文件 -->
+		<property name="mappingResources">
+			<list>
+				<value>com/book/pojos/Book.hbm.xml</value>
+				<value>com/book/pojos/OrderItem.hbm.xml</value>
+				<value>com/book/pojos/Order.hbm.xml</value>
+				<value>com/book/pojos/ClassOrder.hbm.xml</value>
+				<value>com/book/pojos/Student.hbm.xml</value>
+				<value>com/book/pojos/Manager.hbm.xml</value>
+				<value>com/book/pojos/BookType.hbm.xml</value>
+			</list>
+		</property>
+	</bean>
+
+
+	<!-- 配置事务管理器 -->
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<tx:annotation-driven transaction-manager="transactionManager" />
+
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="save*" propagation="REQUIRED" />
+			<tx:method name="del*" propagation="REQUIRED"  />
+			<tx:method name="update*" propagation="REQUIRED"  />
+			<tx:method name="add*" propagation="REQUIRED"  />
+			<tx:method name="find*" propagation="REQUIRED"  />
+			<tx:method name="get*" propagation="REQUIRED"  />
+			<tx:method name="*" read-only="true" />
+		</tx:attributes>
+	</tx:advice>
+
+	<aop:config>
+		<aop:pointcut id="daoPointCut" expression="execution(* com.book.*.*(..))" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="daoPointCut" />
+	</aop:config>
+	
+	
+	<bean id="loginAction" class="com.book.login.LoginAction" scope="prototype">
+		<property name="studentService" ref="studentService" />
+		<property name="managerService" ref="managerService" />
+	</bean>
+
+	<bean id="studentService" class="com.book.service.impl.StudentServiceImpl">
+		<property name="studentDao" ref="studentDao" />
+	</bean>
+
+	<bean id="studentDao" class="com.book.dao.impl.StudentDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="bookAction" class="com.book.action.BookAction" scope="prototype">
+		<property name="bookService" ref="bookService" />
+	</bean>
+
+	<bean id="bookService" class="com.book.service.impl.BookServiceImpl">
+		<property name="bookDao" ref="bookDao" />
+	</bean>
+
+	<bean id="bookDao" class="com.book.dao.impl.BookDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="orderAction" class="com.book.action.OrderAction" scope="prototype">
+		<property name="orderItemService" ref="orderItemService" />
+		<property name="orderService" ref="orderService" />
+		<property name="bookService" ref="bookService" />
+		<property name="studentService" ref="studentService" />
+	</bean>
+
+	<bean id="orderItemService" class="com.book.service.impl.OrderItemServiceImpl">
+		<property name="orderItemDao" ref="orderItemDao" />
+	</bean>
+
+	<bean id="orderItemDao" class="com.book.dao.impl.OrderItemDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="orderService" class="com.book.service.impl.OrderServiceImpl">
+		<property name="orderDao" ref="orderDao" />
+	</bean>
+
+	<bean id="orderDao" class="com.book.dao.impl.OrderDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="managerAction" class="com.book.action.ManagerAction"
+		scope="prototype">
+		<property name="managerService" ref="managerService" />
+	</bean>
+
+	<bean id="bookTypeAction" class="com.book.action.BookTypeAction"
+		scope="prototype">
+		<property name="bookTypeService" ref="bookTypeService" />
+		<property name="bookService" ref="bookService" />
+	</bean>
+
+	<bean id="bookTypeService" class="com.book.service.impl.BookTypeServiceImpl">
+		<property name="bookTypeDao" ref="bookTypeDao" />
+	</bean>
+
+	<bean id="bookTypeDao" class="com.book.dao.impl.BookTypeDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<!-- <bean id="bookType" class="com.book.pojos.BookType"></bean> -->
+	<bean id="managerService" class="com.book.service.impl.ManagerServiceImpl">
+		<property name="managerDao" ref="managerDao" />
+	</bean>
+
+	<bean id="managerDao" class="com.book.dao.impl.ManagerDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="authorizeAction" class="com.book.action.AuthorizeAction"
+		scope="prototype">
+		<property name="studentService" ref="studentService" />
+	</bean>
+
+</beans>

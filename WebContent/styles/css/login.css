@@ -1,0 +1,143 @@
+html,
+body,
+div,
+ul,
+li,
+span,
+img,
+a,
+button,
+input,
+select,
+table,
+td,
+tr,
+th,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+header,
+section {
+    margin: 0;
+    padding: 0;
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+img {
+    border: 0;
+}
+
+input,
+button,
+select,
+a {
+    outline: 0;
+    border: 0;
+}
+
+.clear {
+    clear: both;
+}
+
+@media only screen and (max-width: 361px) {
+    html {
+        font-size: 100%!important;
+    }
+}
+
+
+@media only screen and (min-width: 362px) and (max-width: 561px) {
+    html {
+        font-size: 125%!important;
+    }
+}
+
+@media only screen and (min-width: 561px) and (max-width: 640px) {
+    html {
+        font-size: 150%!important;
+    }
+}
+
+@media only screen and (min-width: 641px) {
+    html {
+        font-size: 175%!important;
+    }
+}
+
+@media only screen and (min-width: 750px) {
+    html {
+        font-size: 187.5%!important;
+    }
+}
+
+html,body{
+    width: 100%;
+    height: 100%;
+}
+
+.logo{
+    position: absolute;
+    top: 5em;
+    left: 50%;
+    margin-left: -3.5em;
+    width: 7em;
+}
+.form{
+    margin: 0 auto;
+    padding-top: 12em;
+    width: 80%;
+    font-family: "微软雅黑";
+    /* border: 1px solid red; */
+}
+#user,#password{
+    width: 100%;
+    height: 3em;
+    border-bottom: 2px solid #eee;
+    text-indent: 3em;
+    font-size: 1em;
+}
+#user{
+    background: url(../img/user.png) no-repeat center left;
+    background-size: 2.5em;
+}
+#password{
+    margin-top: 1em;
+    background: url(../img/password.png) no-repeat center left;
+    background-size: 2.5em;
+}
+input::placeholder{
+    font-size: 1em;
+}
+#login{
+    margin-top: 1.5em;
+    width: 100%;
+    height: 2.5em;
+    border: 1px solid #b4b4b4;
+    border-radius: 5px;
+    font-size: 1em;
+    color: #6f766c;
+    background-color: #ebf2e6;
+}
+
+.footer{
+    position: absolute;
+    bottom: 0;
+    border-top: 2px solid #eee;
+    padding-top: 2em;
+    padding-bottom: 2em;
+    width: 100%;
+    font-size: 0.8em;
+    color: #a7a7a7;
+    text-align: center;
+}

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.book.pojos.ClassOrder" table="class_orders">
+
+		<!-- 主键 -->
+		<id name="id" column="id">
+			<generator class="uuid.hex" />
+		</id>
+
+		<!-- 订单编号 -->
+		<property name="orderNo" column="order_no" type="java.lang.String"
+			length="15"  />
+
+		<!-- 班级 -->
+		<property name="clasz" column="clasz" type="java.lang.String"
+			length="4"  />
+
+		<!-- 学年 -->
+		<property name="grade" column="grade" type="java.lang.String"
+			length="4"  />
+
+		<!-- 价格 -->
+		<property name="price" column="price" type="java.lang.Float"
+			 />
+
+		<!-- 数量 -->
+		<property name="sales" column="sales" type="java.lang.Integer"
+			 />
+
+		<!-- 付款状态 -->
+		<property name="pay" column="pay" type="java.lang.Boolean"
+			 />
+
+		<!--领取状态 -->
+		<property name="get" column="get" type="java.lang.Boolean"
+			 />
+
+		<!-- 书籍 -->
+		<property name="bookISBN" column="book_isbn" type="java.lang.String"
+			 />
+
+		<!-- 订单时间 -->
+		<property name="orderTime" column="order_time" type="timestamp"
+			 />
+
+	</class>
+</hibernate-mapping>

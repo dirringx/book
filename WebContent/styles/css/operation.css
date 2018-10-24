@@ -1,0 +1,126 @@
+html,
+body,
+div,
+ul,
+li,
+span,
+img,
+a,
+button,
+input,
+select,
+table,
+td,
+tr,
+th,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+header,
+section {
+    margin: 0;
+    padding: 0;
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+img {
+    border: 0;
+}
+
+input,
+button,
+select,
+a {
+    outline: 0;
+    border: 0;
+}
+html,body{
+    width: 100%;
+    height: 100%;
+}
+.wrap{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-width: 700px;
+    min-height: 500px;
+    background-color: #e4f3ff;
+    background: linear-gradient(#fff,#c7e7ff);
+}
+.choose{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -30%;
+    margin-top: -100px;
+    width: 60%;
+    height: 200px;
+    overflow: hidden;
+}
+.choose input{
+    display: inline-block;
+    font-size: 25px;
+    color: #fff;
+    background-color: #8fccfa;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.choose #bookManage{
+    float: left;
+    background-image: url(../img/book_manage.png);
+    background-repeat: no-repeat;
+    background-position: 10% 10%;
+    width: 200px;
+    height: 200px;
+}
+.choose #grantManage{
+    float: right;
+    background-image: url(../img/authorize.png);
+    background-repeat: no-repeat;
+    background-position: 10% 10%;
+    width: 200px;
+    height: 200px;
+    border: none;
+   
+}
+.head{
+    position: relative;
+    padding: 15px 2%;
+    text-align: right;
+    overflow: hidden;
+    }
+.home{
+    float: left;
+}
+.home>img{
+    width: 50px;
+}
+.teacher{
+    margin-right: 20px;
+    font-size: 16px;
+    color: #444;
+}
+.loginout{
+    display: inline-block;
+    width: 58px;
+    font-size: 18px;
+    color: #2397ee;
+    text-indent: 1.2em;
+    background:url(../img/loginout.png) no-repeat center left;
+}
+.border{
+    position: absolute;
+    bottom: 10px;
+    right: 2%;
+}
