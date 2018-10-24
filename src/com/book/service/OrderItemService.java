@@ -5,6 +5,12 @@ import com.book.pojos.OrderItem;
 
 public interface OrderItemService extends BaseService<OrderItem>{
 
-	public OrderItem findByBook(String id);
+	/**
+	 * 通过书籍查找订单
+	 * 
+	 * @param id
+	 * @return
+	 */
+	OrderItem findByBook(String id);
 	
 }

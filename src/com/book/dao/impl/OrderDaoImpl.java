@@ -11,10 +11,7 @@ public class OrderDaoImpl extends BaseDaoImpl<Order> implements OrderDao {
 
 	public List<Order> findOrderBystudentID(int id) {
 		String hql = "from Order o where o.student.id = ?";
-		List<Order> orders = (List<Order>) this.getHibernateTemplate().find(hql, id);
-		if (orders == null || orders.isEmpty())
-			return null;
-		return orders;
+		return (List<Order>) this.getHibernateTemplate().find(hql, id);
 	}
 
 	public Order findOrderByBookISBN(String ISBN) {
@@ -29,11 +26,9 @@ public class OrderDaoImpl extends BaseDaoImpl<Order> implements OrderDao {
 	public Order findByorderNo(String orderNo) {
 		String hql = "from Order o where o.orderNo=?";
 		List<Order> orders = (List<Order>) this.getHibernateTemplate().find(hql, orderNo);
-		if (orders == null || orders.isEmpty()) {
+		if (orders == null || orders.isEmpty())
 			return null;
-		}
 		return orders.get(0);
-
 	}
 
 }

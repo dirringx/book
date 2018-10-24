@@ -1,7 +1,5 @@
 package com.book.action;
 
-import java.util.List;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -21,25 +19,29 @@ public class StudentActoin extends BaseAction {
 
 	private String password;
 
+	/**
+	 * 学生个人中心
+	 * 
+	 * @return
+	 */
 	public String index() {
-		return "success";
+		Student student = (Student) ActionContextUtils.getAttribute("student", "session");
+		// 没有学生用户的session缓存信息返回登陆界面
+		if (student == null)
+			return "login";
+		return SUCCESS;
 	}
 
-	public String show() {
-		try {
-			List<Student> students = studentService.findStudentByPermission("1");
-			System.out.println(students.size());
-		} catch (Exception e) {
-
-		}
-		return "success";
-	}
-
+	/**
+	 * 修改密码
+	 * 
+	 * @return
+	 */
 	public String update() {
 		Student s = (Student) ActionContextUtils.getContext().getApplication().get("student");
 		s.setPassword(this.password);
 		studentService.update(s);
-		return "success";
+		return SUCCESS;
 	}
 
 	public String getPassword() {

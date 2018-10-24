@@ -14,7 +14,7 @@ public interface BookDao extends BaseDao<Book> {
 	 *            国际标准书号
 	 * @return
 	 */
-	public Book findBookByISBN(String ISBN);
+	Book findBookByISBN(String ISBN);
 
 	/**
 	 * 通过书籍类别查询
@@ -22,7 +22,5 @@ public interface BookDao extends BaseDao<Book> {
 	 * @param typeID
 	 * @return
 	 */
-	public List<Book> findBookByType(int typeID);
-
-	void add(Book obj);
+	List<Book> findBookByType(int typeID);
 }

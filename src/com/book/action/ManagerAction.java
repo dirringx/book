@@ -18,7 +18,7 @@ public class ManagerAction extends BaseAction {
 	private ManagerService managerService;
 
 	public String index() {
-		return "success";
+		return SUCCESS;
 	}
 
 	public String book() {

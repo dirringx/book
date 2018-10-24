@@ -5,5 +5,12 @@ import com.book.pojos.BookType;
 
 public interface BookTypeService extends BaseService<BookType>{
 
-	public BookType findBookByType(String major,String grade);
+	/**
+	 * 通过年级和专业信息查找书籍类别
+	 * 
+	 * @param major
+	 * @param grade
+	 * @return
+	 */
+	BookType findBookByType(String major, String grade);
 }

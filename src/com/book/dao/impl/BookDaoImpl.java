@@ -19,10 +19,7 @@ public class BookDaoImpl extends BaseDaoImpl<Book> implements BookDao {
 
 	public List<Book> findBookByType(int typeID) {
 		String hql = "from Book b where b.bookType.id = ?";
-		List<Book> books = (List<Book>) this.getHibernateTemplate().find(hql, typeID);
-		if (books == null || books.isEmpty())
-			return null;
-		return books;
+		return (List<Book>) this.getHibernateTemplate().find(hql, typeID);
 	}
 
 }

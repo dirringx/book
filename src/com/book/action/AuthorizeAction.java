@@ -37,7 +37,7 @@ public class AuthorizeAction extends BaseAction {
 			ex.printStackTrace();
 		}
 		this.show();
-		return "success";
+		return SUCCESS;
 	}
 
 	public String noAuth() {
@@ -49,7 +49,7 @@ public class AuthorizeAction extends BaseAction {
 			ex.printStackTrace();
 		}
 		this.show();
-		return "success";
+		return SUCCESS;
 	}
 
 	public String getStudentID() {

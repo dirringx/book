@@ -48,7 +48,6 @@
 		</property>
 	</bean>
 
-
 	<!-- 配置事务管理器 -->
 	<bean id="transactionManager"
 		class="org.springframework.orm.hibernate5.HibernateTransactionManager">
@@ -60,11 +59,11 @@
 	<tx:advice id="txAdvice" transaction-manager="transactionManager">
 		<tx:attributes>
 			<tx:method name="save*" propagation="REQUIRED" />
-			<tx:method name="del*" propagation="REQUIRED"  />
-			<tx:method name="update*" propagation="REQUIRED"  />
-			<tx:method name="add*" propagation="REQUIRED"  />
-			<tx:method name="find*" propagation="REQUIRED"  />
-			<tx:method name="get*" propagation="REQUIRED"  />
+			<tx:method name="del*" propagation="REQUIRED" />
+			<tx:method name="update*" propagation="REQUIRED" />
+			<tx:method name="add*" propagation="REQUIRED" />
+			<tx:method name="find*" propagation="REQUIRED" />
+			<tx:method name="get*" propagation="REQUIRED" />
 			<tx:method name="*" read-only="true" />
 		</tx:attributes>
 	</tx:advice>
@@ -73,8 +72,8 @@
 		<aop:pointcut id="daoPointCut" expression="execution(* com.book.*.*(..))" />
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="daoPointCut" />
 	</aop:config>
-	
-	
+
+
 	<bean id="loginAction" class="com.book.login.LoginAction" scope="prototype">
 		<property name="studentService" ref="studentService" />
 		<property name="managerService" ref="managerService" />

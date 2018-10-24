@@ -40,6 +40,9 @@ public class OrderAction extends BaseAction {
 
 	private String isbn;
 
+	/**
+	 * 购买状态
+	 */
 	private String np;
 
 	@Override
@@ -47,6 +50,11 @@ public class OrderAction extends BaseAction {
 		System.out.println(this.np);
 	}
 
+	/**
+	 * 显示学生下的订单信息
+	 * 
+	 * @return
+	 */
 	public String show() {
 		ActionContextUtils.removeAttrFromSession("stu_orders");
 		Student student = (Student) ActionContextUtils.getAttribute("student", "session");
@@ -78,25 +86,23 @@ public class OrderAction extends BaseAction {
 			}
 			ActionContextUtils.setAttributeToSession("stu_orders", orders);
 		} catch (Exception e) {
-			if (e.getClass() == java.util.ConcurrentModificationException.class) {
-				System.out.println("nice");
-			}
+
 		}
 		return "show";
 	}
 
+	/**
+	 * 显示订单信息
+	 * 
+	 * @return
+	 */
 	public String orderList() {
-		try {
-			Order order = orderService.findByorderNo(this.orderNo);
-			if (order != null) {
-				ActionContextUtils.setAttributeToSession("order", order);
-				List<OrderItem> orderItemList = new ArrayList<OrderItem>(order.getOrderitems());
-				if (orderItemList != null || !orderItemList.isEmpty()) {
-					ActionContextUtils.setAttributeToSession("orderBookList", orderItemList);
-				}
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
+		Order order = orderService.findByorderNo(this.orderNo);
+		if (order != null) {
+			ActionContextUtils.setAttributeToSession("order", order);
+			List<OrderItem> orderItemList = new ArrayList<OrderItem>(order.getOrderitems());
+			if (orderItemList != null || !orderItemList.isEmpty())
+				ActionContextUtils.setAttributeToSession("orderBookList", orderItemList);
 		}
 		return "admin";
 	}
@@ -116,20 +122,24 @@ public class OrderAction extends BaseAction {
 			while (orderItemListIterator.hasNext()) {
 				OrderItem ot = orderItemListIterator.next();
 				book = ot.getBook();
-				if (book.getISBN().equals(this.isbn)) {
+				if (book.getISBN().equals(this.isbn))
 					orderItemList.remove(ot);
-				}
 			}
 			ActionContextUtils.setAttributeToSession("orderBookList", orderItemList);
 			ActionContextUtils.setAttributeToSession("order", order);
 			bookService.findBookByISBN(book.getISBN());
 			orderItemService.delete(orderItemService.findByBook(book.getId()));
 		} catch (Exception e) {
-			e.printStackTrace();
+
 		}
 		return "admin";
 	}
 
+	/**
+	 * 学生下订单
+	 * 
+	 * @return
+	 */
 	public String buy() {
 		try {
 			List<Book> books = (List<Book>) ActionContextUtils.getAttribute("bookList", "session");
@@ -161,7 +171,7 @@ public class OrderAction extends BaseAction {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "success";
+		return SUCCESS;
 	}
 
 	public String getNp() {

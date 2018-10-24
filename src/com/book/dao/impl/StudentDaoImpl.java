@@ -11,10 +11,7 @@ public class StudentDaoImpl extends BaseDaoImpl<Student> implements StudentDao {
 
 	public List<Student> findStudentByclass(String studentClass) {
 		String hql = "from Student s where s.studentClass = ?";
-		List<Student> students = (List<Student>) this.getHibernateTemplate().find(hql, studentClass);
-		if (students == null || students.isEmpty())
-			return null;
-		return students;
+		return (List<Student>) this.getHibernateTemplate().find(hql, studentClass);
 	}
 
 	public Student findStudentBystudentIDAndPwd(String studentID, String password) {
@@ -35,9 +32,6 @@ public class StudentDaoImpl extends BaseDaoImpl<Student> implements StudentDao {
 
 	public List<Student> findStudentByPermission(String permission) {
 		String hql = "from Student s where s.permission = ?";
-		List<Student> students = (List<Student>) this.getHibernateTemplate().find(hql, permission);
-		if(students == null || students.isEmpty())
-			return null;
-		return students;
+		return (List<Student>) this.getHibernateTemplate().find(hql, permission);
 	}
 }

@@ -1,15 +1,13 @@
 package com.book.action;
 
-import java.util.List;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.book.core.util.ActionContextUtils;
-import com.book.core.util.ExceptionUtils;
 import com.book.core.web.action.BaseAction;
 import com.book.pojos.Book;
 import com.book.pojos.BookType;
+import com.book.pojos.Student;
 import com.book.service.BookService;
 import com.book.service.BookTypeService;
 import com.opensymphony.xwork2.ModelDriven;
@@ -38,38 +36,64 @@ public class BookAction extends BaseAction implements ModelDriven<Book> {
 
 	private String college;
 
-	private String data;
-
 	public Book getModel() {
 		if (book == null)
 			book = new Book();
 		return book;
 	}
 
+	/**
+	 * 显示书籍信息
+	 */
 	public void show() {
 		this.bookList();
 	}
 
+	/**
+	 * 显示学生能购买书籍
+	 * 
+	 * @return
+	 */
 	public String bookList() {
-		ActionContextUtils.removeAttrFromSession("len");
-		ActionContextUtils.removeAttrFromSession("bookList");
-		List<Book> lists = bookService.findAll(Book.class);
-		ActionContextUtils.setAttributeToSession("bookList", lists);
-		return "success";
-	}
+		Student student = (Student) ActionContextUtils.getAttribute("student", "session");
 
-	public String findByISBN() {
-		Book book = null;
-		try {
-			book = bookService.findBookByISBN(this.isbn);
-		} catch (Exception ex) {
-			String event = ExceptionUtils.formatStackTrace(ex);
-			logger.error(event);
+		// 没有学生用户的session缓存信息返回登陆界面
+		if (student == null)
+			return "login";
+
+		// 获取学生专业年级信息
+		String major = student.getMajor();
+		String grade = student.getGrade();
+
+		// 检查学生的年级以及专业信息
+		if (major.isEmpty() || grade.isEmpty()) {
+			return "login";
 		}
-		ActionContextUtils.setAtrributeToRequest("book", book);
-		return "success";
+
+		// 获取学生能够购买的书籍清单
+		BookType bt = bookTypeService.findBookByType(major, grade);
+		if (bt != null) {
+			ActionContextUtils.setAttributeToSession("bookList", bookService.findBookByType(bt.getId()));
+		}
+		
+		return SUCCESS;
 	}
 
+	/**
+	 * 通过ISBN查找书籍
+	 * 
+	 * @return
+	 */
+	public String findByISBN() {
+		ActionContextUtils.setAtrributeToRequest("book", bookService.findBookByISBN(this.isbn));
+		return SUCCESS;
+	}
+
+	/**
+	 * 添加书籍
+	 * 
+	 * @return
+	 */
 	public String addBook() {
 		// 查询所添加的书籍类别是否已经存在
 		BookType bookType = bookTypeService.findBookByType(this.major, this.grade);
@@ -87,19 +111,11 @@ public class BookAction extends BaseAction implements ModelDriven<Book> {
 		}
 		// 添加书籍
 		bookService.add(this.book);
-		return "success";
+		return SUCCESS;
 	}
 
 	public String testJson() {
 		return "testJson";
-	}
-
-	public String getData() {
-		return data;
-	}
-
-	public void setData(String data) {
-		this.data = data;
 	}
 
 	public String getGrade() {

@@ -14,7 +14,7 @@ public interface StudentService extends BaseService<Student> {
 	 *            学生所在班级
 	 * @return
 	 */
-	public List<Student> findStudentByclass(String studentClass);
+	List<Student> findStudentByclass(String studentClass);
 
 	/**
 	 * 通过学号和密码验证登陆
@@ -25,7 +25,7 @@ public interface StudentService extends BaseService<Student> {
 	 *            密码
 	 * @return
 	 */
-	public Student findStudentBystudentIDAndPwd(String studentID, String password);
+	Student findStudentBystudentIDAndPwd(String studentID, String password);
 
 	/**
 	 * 通过学号查找学生信息
@@ -34,13 +34,14 @@ public interface StudentService extends BaseService<Student> {
 	 *            学号
 	 * @return
 	 */
-	public Student findStudentBystudentID(String studentID);
+	Student findStudentBystudentID(String studentID);
 
 	/**
 	 * 查询学生授权信息
 	 * 
 	 * @param permission
+	 *            权限
 	 * @return
 	 */
-	public List<Student> findStudentByPermission(String permission);
+	List<Student> findStudentByPermission(String permission);
 }

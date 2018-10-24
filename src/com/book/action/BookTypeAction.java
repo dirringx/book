@@ -35,16 +35,15 @@ public class BookTypeAction extends BaseAction implements ModelDriven<BookType> 
 		return bookType;
 	}
 
+	/**
+	 * 通过专业和年级查找书籍
+	 * 
+	 * @return
+	 */
 	public String find() {
-		ActionContextUtils.removeAttrFromSession("books");
-		try {
-			System.out.println(bookType.getGrade());
-			BookType bt = bookTypeService.findBookByType(bookType.getMajor(), bookType.getGrade());
-			List<Book> books = bookService.findBookByType(bt.getId());
-			System.out.println(books.size());
-			ActionContextUtils.setAttributeToSession("books", books);
-		} catch (Exception e) {
-		}
+		List<Book> books = bookService
+				.findBookByType(bookTypeService.findBookByType(bookType.getMajor(), bookType.getGrade()).getId());
+		ActionContextUtils.setAttributeToSession("books", books);
 		return "book";
 	}
 

@@ -14,7 +14,13 @@ public interface BookService extends BaseService<Book>{
 	 *            国际标准书号
 	 * @return
 	 */
-	public Book findBookByISBN(String ISBN);
-	
-	public List<Book> findBookByType(int typeID);
+	Book findBookByISBN(String ISBN);
+
+	/**
+	 * 通过书籍类别查询
+	 * 
+	 * @param typeID
+	 * @return
+	 */
+	List<Book> findBookByType(int typeID);
 }
