@@ -39,7 +39,7 @@ public class BookAction extends BaseAction implements ModelDriven<Book> {
 	private String college;
 
 	private String data;
-	
+
 	public Book getModel() {
 		if (book == null)
 			book = new Book();
@@ -90,7 +90,7 @@ public class BookAction extends BaseAction implements ModelDriven<Book> {
 		return "success";
 	}
 
-	public String testJson(){
+	public String testJson() {
 		return "testJson";
 	}
 
@@ -125,7 +125,7 @@ public class BookAction extends BaseAction implements ModelDriven<Book> {
 	public void setCollege(String college) {
 		this.college = college;
 	}
-	
+
 	public String getIsbn() {
 		return isbn;
 	}

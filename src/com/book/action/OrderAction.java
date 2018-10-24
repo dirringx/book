@@ -29,7 +29,7 @@ public class OrderAction extends BaseAction {
 	private OrderItemService orderItemService;
 
 	private StudentService studentService;
-	
+
 	private OrderService orderService;
 
 	private BookService bookService;
@@ -39,46 +39,48 @@ public class OrderAction extends BaseAction {
 	private String price;
 
 	private String isbn;
-	
+
 	private String np;
 
 	@Override
 	public void validate() {
 		System.out.println(this.np);
 	}
-	
+
 	public String show() {
 		ActionContextUtils.removeAttrFromSession("stu_orders");
 		Student student = (Student) ActionContextUtils.getAttribute("student", "session");
-	
-		if(student == null)
+
+		if (student == null)
 			return "login";
-		
-		try{
+
+		try {
 			Order order = null;
 			List<Order> orders = orderService.findOrderBystudentID(student.getId());
-			//未完成订单集合
-			if("1".equals(this.np)){
+			// 未完成订单集合
+			if ("1".equals(this.np)) {
 				Iterator<Order> ordersIterator = orders.iterator();
-				while(ordersIterator.hasNext()){
+				while (ordersIterator.hasNext()) {
 					order = ordersIterator.next();
-					if(order.getPay())
+					if (order.getPay())
 						orders.remove(order);
 				}
 			}
-			
-			//已经完成订单集合
-			if("2".equals(this.np)){
+
+			// 已经完成订单集合
+			if ("2".equals(this.np)) {
 				Iterator<Order> ordersIterator = orders.iterator();
-				while(ordersIterator.hasNext()){
+				while (ordersIterator.hasNext()) {
 					order = ordersIterator.next();
-					if(!order.getPay())
+					if (!order.getPay())
 						orders.remove(order);
 				}
 			}
 			ActionContextUtils.setAttributeToSession("stu_orders", orders);
-		}catch (Exception e) {
-			e.printStackTrace();
+		} catch (Exception e) {
+			if (e.getClass() == java.util.ConcurrentModificationException.class) {
+				System.out.println("nice");
+			}
 		}
 		return "show";
 	}
@@ -137,8 +139,7 @@ public class OrderAction extends BaseAction {
 			order.setOrderNo(StringUtils.createOrderNumber(1, 1));
 			order.setOrderTime(new Date());
 			order.setPay(false);
-			
-			
+
 			// OrderItem orderItem1 = new OrderItem();
 			// orderItem1.setOrder(order);
 			// orderItem1.setBook(bookDao.findBookByISBN("1"));
@@ -154,7 +155,7 @@ public class OrderAction extends BaseAction {
 			// order.getOrderitems().add(orderItem1);
 			// order.getOrderitems().add(orderItem2);
 			// Float p = orderItem1.getPurchasePrice() +
-			// 			 orderItem2.getPurchasePrice();
+			// orderItem2.getPurchasePrice();
 			// order.setPrice(p);
 			// orderService.add(order);
 		} catch (Exception e) {
@@ -162,7 +163,7 @@ public class OrderAction extends BaseAction {
 		}
 		return "success";
 	}
-	
+
 	public String getNp() {
 		return np;
 	}
@@ -198,7 +199,7 @@ public class OrderAction extends BaseAction {
 	public void setStudentService(StudentService studentService) {
 		this.studentService = studentService;
 	}
-	
+
 	public void setOrderItemService(OrderItemService orderItemService) {
 		this.orderItemService = orderItemService;
 	}

@@ -36,6 +36,7 @@ public class BookTypeAction extends BaseAction implements ModelDriven<BookType> 
 	}
 
 	public String find() {
+		ActionContextUtils.removeAttrFromSession("books");
 		try {
 			System.out.println(bookType.getGrade());
 			BookType bt = bookTypeService.findBookByType(bookType.getMajor(), bookType.getGrade());

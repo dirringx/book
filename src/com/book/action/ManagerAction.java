@@ -9,30 +9,30 @@ import com.book.service.ManagerService;
 import com.opensymphony.xwork2.ModelDriven;
 
 @SuppressWarnings({ "serial", "unused" })
-public class ManagerAction extends BaseAction{
+public class ManagerAction extends BaseAction {
 
 	/** 日志记录类 **/
 	public static Log logger = LogFactory.getLog(ManagerAction.class);
 
 	/** managerService **/
 	private ManagerService managerService;
-	
-	public String index(){
+
+	public String index() {
 		return "success";
 	}
-	
-	public String book(){
+
+	public String book() {
 		return "book";
 	}
 
-	public String authorize(){
+	public String authorize() {
 		return "authorize";
 	}
-	
-	public String order(){
+
+	public String order() {
 		return "order";
 	}
-	
+
 	public void setManagerService(ManagerService managerService) {
 		this.managerService = managerService;
 	}

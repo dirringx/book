@@ -19,40 +19,39 @@ public class AuthorizeAction extends BaseAction {
 	private StudentService studentService;
 
 	private String studentID;
-	
-	public void show(){
-		try{
+
+	public void show() {
+		try {
 			List<Student> students = studentService.findStudentByPermission("1");
 			ActionContextUtils.setAtrributeToRequest("stu", students);
-		}catch (Exception e) {
+		} catch (Exception e) {
 		}
 	}
-	
+
 	public String auth() {
-		try{
+		try {
 			Student student = studentService.findStudentBystudentID(this.studentID);
 			student.setPermission("1");
 			studentService.update(student);
-		}catch (Exception ex) {
+		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
 		this.show();
 		return "success";
 	}
 
-	public String noAuth(){
-		try{
+	public String noAuth() {
+		try {
 			Student student = studentService.findStudentBystudentID(this.studentID);
 			student.setPermission("0");
 			studentService.update(student);
-		}catch (Exception ex) {
+		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
 		this.show();
 		return "success";
 	}
-	
-	
+
 	public String getStudentID() {
 		return studentID;
 	}
@@ -64,5 +63,5 @@ public class AuthorizeAction extends BaseAction {
 	public void setStudentService(StudentService studentService) {
 		this.studentService = studentService;
 	}
-	
+
 }
