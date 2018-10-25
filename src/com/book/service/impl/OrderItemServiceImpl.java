@@ -16,6 +16,4 @@ public class OrderItemServiceImpl extends BaseServiceImpl<OrderItem> implements 
 	public OrderItem findByBook(String id) {
 		return orderItemDao.findByBook(id);
 	}
-
-	
 }

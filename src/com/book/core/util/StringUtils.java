@@ -11,9 +11,10 @@ import java.util.Date;
  *
  */
 public final class StringUtils {
-	
-	private StringUtils(){}
-	
+
+	private StringUtils() {
+	}
+
 	/**
 	 * 空字符串数组
 	 */

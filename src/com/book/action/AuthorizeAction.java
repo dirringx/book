@@ -6,6 +6,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.book.core.util.ActionContextUtils;
+import com.book.core.util.StringUtils;
 import com.book.core.web.action.BaseAction;
 import com.book.pojos.Student;
 import com.book.service.StudentService;
@@ -20,36 +21,48 @@ public class AuthorizeAction extends BaseAction {
 
 	private String studentID;
 
-	public void show() {
-		try {
-			List<Student> students = studentService.findStudentByPermission("1");
-			ActionContextUtils.setAtrributeToRequest("stu", students);
-		} catch (Exception e) {
-		}
+	public String show() {
+		List<Student> students = studentService.findStudentByPermission("1");
+		ActionContextUtils.setAtrributeToRequest("stu", students);
+		return SUCCESS;
 	}
 
+	/**
+	 * 授权
+	 * 
+	 * @return
+	 */
 	public String auth() {
-		try {
-			Student student = studentService.findStudentBystudentID(this.studentID);
-			student.setPermission("1");
-			studentService.update(student);
-		} catch (Exception ex) {
-			ex.printStackTrace();
+		// 检查输入信息
+		if (StringUtils.isEmpty(this.studentID)) {
+			ActionContextUtils.setAtrributeToRequest("msg", "查询内容不能为空");
+			return this.show();
 		}
-		this.show();
-		return SUCCESS;
+		Student student = studentService.findStudentBystudentID(this.studentID);
+		if (student == null) {
+			ActionContextUtils.setAtrributeToRequest("msg", "没有该学生用户信息");
+			return this.show();
+		}
+		System.out.println(studentID);
+		student.setPermission("1");
+		studentService.update(student);
+		return this.show();
 	}
 
+	/**
+	 * 取消授权
+	 * 
+	 * @return
+	 */
 	public String noAuth() {
-		try {
-			Student student = studentService.findStudentBystudentID(this.studentID);
-			student.setPermission("0");
-			studentService.update(student);
-		} catch (Exception ex) {
-			ex.printStackTrace();
+		Student student = studentService.findStudentBystudentID(this.studentID);
+		if (student == null) {
+			ActionContextUtils.setAtrributeToRequest("msg", "没有该学生用户信息");
+			return this.show();
 		}
-		this.show();
-		return SUCCESS;
+		student.setPermission("0");
+		studentService.update(student);
+		return this.show();
 	}
 
 	public String getStudentID() {

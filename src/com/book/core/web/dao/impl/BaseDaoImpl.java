@@ -7,13 +7,14 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.book.core.web.dao.BaseDao;
 
+@Transactional
 public abstract class BaseDaoImpl<T> extends HibernateDaoSupport implements BaseDao<T> {
 	/**
 	 * 增
 	 * 
 	 * @param object
 	 */
-	@Transactional
+
 	public void add(T obj) {
 		this.getHibernateTemplate().save(obj);
 	}

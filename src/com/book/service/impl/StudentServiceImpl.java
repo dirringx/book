@@ -15,6 +15,7 @@ public class StudentServiceImpl extends BaseServiceImpl<Student>  implements Stu
 		this.studentDao = studentDao;
 	}
 	
+	@Override
 	public void update(Student obj) {
 		studentDao.update(obj);
 	}

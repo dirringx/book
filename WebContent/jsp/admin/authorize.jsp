@@ -13,15 +13,18 @@
 <body>
     <div class="wrap">
         <jsp:include page="/jsp/admin/top.jsp"></jsp:include>
-        <h1 class="title"><a href="${ctx}/admin/auth.action?method=auth">授权管理</a></h1>
+        <h1 class="title"><a href="${ctx}/admin/auth.action?method=show">授权管理</a></h1>
         <form action="${ctx}/admin/auth.action?method=auth" method="post">
 	        <div class="lookup">
+	        	<c:if test="${not empty msg and msg ne 'unseted'}">
+	            	<span>提示：${msg}</span>
+	            </c:if>
 	            <label for="stuId">学号：</label>
 	            <input id="stuId" name="studentID" type="text" />
 	            <button type="submit" id="authorize">授权</button>     
 	        </div>
         </form>
-        <img class="table-head" src="${ctx}/styles/img/table_head_bg.png" />
+        <img class="table-head" src="${ctx}/styles/img/table_head_bg.png" />  
         <table id="table" >
             <thead>
                 <tr>
