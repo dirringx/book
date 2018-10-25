@@ -17,6 +17,10 @@ public class ManagerAction extends BaseAction {
 	/** managerService **/
 	private ManagerService managerService;
 
+	public String toLogin(){
+		return "toLogin";
+	}
+	
 	public String index() {
 		return SUCCESS;
 	}

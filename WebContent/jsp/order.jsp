@@ -47,7 +47,7 @@
 			</s:iterator>
 		</li>
 	</ul>
-	<jsp:include page="/jsp/NavBar.jsp"></jsp:include>
+	<jsp:include page="/comm/view/NavBar.jsp"></jsp:include>
 	<script type="text/javascript">
 		var list = document.getElementById("list");
 		var li = list.getElementsByTagName("li");

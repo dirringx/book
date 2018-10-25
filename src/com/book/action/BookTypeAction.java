@@ -1,11 +1,8 @@
 package com.book.action;
 
-import java.util.List;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.book.pojos.Book;
 import com.book.pojos.BookType;
 import com.book.service.BookService;
 import com.book.service.BookTypeService;
@@ -41,9 +38,9 @@ public class BookTypeAction extends BaseAction implements ModelDriven<BookType> 
 	 * @return
 	 */
 	public String find() {
-		List<Book> books = bookService
-				.findBookByType(bookTypeService.findBookByType(bookType.getMajor(), bookType.getGrade()).getId());
-		ActionContextUtils.setAttributeToSession("books", books);
+		BookType bt = bookTypeService.findBookByType(bookType.getMajor(), bookType.getGrade());
+		if (bt != null)
+			ActionContextUtils.setAttributeToSession("books", bookService.findBookByType(bt.getId()));
 		return "book";
 	}
 

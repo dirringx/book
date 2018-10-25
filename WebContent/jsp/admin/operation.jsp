@@ -15,7 +15,7 @@
 </head>
 <body>
 <div class="wrap">
-        <jsp:include page="/jsp/admin/top.jsp"></jsp:include>
+        <jsp:include page="/comm/view/admin/top.jsp"></jsp:include>
         <div class="choose">
             <input type="button" value="教材管理" id="bookManage">
             <input type="button" value="授权管理" id="grantManage">

@@ -37,7 +37,7 @@
 	            <input id="settlement" type="submit" name="price" value="结算(0)" />
 	        </div>
         </form>
-		<jsp:include page="/jsp/NavBar.jsp"></jsp:include>
+		<jsp:include page="/comm/view/NavBar.jsp"></jsp:include>
     </div>
     <script type="text/javascript" src="${ctx}/styles/js/jquery-1.8.0.min.js"></script>
     <script type="text/javascript">

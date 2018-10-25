@@ -32,6 +32,6 @@
             <img class="arrow" src="${ctx}/styles/img/arrow.png" />
         </li>
     </ul>
-    <jsp:include page="/jsp/NavBar.jsp"></jsp:include>
+    <jsp:include page="/comm/view/NavBar.jsp"></jsp:include>
 </body>
 </html>

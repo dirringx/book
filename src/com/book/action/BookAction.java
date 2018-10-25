@@ -4,6 +4,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.book.core.util.ActionContextUtils;
+import com.book.core.util.StringUtils;
 import com.book.core.web.action.BaseAction;
 import com.book.pojos.Book;
 import com.book.pojos.BookType;
@@ -85,7 +86,8 @@ public class BookAction extends BaseAction implements ModelDriven<Book> {
 	 * @return
 	 */
 	public String findByISBN() {
-		ActionContextUtils.setAtrributeToRequest("book", bookService.findBookByISBN(this.isbn));
+		if(!StringUtils.isEmpty(this.isbn))
+			ActionContextUtils.setAtrributeToRequest("book", bookService.findBookByISBN(this.isbn));
 		return SUCCESS;
 	}
 

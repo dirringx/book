@@ -14,7 +14,7 @@
 </head>
 <body>
     <div class="wrap">
-        <jsp:include page="/jsp/admin/top.jsp"></jsp:include>
+        <jsp:include page="/comm/view/admin/top.jsp"></jsp:include>
         <div class="find">
         	<form id="orderForm" action="${ctx}/order/o.action?method=orderList" method="post">
 	            <label for="orderNum">订单号：</label>

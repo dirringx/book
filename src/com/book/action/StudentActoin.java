@@ -25,9 +25,8 @@ public class StudentActoin extends BaseAction {
 	 * @return
 	 */
 	public String index() {
-		Student student = (Student) ActionContextUtils.getAttribute("student", "session");
 		// 没有学生用户的session缓存信息返回登陆界面
-		if (student == null)
+		if (ActionContextUtils.getAttribute("student", "session") == null)
 			return "login";
 		return SUCCESS;
 	}
@@ -38,9 +37,11 @@ public class StudentActoin extends BaseAction {
 	 * @return
 	 */
 	public String update() {
-		Student s = (Student) ActionContextUtils.getContext().getApplication().get("student");
-		s.setPassword(this.password);
-		studentService.update(s);
+		Student stu = (Student) ActionContextUtils.getContext().getApplication().get("student");
+		if(stu != null){
+			stu.setPassword(this.password);
+			studentService.update(stu);
+		}
 		return SUCCESS;
 	}
 
