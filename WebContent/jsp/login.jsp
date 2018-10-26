@@ -22,7 +22,7 @@
 	  ${msg }
 	  </c:if>
 	</span>    
-      <input id="user" name="userName" type="text" placeholder="请输入账号" maxlength="12"/>
+      <input id="user" name="studentName" type="text" placeholder="请输入账号" maxlength="12"/>
       <input id="password" name="password" type="password" placeholder="请输入密码" maxlength="16"/>
       <input id="login" type="submit" value="Login"  />
     </form>

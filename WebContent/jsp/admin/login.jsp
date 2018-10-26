@@ -20,7 +20,7 @@
       	<form action="${ctx}/admin/a.action?method=login" method="post">
             <div class="user">
                 <label for="username">工号：</label>
-                <input type="text" id="username" name="userName" class="required" maxlength="8">
+                <input type="text" id="username" name="workNumber" class="required" maxlength="8">
             </div>
             <div class="psd">
                 <label for="psd">密码：</label>
@@ -35,9 +35,9 @@
 	            </div>
              -->
             <div class="pos">
-                <input id="dean" name="userType" type="radio" value="1" checked="checked">
+                <input id="dean" name="permission" type="radio" value="1" checked="checked">
                 <label for="dean">教务员</label>
-                <input id="administrator" name="userType" type="radio" value="2" >
+                <input id="administrator" name="permission" type="radio" value="2" >
                 <label for="administrator">管理员</label>
             </div>
             <div class="startLogin">

@@ -4,16 +4,12 @@ import javax.annotation.Resource;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Controller;
 
 import com.book.core.util.ActionContextUtils;
 import com.book.core.web.action.BaseAction;
 import com.book.pojos.Student;
 import com.book.service.StudentService;
 
-@Controller(value = "studentActoin")
-@Scope(value = "prototype")
 public class StudentActoin extends BaseAction {
 	private static final long serialVersionUID = 1L;
 

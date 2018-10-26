@@ -7,7 +7,7 @@
   </a>
   <c:choose>
     <c:when test="${not empty manager.name and manager.name ne 'unseted'}">
-      <span class="teacher">欢迎您，${manager.name}老师</span>
+      <span class="teacher">欢迎您，${manager.name}</span>
       <a class="loginout" href="${ctx}/admin/a.action?method=logout">退出</a>
     </c:when>
     <c:otherwise>
