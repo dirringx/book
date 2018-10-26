@@ -2,13 +2,15 @@ package com.book.dao.impl;
 
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
 import com.book.core.web.dao.impl.BaseDaoImpl;
 import com.book.dao.BookDao;
 import com.book.pojos.Book;
 
-@SuppressWarnings("unchecked")
+@Repository(value="bookDao")
 public class BookDaoImpl extends BaseDaoImpl<Book> implements BookDao {
-
+	
 	public Book findBookByISBN(String ISBN) {
 		String hql = "from Book b where b.ISBN = ?";
 		List<Book> books = (List<Book>) this.getHibernateTemplate().find(hql, ISBN);

@@ -2,11 +2,13 @@ package com.book.dao.impl;
 
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
 import com.book.core.web.dao.impl.BaseDaoImpl;
 import com.book.dao.ManagerDao;
 import com.book.pojos.Manager;
 
-@SuppressWarnings("unchecked")
+@Repository(value="managerDao")
 public class ManagerDaoImpl extends BaseDaoImpl<Manager> implements ManagerDao {
 
 	public Manager findManagerBywordNumber(String workNumber) {

@@ -2,11 +2,13 @@ package com.book.dao.impl;
 
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
 import com.book.core.web.dao.impl.BaseDaoImpl;
 import com.book.dao.BookTypeDao;
 import com.book.pojos.BookType;
 
-@SuppressWarnings("unchecked")
+@Repository(value="bookTypeDao")
 public class BookTypeDaoImpl extends BaseDaoImpl<BookType> implements BookTypeDao {
 
 	public BookType findBookByType(String major, String grade) {

@@ -1,20 +1,26 @@
 package com.book.action;
 
+import javax.annotation.Resource;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Controller;
 
 import com.book.core.util.ActionContextUtils;
 import com.book.core.web.action.BaseAction;
 import com.book.pojos.Student;
 import com.book.service.StudentService;
 
-@SuppressWarnings("serial")
+@Controller(value = "studentActoin")
+@Scope(value = "prototype")
 public class StudentActoin extends BaseAction {
+	private static final long serialVersionUID = 1L;
 
 	/** 日志记录类 **/
 	public static Log logger = LogFactory.getLog(StudentActoin.class);
 
-	/** studentService **/
+	@Resource(name = "studentService")
 	private StudentService studentService;
 
 	private String password;
@@ -38,7 +44,7 @@ public class StudentActoin extends BaseAction {
 	 */
 	public String update() {
 		Student stu = (Student) ActionContextUtils.getContext().getApplication().get("student");
-		if(stu != null){
+		if (stu != null) {
 			stu.setPassword(this.password);
 			studentService.update(stu);
 		}
@@ -51,9 +57,5 @@ public class StudentActoin extends BaseAction {
 
 	public void setPassword(String password) {
 		this.password = password;
-	}
-
-	public void setStudentService(StudentService studentService) {
-		this.studentService = studentService;
 	}
 }

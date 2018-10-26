@@ -70,7 +70,7 @@
 				/admin/auth.action?method=show
 			</result>
 		</action>
-		
+
 		<action name="b" class="com.book.action.BookAction">
 			<result name="testJson">/jsp/main.jsp</result>
 		</action>

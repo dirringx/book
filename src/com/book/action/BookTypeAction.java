@@ -1,7 +1,11 @@
 package com.book.action;
 
+import javax.annotation.Resource;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Controller;
 
 import com.book.pojos.BookType;
 import com.book.service.BookService;
@@ -11,19 +15,20 @@ import com.book.core.web.action.BaseAction;
 
 import com.opensymphony.xwork2.ModelDriven;
 
-@SuppressWarnings("serial")
+@Controller(value = "bookTypeAction")
+@Scope(value = "prototype")
 public class BookTypeAction extends BaseAction implements ModelDriven<BookType> {
+	private static final long serialVersionUID = 1L;
 
 	/** 日志记录类 **/
 	public static Log logger = LogFactory.getLog(BookTypeAction.class);
 
-	/** bookTypeService **/
+	@Resource(name = "bookTypeService")
 	private BookTypeService bookTypeService;
 
-	/** bookService **/
+	@Resource(name = "bookService")
 	private BookService bookService;
 
-	/** bookType **/
 	private BookType bookType;
 
 	public BookType getModel() {
@@ -42,13 +47,5 @@ public class BookTypeAction extends BaseAction implements ModelDriven<BookType> 
 		if (bt != null)
 			ActionContextUtils.setAttributeToSession("books", bookService.findBookByType(bt.getId()));
 		return "book";
-	}
-
-	public void setBookService(BookService bookService) {
-		this.bookService = bookService;
-	}
-
-	public void setBookTypeService(BookTypeService bookTypeService) {
-		this.bookTypeService = bookTypeService;
 	}
 }

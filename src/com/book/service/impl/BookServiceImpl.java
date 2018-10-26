@@ -2,28 +2,30 @@ package com.book.service.impl;
 
 import java.util.List;
 
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Service;
+
 import com.book.core.web.service.impl.BaseServiceImpl;
 import com.book.dao.BookDao;
 import com.book.pojos.Book;
 import com.book.service.BookService;
 
-public class BookServiceImpl extends BaseServiceImpl<Book> implements BookService{
+@Service(value = "bookService")
+public class BookServiceImpl extends BaseServiceImpl<Book> implements BookService {
 
+	@Resource(name = "bookDao")
 	private BookDao bookDao;
-	
-	public void setBookDao(BookDao bookDao) {
-		this.bookDao = bookDao;
-	}
 
 	@Override
 	public void add(Book obj) {
 		bookDao.add(obj);
 	}
-	
+
 	public List<Book> findAll(Class<Book> clazz) {
 		return bookDao.findAll(clazz);
 	}
-	
+
 	public Book findBookByISBN(String ISBN) {
 		return bookDao.findBookByISBN(ISBN);
 	}

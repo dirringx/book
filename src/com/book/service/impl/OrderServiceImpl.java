@@ -2,21 +2,20 @@ package com.book.service.impl;
 
 import java.util.List;
 
-import org.springframework.transaction.annotation.Transactional;
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Service;
 
 import com.book.core.web.service.impl.BaseServiceImpl;
 import com.book.dao.OrderDao;
 import com.book.pojos.Order;
 import com.book.service.OrderService;
 
-@Transactional
+@Service(value = "orderService")
 public class OrderServiceImpl extends BaseServiceImpl<Order> implements OrderService {
 
+	@Resource(name = "orderDao")
 	private OrderDao orderDao;
-
-	public void setOrderDao(OrderDao orderDao) {
-		this.orderDao = orderDao;
-	}
 
 	public List<Order> findOrderBystudentID(int id) {
 		return orderDao.findOrderBystudentID(id);
@@ -29,5 +28,5 @@ public class OrderServiceImpl extends BaseServiceImpl<Order> implements OrderSer
 	public Order findByorderNo(String orderNo) {
 		return orderDao.findByorderNo(orderNo);
 	}
-	
+
 }

@@ -5,8 +5,12 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Controller;
 
 import com.book.core.util.ActionContextUtils;
 import com.book.core.util.StringUtils;
@@ -20,18 +24,24 @@ import com.book.service.OrderItemService;
 import com.book.service.OrderService;
 import com.book.service.StudentService;
 
-@SuppressWarnings({ "serial", "unchecked", "unused" })
+@Controller(value = "orderAction")
+@Scope(value = "prototype")
 public class OrderAction extends BaseAction {
+	private static final long serialVersionUID = 1L;
 
 	/** 日志记录类 **/
 	public static Log logger = LogFactory.getLog(OrderAction.class);
 
+	@Resource(name = "orderItemService")
 	private OrderItemService orderItemService;
 
+	@Resource(name = "studentService")
 	private StudentService studentService;
 
+	@Resource(name = "orderService")
 	private OrderService orderService;
 
+	@Resource(name = "bookService")
 	private BookService bookService;
 
 	private String orderNo;
@@ -204,21 +214,5 @@ public class OrderAction extends BaseAction {
 
 	public void setOrderNo(String orderNo) {
 		this.orderNo = orderNo;
-	}
-
-	public void setStudentService(StudentService studentService) {
-		this.studentService = studentService;
-	}
-
-	public void setOrderItemService(OrderItemService orderItemService) {
-		this.orderItemService = orderItemService;
-	}
-
-	public void setBookService(BookService bookService) {
-		this.bookService = bookService;
-	}
-
-	public void setOrderService(OrderService orderService) {
-		this.orderService = orderService;
 	}
 }

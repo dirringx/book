@@ -12,6 +12,9 @@
   		http://www.springframework.org/schema/context
   		http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 
+	<!-- 注解注入 -->
+	<context:component-scan base-package="com.book" />
+
 	<!-- 配置C3P0数据库连接池 -->
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
 		<property name="driverClass" value="com.mysql.jdbc.Driver" />
@@ -55,104 +58,5 @@
 	</bean>
 
 	<tx:annotation-driven transaction-manager="transactionManager" />
-
-	<tx:advice id="txAdvice" transaction-manager="transactionManager">
-		<tx:attributes>
-			<tx:method name="save*" propagation="REQUIRED" />
-			<tx:method name="del*" propagation="REQUIRED" />
-			<tx:method name="update*" propagation="REQUIRED" />
-			<tx:method name="add*" propagation="REQUIRED" />
-			<tx:method name="find*" propagation="REQUIRED" />
-			<tx:method name="get*" propagation="REQUIRED" />
-			<tx:method name="*" read-only="true" />
-		</tx:attributes>
-	</tx:advice>
-
-	<aop:config>
-		<aop:pointcut id="daoPointCut" expression="execution(* com.book.*.*(..))" />
-		<aop:advisor advice-ref="txAdvice" pointcut-ref="daoPointCut" />
-	</aop:config>
-
-
-	<bean id="loginAction" class="com.book.login.LoginAction" scope="prototype">
-		<property name="studentService" ref="studentService" />
-		<property name="managerService" ref="managerService" />
-	</bean>
-
-	<bean id="studentService" class="com.book.service.impl.StudentServiceImpl">
-		<property name="studentDao" ref="studentDao" />
-	</bean>
-
-	<bean id="studentDao" class="com.book.dao.impl.StudentDaoImpl">
-		<property name="sessionFactory" ref="sessionFactory" />
-	</bean>
-
-	<bean id="bookAction" class="com.book.action.BookAction" scope="prototype">
-		<property name="bookService" ref="bookService" />
-	</bean>
-
-	<bean id="bookService" class="com.book.service.impl.BookServiceImpl">
-		<property name="bookDao" ref="bookDao" />
-	</bean>
-
-	<bean id="bookDao" class="com.book.dao.impl.BookDaoImpl">
-		<property name="sessionFactory" ref="sessionFactory" />
-	</bean>
-
-	<bean id="orderAction" class="com.book.action.OrderAction" scope="prototype">
-		<property name="orderItemService" ref="orderItemService" />
-		<property name="orderService" ref="orderService" />
-		<property name="bookService" ref="bookService" />
-		<property name="studentService" ref="studentService" />
-	</bean>
-
-	<bean id="orderItemService" class="com.book.service.impl.OrderItemServiceImpl">
-		<property name="orderItemDao" ref="orderItemDao" />
-	</bean>
-
-	<bean id="orderItemDao" class="com.book.dao.impl.OrderItemDaoImpl">
-		<property name="sessionFactory" ref="sessionFactory" />
-	</bean>
-
-	<bean id="orderService" class="com.book.service.impl.OrderServiceImpl">
-		<property name="orderDao" ref="orderDao" />
-	</bean>
-
-	<bean id="orderDao" class="com.book.dao.impl.OrderDaoImpl">
-		<property name="sessionFactory" ref="sessionFactory" />
-	</bean>
-
-	<bean id="managerAction" class="com.book.action.ManagerAction"
-		scope="prototype">
-		<property name="managerService" ref="managerService" />
-	</bean>
-
-	<bean id="bookTypeAction" class="com.book.action.BookTypeAction"
-		scope="prototype">
-		<property name="bookTypeService" ref="bookTypeService" />
-		<property name="bookService" ref="bookService" />
-	</bean>
-
-	<bean id="bookTypeService" class="com.book.service.impl.BookTypeServiceImpl">
-		<property name="bookTypeDao" ref="bookTypeDao" />
-	</bean>
-
-	<bean id="bookTypeDao" class="com.book.dao.impl.BookTypeDaoImpl">
-		<property name="sessionFactory" ref="sessionFactory" />
-	</bean>
-
-	<!-- <bean id="bookType" class="com.book.pojos.BookType"></bean> -->
-	<bean id="managerService" class="com.book.service.impl.ManagerServiceImpl">
-		<property name="managerDao" ref="managerDao" />
-	</bean>
-
-	<bean id="managerDao" class="com.book.dao.impl.ManagerDaoImpl">
-		<property name="sessionFactory" ref="sessionFactory" />
-	</bean>
-
-	<bean id="authorizeAction" class="com.book.action.AuthorizeAction"
-		scope="prototype">
-		<property name="studentService" ref="studentService" />
-	</bean>
 
 </beans>

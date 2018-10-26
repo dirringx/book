@@ -1,7 +1,11 @@
 package com.book.action;
 
+import javax.annotation.Resource;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Controller;
 
 import com.book.core.util.ActionContextUtils;
 import com.book.core.util.StringUtils;
@@ -13,16 +17,18 @@ import com.book.service.BookService;
 import com.book.service.BookTypeService;
 import com.opensymphony.xwork2.ModelDriven;
 
-@SuppressWarnings("serial")
+@Controller(value = "bookAction")
+@Scope(value = "prototype")
 public class BookAction extends BaseAction implements ModelDriven<Book> {
+	private static final long serialVersionUID = 1L;
 
 	/** 日志记录类 **/
 	public static Log logger = LogFactory.getLog(BookAction.class);
 
-	/** bookService **/
+	@Resource(name = "bookService")
 	private BookService bookService;
 
-	/** BookTypeService **/
+	@Resource(name = "bookTypeService")
 	private BookTypeService bookTypeService;
 
 	/** ISBN **/
@@ -76,7 +82,7 @@ public class BookAction extends BaseAction implements ModelDriven<Book> {
 		if (bt != null) {
 			ActionContextUtils.setAttributeToSession("bookList", bookService.findBookByType(bt.getId()));
 		}
-		
+
 		return SUCCESS;
 	}
 
@@ -86,7 +92,7 @@ public class BookAction extends BaseAction implements ModelDriven<Book> {
 	 * @return
 	 */
 	public String findByISBN() {
-		if(!StringUtils.isEmpty(this.isbn))
+		if (!StringUtils.isEmpty(this.isbn))
 			ActionContextUtils.setAtrributeToRequest("book", bookService.findBookByISBN(this.isbn));
 		return SUCCESS;
 	}
@@ -150,13 +156,5 @@ public class BookAction extends BaseAction implements ModelDriven<Book> {
 
 	public void setIsbn(String isbn) {
 		this.isbn = isbn;
-	}
-
-	public void setBookTypeService(BookTypeService bookTypeService) {
-		this.bookTypeService = bookTypeService;
-	}
-
-	public void setBookService(BookService bookService) {
-		this.bookService = bookService;
 	}
 }

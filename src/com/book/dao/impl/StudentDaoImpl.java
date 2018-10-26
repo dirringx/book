@@ -2,11 +2,13 @@ package com.book.dao.impl;
 
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
 import com.book.core.web.dao.impl.BaseDaoImpl;
 import com.book.dao.StudentDao;
 import com.book.pojos.Student;
 
-@SuppressWarnings("unchecked")
+@Repository("studentDao")
 public class StudentDaoImpl extends BaseDaoImpl<Student> implements StudentDao {
 
 	public List<Student> findStudentByclass(String studentClass) {

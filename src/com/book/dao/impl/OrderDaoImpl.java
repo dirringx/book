@@ -2,11 +2,13 @@ package com.book.dao.impl;
 
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
 import com.book.core.web.dao.impl.BaseDaoImpl;
 import com.book.dao.OrderDao;
 import com.book.pojos.Order;
 
-@SuppressWarnings("unchecked")
+@Repository(value="orderDao")
 public class OrderDaoImpl extends BaseDaoImpl<Order> implements OrderDao {
 
 	public List<Order> findOrderBystudentID(int id) {

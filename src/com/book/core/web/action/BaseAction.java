@@ -306,7 +306,7 @@ public abstract class BaseAction extends ActionSupport {
 	 * @return
 	 */
 	public static String capitalizeMethodName(String methodName) {
-		assert(methodName != null);
+		assert (methodName != null);
 		return methodName = methodName.substring(0, 1).toUpperCase() + methodName.substring(1);
 	}
 
