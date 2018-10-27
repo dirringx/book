@@ -3,6 +3,7 @@ package com.book.core.web.dao.impl;
 import java.util.List;
 
 import org.hibernate.SessionFactory;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
 import org.springframework.transaction.annotation.Transactional;
@@ -75,7 +76,6 @@ public abstract class BaseDaoImpl<T> extends HibernateDaoSupport implements Base
 	 * 
 	 * @return
 	 */
-	@SuppressWarnings("unchecked")
 	public List<T> findAll(Class<T> clazz) {
 		StringBuffer hql = new StringBuffer("from ").append(clazz.getSimpleName());
 		return (List<T>) this.getHibernateTemplate().find(hql.toString());

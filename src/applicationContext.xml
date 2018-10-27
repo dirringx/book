@@ -35,6 +35,9 @@
 				<prop key="hibernate.temp.use_jdbc_metadata_defaults">false</prop>
 				<prop key="cache.use_second_level_catch">false</prop>
 				<prop key="connection.autocommit">true</prop>
+				<!-- 
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+				 -->
 			</props>
 		</property>
 		<!-- 映入实体映射文件 -->

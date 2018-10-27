@@ -8,6 +8,7 @@ import com.book.core.util.StringUtils;
 import com.book.core.web.action.BaseAction;
 import com.book.pojos.Manager;
 import com.book.service.ManagerService;
+
 import com.opensymphony.xwork2.ModelDriven;
 
 public class ManagerLoginAction extends BaseAction implements ModelDriven<Manager> {

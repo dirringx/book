@@ -5,12 +5,9 @@
 <html>
 <head>
 	<%@include file="/comm/base.jsp"%>
-    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>订单管理</title>
     <link rel="stylesheet" type="text/css" href="${ctx}/styles/css/orderManage.css" />
-	<title>Index</title>
+    <title>订单管理</title>
 </head>
 <body>
     <div class="wrap">

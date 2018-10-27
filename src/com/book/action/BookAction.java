@@ -107,6 +107,7 @@ public class BookAction extends BaseAction implements ModelDriven<Book> {
 			bookType.setMajor(this.major);
 			this.book.setBookType(bookType);
 		}
+		this.book.setBookImage("img/book.jpg");
 		// 添加书籍
 		bookService.add(this.book);
 		return SUCCESS;

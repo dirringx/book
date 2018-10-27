@@ -4,9 +4,6 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * 教材
- */
 @SuppressWarnings("serial")
 public class Book implements Serializable {
 

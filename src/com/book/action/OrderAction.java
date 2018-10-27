@@ -1,14 +1,12 @@
 package com.book.action;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
 import javax.annotation.Resource;
 
 import com.book.core.util.ActionContextUtils;
-import com.book.core.util.StringUtils;
 import com.book.core.web.action.BaseAction;
 import com.book.pojos.Book;
 import com.book.pojos.Order;
@@ -141,36 +139,6 @@ public class OrderAction extends BaseAction {
 	 * @return
 	 */
 	public String buy() {
-		try {
-			List<Book> books = (List<Book>) ActionContextUtils.getAttribute("bookList", "session");
-			Student student = (Student) ActionContextUtils.getAttribute("student", "session");
-			Order order = new Order();
-			order.setStudent((student));
-			order.setOrderNo(StringUtils.createOrderNumber(1, 1));
-			order.setOrderTime(new Date());
-			order.setPay(false);
-
-			// OrderItem orderItem1 = new OrderItem();
-			// orderItem1.setOrder(order);
-			// orderItem1.setBook(bookDao.findBookByISBN("1"));
-			// orderItem1.setQuantity();
-			// orderItem1.setPurchasePrice();
-			//
-			// OrderItem orderItem2 = new OrderItem();
-			// orderItem2.setOrder(order);
-			// orderItem2.setBook(bookDao.findBookByISBN(""));
-			// orderItem2.setQuantity();
-			// orderItem2.setPurchasePrice();
-			//
-			// order.getOrderitems().add(orderItem1);
-			// order.getOrderitems().add(orderItem2);
-			// Float p = orderItem1.getPurchasePrice() +
-			// orderItem2.getPurchasePrice();
-			// order.setPrice(p);
-			// orderService.add(order);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 		return SUCCESS;
 	}
 
