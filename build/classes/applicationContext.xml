@@ -46,7 +46,6 @@
 				<value>com/book/pojos/Book.hbm.xml</value>
 				<value>com/book/pojos/OrderItem.hbm.xml</value>
 				<value>com/book/pojos/Order.hbm.xml</value>
-				<value>com/book/pojos/ClassOrder.hbm.xml</value>
 				<value>com/book/pojos/Student.hbm.xml</value>
 				<value>com/book/pojos/Manager.hbm.xml</value>
 				<value>com/book/pojos/BookType.hbm.xml</value>

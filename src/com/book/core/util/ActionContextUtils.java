@@ -9,10 +9,10 @@ import com.opensymphony.xwork2.ActionContext;
 /**
  * 处理ActionContext中的关于request,session,application等范围对象中的方法。
  */
-@SuppressWarnings("unchecked")
 public final class ActionContextUtils {
 
-	private ActionContextUtils() {}
+	private ActionContextUtils() {
+	}
 
 	/**
 	 * HttpServletRequest对象对应的键。
@@ -45,7 +45,6 @@ public final class ActionContextUtils {
 	 * @return 指定的键所映射到的值
 	 */
 
-	@SuppressWarnings("rawtypes")
 	public static String[] getParameters(String key) {
 		String[] result = null;
 		// 获取parameterMap中的数据,值都是String[]类型的
@@ -68,7 +67,6 @@ public final class ActionContextUtils {
 	 * @return 指定的键所映射到的值的第一个字符串
 	 */
 
-	@SuppressWarnings("rawtypes")
 	public static String getParameter(String key) {
 		String[] result = null;
 		// 获取parameterMap中的数据,值都是String[]类型的
@@ -94,7 +92,6 @@ public final class ActionContextUtils {
 	 * @return 指定的键所映射到的值
 	 */
 
-	@SuppressWarnings("rawtypes")
 	public static Object getAttribute(String key, String scopeName) {
 		if (StringUtils.isEmpty(scopeName)) {
 			scopeName = "session";
@@ -115,7 +112,6 @@ public final class ActionContextUtils {
 	 *            保存对象
 	 */
 
-	@SuppressWarnings("rawtypes")
 	public static void setAtrributeToRequest(String key, Object value) {
 		// 返回request对象
 		Map map = (Map) getContext().get("request");
@@ -131,7 +127,6 @@ public final class ActionContextUtils {
 	 *            保存对象
 	 */
 
-	@SuppressWarnings("rawtypes")
 	public static void setAttributeToSession(String key, Object value) {
 		// 返回session对象
 		Map map = (Map) getContext().getSession();
@@ -147,7 +142,6 @@ public final class ActionContextUtils {
 	 *            保存对象
 	 */
 
-	@SuppressWarnings("rawtypes")
 	public static void setAttributeToApplication(String key, Object value) {
 		// 返回application对象
 		Map map = (Map) getContext().getApplication();

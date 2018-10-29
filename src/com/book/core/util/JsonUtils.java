@@ -23,7 +23,6 @@ public class JsonUtils {
 	 *            对象Class类
 	 * @return java对象
 	 */
-	@SuppressWarnings("unchecked")
 	public static <T> T jsonToBean(String jsonString, Class<T> beanCalss) {
 		JSONObject jsonObject = JSONObject.fromObject(jsonString);
 		T bean = (T) JSONObject.toBean(jsonObject, beanCalss);
