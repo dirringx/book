@@ -3,6 +3,8 @@ package com.book.action;
 import javax.annotation.Resource;
 
 import com.book.core.util.ActionContextUtils;
+import com.book.core.util.CommonMsg;
+import com.book.core.util.JsonUtils;
 import com.book.core.util.StringUtils;
 import com.book.core.web.action.BaseAction;
 import com.book.pojos.Book;
@@ -10,9 +12,8 @@ import com.book.pojos.BookType;
 import com.book.pojos.Student;
 import com.book.service.BookService;
 import com.book.service.BookTypeService;
-import com.opensymphony.xwork2.ModelDriven;
 
-public class BookAction extends BaseAction implements ModelDriven<Book> {
+public class BookAction extends BaseAction {
 	private static final long serialVersionUID = 1L;
 
 	@Resource(name = "bookService")
@@ -24,26 +25,27 @@ public class BookAction extends BaseAction implements ModelDriven<Book> {
 	/** ISBN **/
 	private String isbn;
 
-	/** book **/
-	private Book book;
+	/**
+	 * 书籍的json信息
+	 */
+	private String bookJson;
 
-	private String grade;
-
-	private String major;
-
-	private String college;
-
-	public Book getModel() {
-		if (book == null)
-			book = new Book();
-		return book;
-	}
+	/**
+	 * 书籍类型的json信息
+	 */
+	private String bookTypeJson;
 
 	/**
 	 * 显示书籍信息
 	 */
 	public void show() {
 		this.bookList();
+	}
+
+	@Override
+	public void validate() {
+		System.out.println(bookJson);
+		System.out.println(bookTypeJson);
 	}
 
 	/**
@@ -93,52 +95,60 @@ public class BookAction extends BaseAction implements ModelDriven<Book> {
 	 * @return
 	 */
 	public String addBook() {
+		Book book = new Book();
+		BookType bt = new BookType();
+
+		// json转javaBean对象
+		bt = JsonUtils.jsonToBean(bookTypeJson, BookType.class);
+		book = JsonUtils.jsonToBean(bookJson, Book.class);
+
 		// 查询所添加的书籍类别是否已经存在
-		BookType bookType = bookTypeService.findBookByType(this.major, this.grade);
+		BookType bookType = bookTypeService.findBookByType(bt.getMajor(), bt.getGrade());
+
 		// 存在直接添加
 		if (bookType != null) {
-			this.book.setBookType(bookType);
+			book.setBookType(bookType);
 		}
+
 		// 不存在时新添加一个书籍类别记录
 		else {
 			bookType = new BookType();
-			bookType.setCollege(this.college);
-			bookType.setGrade(this.grade);
-			bookType.setMajor(this.major);
-			this.book.setBookType(bookType);
+			bookType.setCollege(bt.getCollege());
+			bookType.setGrade(bt.getMajor());
+			bookType.setMajor(bt.getGrade());
+			book.setBookType(bookType);
 		}
-		this.book.setBookImage("img/book.jpg");
+
+		book.setBookImage("img/book.jpg");
+
 		// 添加书籍
-		bookService.add(this.book);
-		return SUCCESS;
+		bookService.add(book);
+
+		// 返回信息
+		CommonMsg cg = new CommonMsg();
+		cg.setStatus("200");
+		cg.setMessage("添加成功");
+		cg.setData("NULL");
+		ActionContextUtils.setAtrributeToRequest("result", JsonUtils.beanToJson(cg));
+		
+		return "ajaxReturn";
+
 	}
 
-	public String testJson() {
-		return "testJson";
+	public String getBookTypeJson() {
+		return bookTypeJson;
 	}
 
-	public String getGrade() {
-		return grade;
+	public void setBookTypeJson(String bookTypeJson) {
+		this.bookTypeJson = bookTypeJson;
 	}
 
-	public void setGrade(String grade) {
-		this.grade = grade;
+	public String getBookJson() {
+		return bookJson;
 	}
 
-	public String getMajor() {
-		return major;
-	}
-
-	public void setMajor(String major) {
-		this.major = major;
-	}
-
-	public String getCollege() {
-		return college;
-	}
-
-	public void setCollege(String college) {
-		this.college = college;
+	public void setBookJson(String bookJson) {
+		this.bookJson = bookJson;
 	}
 
 	public String getIsbn() {

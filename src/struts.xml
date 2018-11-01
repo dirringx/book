@@ -12,6 +12,7 @@
 			<result name="index">/jsp/book.jsp</result>
 			<result name="error">/comm/error.jsp</result>
 			<result name="login">/jsp/login.jsp</result>
+			<result name="ajaxReturn">/jsp/main.jsp</result>
 		</global-results>
 		<global-exception-mappings>
 			<exception-mapping result="error" exception="java.lang.Exception" />
@@ -43,8 +44,7 @@
 	<!-- 书籍选购 -->
 	<package name="book" extends="book-default" namespace="/book">
 		<action name="b" class="com.book.action.BookAction">
-			<result name="success">/jsp/book.jsp</result>
-			<result name="successjson">/jsp/main.jsp</result>
+			<result>/jsp/book.jsp</result>
 		</action>
 	</package>
 
@@ -56,7 +56,7 @@
 			<result name="toLogin">/jsp/admin/login.jsp</result>
 		</action>
 		<action name="m" class="com.book.action.ManagerAction">
-			<result name="success">/jsp/admin/operation.jsp</result>
+			<result>/jsp/admin/operation.jsp</result>
 			<result name="toLogin">/jsp/admin/login.jsp</result>
 			<result name="order">/jsp/admin/order.jsp</result>
 			<result name="book">/jsp/admin/book.jsp</result>
@@ -66,16 +66,16 @@
 			</result>
 		</action>
 		<action name="b" class="com.book.action.BookAction">
-			<result name="testJson">/jsp/main.jsp</result>
+			<result>/jsp/admin/book.jsp</result>
 		</action>
 		<action name="t" class="com.book.action.BookTypeAction">
 			<result name="book">/jsp/admin/book.jsp</result>
 		</action>
 		<action name="i" class="com.book.action.StudentActoin">
-			<result name="success">/jsp/student.jsp</result>
+			<result>/jsp/student.jsp</result>
 		</action>
 		<action name="auth" class="com.book.action.AuthorizeAction">
-			<result name="success">/jsp/admin/authorize.jsp</result>
+			<result>/jsp/admin/authorize.jsp</result>
 		</action>
 	</package>
 

@@ -54,15 +54,6 @@
     //每本数量
     var book_number = $(".number");
 	
-	console.log(number)
-	console.log(all_money)
-	console.log(select_box)
-	console.log(settlement)
-	console.log(allSelect)
-	console.log(money)
-	console.log(price)
-	console.log(book_number)
-	
     //点击全选
     allSelect.click(function(){
         if(this.className == "unselect"){
@@ -99,7 +90,6 @@
 		console.log(select_box[i].index)
 		console.log(book_number[i].index)
 		console.log(book_number[i].count)
-		console.log("-----")
     }
 	
     $(".select-box").click(function(){

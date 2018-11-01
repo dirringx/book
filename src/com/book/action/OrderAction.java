@@ -43,11 +43,6 @@ public class OrderAction extends BaseAction {
 	 */
 	private String np;
 
-	@Override
-	public void validate() {
-		System.out.println(this.np);
-	}
-
 	/**
 	 * 显示学生下的订单信息
 	 * 

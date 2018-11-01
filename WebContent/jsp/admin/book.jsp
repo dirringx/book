@@ -126,7 +126,6 @@
 		src="${ctx}/styles/js/jquery-1.8.0.min.js"></script>
 	<script type="text/javascript">
 		function saveVari() {
-			var objArray = new Array();
 			//获取tbody下的所有tr原素
 			var tr = $("#xtbody").find("tr");
 			//循环tr原素
@@ -134,32 +133,33 @@
 				//找到所有input
 				var inputs = $(f).find('input');
 				//新建对象
-				var obj = {};
+				book = {};
 				//循环所有inputs，把input中的name和value变成对象中的属性和值
 				for (var j = 0; j < inputs.length; j++) {
 					var o = inputs[j];
-					obj[$(o).attr('name')] = $(o).val();
-
-					par = jQuery.param(obj);
+					book[$(o).attr('name')] = $(o).val();
 				}
-
-				obj[$('#college').attr('name')] = $('#college').val();
-				par = jQuery.param(obj);
-				obj[$('#grade').attr('name')] = $('#grade').val();
-				par = jQuery.param(obj);
-				obj[$('#major').attr('name')] = $('#major').val();
-				par = jQuery.param(obj);
-				console.log(par);
 			});
-
-			console.log(par);
-
+			bookType = {}
+			bookType[$('#college').attr('name')] = $('#college').val();
+			bookType[$('#grade').attr('name')] = $('#grade').val();
+			bookType[$('#major').attr('name')] = $('#major').val();
+			book = JSON.stringify(book)
+			bookType = JSON.stringify(bookType)
+			url = "${ctx}/book/b.action?method=addBook";
+			//异步请求
 			$.ajax({
-				url : "${ctx}/book/b.action?method=addBook&" + par,
-				type : "POST",
-				success : function(result) {
-					alert("保存成功");
-					window.location.href = "${ctx}/admin/t.action?method=find";
+				url : url,
+				data:{bookJson:book,bookTypeJson:bookType},
+				dataType:"JSON",
+				type:"POST",
+				cache:false,
+				async:false,
+				success:function(result) {
+					if (typeof(result) != undefined && result.status == '200') {
+						alert(result.message);
+						window.location.href = "${ctx}/admin/t.action?method=find";
+					}
 				}
 			});
 		}
