@@ -16,25 +16,24 @@
         <li>
             <img class="select-box no" src="${ctx}/styles/img/unselect.png" />
             <img class="book-img" src="${ctx}/styles/${book.bookImage}" />
-            
+            <input type="hidden" name="ISBN" value="${book.ISBN}" />
+            <input type="hidden" name="name" value="${book.name}" />
             <div class="information">
                 <p class="book-name">${book.name}</p>
                 <span class="price">${book.discount}</span>
                 <p class="front">折前：<span class="front-price">${book.price}</span></p>
                 <span class="number-text">数量：</span>
-                <input class="number" type="number" value="0"/>
+                <input class="number" name="number" type="number" value="0"/>
             </div>
         </li>
         </s:iterator>
     </ul>
     <div class="footer">
-    	<form action="${ctx}/order/o.action?method=buy" method="post">
-	        <div class="summary">
-	            <span class="unselect" id="allSelect">全选</span>
-	            <span class="total">合计：<span id="money">¥0.00</span></span>
-	            <input id="settlement" type="submit" name="price" value="结算(0)" />
-	        </div>
-        </form>
+        <div class="summary">
+            <span class="unselect" id="allSelect">全选</span>
+            <span class="total">合计：<span id="money">¥0.00</span></span>
+            <input id="settlement" type="submit" name="price" onclick="buyBook()" value="结算(0)" />
+        </div>
 		<jsp:include page="/comm/view/NavBar.jsp"></jsp:include>
     </div>
     <script type="text/javascript" src="${ctx}/styles/js/jquery-1.8.0.min.js"></script>
@@ -87,9 +86,6 @@
         select_box[i].index = i
         book_number[i].index = i;
         book_number[i].count = 1;
-		console.log(select_box[i].index)
-		console.log(book_number[i].index)
-		console.log(book_number[i].count)
     }
 	
     $(".select-box").click(function(){
@@ -127,6 +123,46 @@
         }        
         money.html("¥"+all_money.toFixed(2));
     })
+    
+    function buyBook() {
+    	//获取tbody下的所有tr原素
+		var li = $("#list").find("li");
+		//新建对象
+		book = [];
+		//循环tr原素
+		$.each(li, function(i, f) {
+			//找到所有input
+			var inputs = $(f).find('input');
+			var b = {};
+			//循环所有inputs，把input中的name和value变成对象中的属性和值
+			for (var j = 0; j < inputs.length; j++) {
+				var o = inputs[j];
+				b[$(o).attr('name')] = $(o).val();
+			}
+			book.push(b);
+		});
+		url = "${ctx}/order/o.action?method=buy";
+		$.ajax({
+			url : url,
+			data : {
+				bookJson : JSON.stringify(book),
+			},
+			dataType : "JSON",
+			type : "POST",
+			cache : false,
+			async : false,
+			success : function(result) {
+				if (typeof (result) != undefined && result.status == '200') {
+					alert(result.message);
+					window.location.href = "${ctx}/book/b.action?method=bookList";
+				}
+				if(typeof (result) != undefined && result.status == '-1'){
+					alert(result.message);
+					window.location.href = "${ctx}/book/b.action?method=bookList";
+				}
+			}
+		});
+    }
     </script>
 </body>
 </html>

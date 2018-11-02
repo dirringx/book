@@ -81,8 +81,8 @@
 				</tbody>
 			</table>
 			<div class="btn">
-				<input id="addBook" type="button" value="添加书籍" /> <input
-					onclick="delBook()" value="删除" />
+				<input id="addBook" type="button" value="添加书籍" /> 
+				<input id="delBook" onclick="delBook()" value="删除" />
 			</div>
 			<div class="dn" id="addBox">
 				<p class="tips">请输入以下教材信息</p>
@@ -199,6 +199,10 @@
 				async : false,
 				success : function(result) {
 					if (typeof (result) != undefined && result.status == '200') {
+						alert(result.message);
+						window.location.href = "${ctx}/admin/t.action?method=find";
+					}
+					if (typeof (result) != undefined && result.status == '-1') {
 						alert(result.message);
 						window.location.href = "${ctx}/admin/t.action?method=find";
 					}

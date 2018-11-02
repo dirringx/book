@@ -14,7 +14,6 @@ import com.book.pojos.Student;
 import com.book.service.BookService;
 import com.book.service.BookTypeService;
 
-
 public class BookAction extends BaseAction {
 	private static final long serialVersionUID = 1L;
 
@@ -108,9 +107,10 @@ public class BookAction extends BaseAction {
 		// 返回信息
 		CommonMsg cg = new CommonMsg();
 		cg.setStatus("200");
-		cg.setMessage("添加成功");
+		cg.setMessage("添加成功！");
 		cg.setData("NULL");
 		ActionContextUtils.setAtrributeToRequest("result", JsonUtils.beanToJson(cg));
+
 		return "ajaxReturn";
 
 	}
@@ -121,13 +121,23 @@ public class BookAction extends BaseAction {
 	 * @return
 	 */
 	public String delBook() {
-		System.out.println(bookJson);
 		List<Book> books = (List<Book>) JsonUtils.jsonToBeanList(bookJson, Book.class);
-		if(books.isEmpty() || books != null){
-			for(Book b : books){
+		// 返回信息
+		CommonMsg cg = new CommonMsg();
+		if (books.size() > 0) {
+			for (Book b : books) {
 				System.out.println(b.getISBN());
 				bookService.deleteBookByISBN(b.getISBN());
 			}
+			cg.setStatus("200");
+			cg.setMessage("删除成功！");
+			cg.setData("NULL");
+			ActionContextUtils.setAtrributeToRequest("result", JsonUtils.beanToJson(cg));
+		} else {
+			cg.setStatus("-1");
+			cg.setMessage("删除失败！请选择要删除的书籍");
+			cg.setData("NULL");
+			ActionContextUtils.setAtrributeToRequest("result", JsonUtils.beanToJson(cg));
 		}
 		return "ajaxReturn";
 	}

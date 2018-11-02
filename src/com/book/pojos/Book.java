@@ -39,11 +39,24 @@ public class Book implements Serializable {
 
 	private BookType bookType;
 
+	/**
+	 * 用于记录订单中书籍数量
+	 */
+	private int number;
+
 	/* 订单单向集合 */
 	private Set<OrderItem> orderitems = new HashSet<OrderItem>(0);
 
 	public BookType getBookType() {
 		return bookType;
+	}
+
+	public int getNumber() {
+		return number;
+	}
+
+	public void setNumber(int number) {
+		this.number = number;
 	}
 
 	public void setBookType(BookType bookType) {
