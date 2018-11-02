@@ -234,6 +234,9 @@ public class OrderAction extends BaseAction {
 					}
 					// 订单添加订单项
 					order.getOrderitems().add(orderItem);
+				}else{
+					totalAmount = -1f;
+					break;
 				}
 			}
 		}
