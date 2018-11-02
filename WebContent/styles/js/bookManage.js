@@ -100,6 +100,7 @@ addBook.onclick = function(){
         addTbody.rows[i].cells[2].innerText = major.value;
     }
 }
+/*
 //点击删除
 var delBook = document.getElementById("delBook");
 delBook.onclick = function(){
@@ -170,4 +171,4 @@ for(i=0;i<addTbody.rows.length;i++){
 addCancel.onclick = function(){
     cover.className = "dn";
     addBox.className = "dn";
-}
+}*/

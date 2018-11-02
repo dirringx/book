@@ -20,3 +20,4 @@
 <meta http-equiv="expires" content="0">
 <meta name="renderer" content="webkit">
 <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+<link rel="icon" href="<%=request.getAttribute("rootpath")%>/favicon.ico" type="image/x-icon" /> 

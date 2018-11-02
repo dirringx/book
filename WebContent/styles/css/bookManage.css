@@ -260,7 +260,7 @@ html,body{
     background: url(../img/add_hover.png) no-repeat 15% center;
     background-color: #ffb701;
 }
-#delBook{
+#del-Book{
     width: 120px;
     height: 45px;
     line-height: 45px;

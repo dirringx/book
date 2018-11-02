@@ -82,7 +82,7 @@
 			</table>
 			<div class="btn">
 				<input id="addBook" type="button" value="添加书籍" /> 
-				<input id="delBook" onclick="delBook()" value="删除" />
+				<input id="del-Book" onclick="delBook()" value="删除" />
 			</div>
 			<div class="dn" id="addBox">
 				<p class="tips">请输入以下教材信息</p>
@@ -187,6 +187,7 @@
 					delbook.push(b);
 				}
 			});
+			console.log(JSON.stringify(delbook))
 			url = "${ctx}/book/b.action?method=delBook";
 			$.ajax({
 				url : url,

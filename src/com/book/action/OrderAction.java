@@ -91,6 +91,39 @@ public class OrderAction extends BaseAction {
 	}
 
 	/**
+	 * 管理员删除订单中的书籍
+	 * 
+	 * @return
+	 */
+	public String delBook() {
+		ActionContextUtils.removeAttrFromSession("order");
+		ActionContextUtils.removeAttrFromSession("orderBookList");
+
+		Book book = null;
+		Order order = null;
+		List<OrderItem> orderItemList = null;
+
+		try {
+			order = orderService.findByorderNo(this.orderNo);
+			orderItemList = new ArrayList<OrderItem>(order.getOrderitems());
+			Iterator<OrderItem> orderItemListIterator = orderItemList.iterator();
+			while (orderItemListIterator.hasNext()) {
+				OrderItem ot = orderItemListIterator.next();
+				book = ot.getBook();
+				if (book.getISBN().equals(this.isbn))
+					orderItemList.remove(ot);
+			}
+			ActionContextUtils.setAttributeToSession("orderBookList", orderItemList);
+			ActionContextUtils.setAttributeToSession("order", order);
+			bookService.findBookByISBN(book.getISBN());
+			orderItemService.delete(orderItemService.findByBook(book.getId()));
+		} catch (Exception e) {
+
+		}
+		return "admin";
+	}
+
+	/**
 	 * 显示订单信息
 	 * 
 	 * @return

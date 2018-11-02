@@ -121,7 +121,9 @@ public class BookAction extends BaseAction {
 	 * @return
 	 */
 	public String delBook() {
+		System.out.println(bookJson);
 		List<Book> books = (List<Book>) JsonUtils.jsonToBeanList(bookJson, Book.class);
+		System.out.println(books.size());
 		// 返回信息
 		CommonMsg cg = new CommonMsg();
 		if (books.size() > 0) {
