@@ -127,6 +127,7 @@
 	<script type="text/javascript"
 		src="${ctx}/styles/js/jquery-1.8.0.min.js"></script>
 	<script type="text/javascript">
+		returnURL = "${ctx}/admin/t.action?method=find&major="+ $('#major').val() + "&grade=" + $('#grade').val();
 		function saveBook() {
 			//获取tbody下的所有tr原素
 			var tr = $("#xtbody").find("tr");
@@ -162,7 +163,7 @@
 				success : function(result) {
 					if (typeof (result) != undefined && result.status == '200') {
 						alert(result.message);
-						window.location.href = "${ctx}/admin/t.action?method=find";
+						window.location.href = returnURL;
 					}
 				}
 			});
@@ -201,11 +202,11 @@
 				success : function(result) {
 					if (typeof (result) != undefined && result.status == '200') {
 						alert(result.message);
-						window.location.href = "${ctx}/admin/t.action?method=find";
+						window.location.href = returnURL;
 					}
 					if (typeof (result) != undefined && result.status == '-1') {
 						alert(result.message);
-						window.location.href = "${ctx}/admin/t.action?method=find";
+						window.location.href = returnURL;
 					}
 				}
 			});

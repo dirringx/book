@@ -38,6 +38,8 @@ public class OrderAction extends BaseAction {
 
 	private String bookJson;
 
+	private String orderItemJson;
+
 	private String orderNo;
 
 	private String price;
@@ -95,31 +97,33 @@ public class OrderAction extends BaseAction {
 	 * 
 	 * @return
 	 */
-	public String delBook() {
-		ActionContextUtils.removeAttrFromSession("order");
+	public String delBookFromOrder() {
 		ActionContextUtils.removeAttrFromSession("orderBookList");
+		ActionContextUtils.removeAttrFromSession("order");
 
-		Book book = null;
-		Order order = null;
-		List<OrderItem> orderItemList = null;
+		// 获取根据订单号获取信息
+		Order order = orderService.findByorderNo(orderNo);
 
-		try {
-			order = orderService.findByorderNo(this.orderNo);
-			orderItemList = new ArrayList<OrderItem>(order.getOrderitems());
-			Iterator<OrderItem> orderItemListIterator = orderItemList.iterator();
-			while (orderItemListIterator.hasNext()) {
-				OrderItem ot = orderItemListIterator.next();
-				book = ot.getBook();
-				if (book.getISBN().equals(this.isbn))
-					orderItemList.remove(ot);
-			}
-			ActionContextUtils.setAttributeToSession("orderBookList", orderItemList);
-			ActionContextUtils.setAttributeToSession("order", order);
-			bookService.findBookByISBN(book.getISBN());
-			orderItemService.delete(orderItemService.findByBook(book.getId()));
-		} catch (Exception e) {
-
+		if (order == null) {
+			ActionContextUtils.setAtrributeToRequest("msg", "未查询到此订单记录！");
+			return "admin";
 		}
+
+		// 获取订单项
+		List<OrderItem> orderItemList = new ArrayList<OrderItem>(order.getOrderitems());
+
+		// 删除订单项中书籍
+		for (OrderItem ot : orderItemList) {
+			Book b = ot.getBook();
+			if (b.getISBN().equals(this.isbn)) {
+				orderItemService.delete(ot);
+			}
+		}
+
+		// 重新获取订单记录
+		order = orderService.findByorderNo(orderNo);
+		ActionContextUtils.setAttributeToSession("order", order);
+		ActionContextUtils.setAttributeToSession("orderBookList", new ArrayList<OrderItem>(order.getOrderitems()));
 		return "admin";
 	}
 
@@ -137,6 +141,48 @@ public class OrderAction extends BaseAction {
 				ActionContextUtils.setAttributeToSession("orderBookList", orderItemList);
 		}
 		return "admin";
+	}
+
+	/**
+	 * 管理员更新订单记录
+	 * 
+	 * @return
+	 */
+	public String updateOrder() {
+		List<OrderItem> orderItems = JsonUtils.jsonToBeanList(orderItemJson, OrderItem.class);
+		// 返回消息
+		CommonMsg cg = new CommonMsg();
+		if (orderItems == null) {
+			cg.setMessage("系统故障，请联系管理员！");
+			cg.setStatus("0");
+			cg.setData("NULL");
+			ActionContextUtils.setAtrributeToRequest("result", JsonUtils.beanToJson(cg));
+			return "ajaxReturn";
+		}
+
+		for (OrderItem ot : orderItems) {
+			if (ot.getQuantity() <= 0) {
+				cg.setMessage("修改失败！请输出正确的数量");
+				cg.setStatus("-1");
+				cg.setData("NULL");
+				ActionContextUtils.setAtrributeToRequest("result", JsonUtils.beanToJson(cg));
+				return "ajaxReturn";
+			}
+		}
+
+		for (OrderItem ot : orderItems) {
+			OrderItem orderItem = orderItemService.findByID(OrderItem.class, ot.getId());
+			orderItem.setQuantity(ot.getQuantity());
+			orderItem.setPurchasePrice(orderItem.getPurchasePrice() * ot.getQuantity());
+			orderItemService.update(orderItem);
+		}
+
+		cg.setMessage("订单修改成功！");
+		cg.setStatus("200");
+		cg.setData("NULL");
+		ActionContextUtils.setAtrributeToRequest("result", JsonUtils.beanToJson(cg));
+
+		return "ajaxReturn";
 	}
 
 	/**
@@ -203,7 +249,7 @@ public class OrderAction extends BaseAction {
 			cg.setStatus("200");
 			cg.setMessage("购买成功！");
 			cg.setData("NULL");
-			ActionContextUtils.setAtrributeToRequest("result", cg);
+			ActionContextUtils.setAtrributeToRequest("result", JsonUtils.beanToJson(cg));
 		} else {
 			// 返回信息
 			CommonMsg cg = new CommonMsg();
@@ -213,6 +259,14 @@ public class OrderAction extends BaseAction {
 			ActionContextUtils.setAtrributeToRequest("result", JsonUtils.beanToJson(cg));
 		}
 		return "ajaxReturn";
+	}
+
+	public String getOrderItemJson() {
+		return orderItemJson;
+	}
+
+	public void setOrderItemJson(String orderItemJson) {
+		this.orderItemJson = orderItemJson;
 	}
 
 	public String getBookJson() {

@@ -61,29 +61,6 @@ CREATE TABLE `booktype` (
 INSERT INTO `booktype` VALUES ('1', '软件工程', '2016', '计算机工程学院');
 
 -- ----------------------------
--- Table structure for class_orders
--- ----------------------------
-DROP TABLE IF EXISTS `class_orders`;
-CREATE TABLE `class_orders` (
-  `id` varchar(255) NOT NULL,
-  `order_no` varchar(15) ,
-  `clasz` varchar(4) ,
-  `grade` varchar(4) ,
-  `price` float ,
-  `sales` int(11) ,
-  `pay` bit(1) ,
-  `get` bit(1) ,
-  `book_isbn` varchar(255) ,
-  `order_time` datetime ,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of class_orders
--- ----------------------------
-INSERT INTO `class_orders` VALUES ('4028abf4669084c10166908529700006', '111810207967649', '', '', '22.33', '11', '\0', '\0', '', '2018-10-20 16:08:57');
-
--- ----------------------------
 -- Table structure for mangers
 -- ----------------------------
 DROP TABLE IF EXISTS `mangers`;

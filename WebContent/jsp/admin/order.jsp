@@ -73,24 +73,24 @@
                             <th class="del"></th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="change">
                     	<s:iterator value="#session.orderBookList" var="item">
                         <tr>
-                            <td>${item.book.ISBN}</td>
-                            <td>${item.book.name}</td>
-                            <td>${item.book.press}</td>
-                            <td>${item.book.price}</td>
-                            <td>${item.book.discount}</td>
-                            <td><input type="text" value="${item.quantity}"/></td>
-                            <td></td>
-                            <td class="delete"><a href="${ctx}/order/o.action?method=delBook&orderNo=${order.orderNo}&isbn=${item.book.ISBN}">删除</a></td>                          
+                            <td><span class="ISBN">${item.book.ISBN}</span></td>
+							<td><span class="name">${item.book.name}</span></td>
+							<td><span class="press">${item.book.press}</span></td>
+							<td><span class="author">${item.book.author}</span></td>
+							<td>${item.book.discount}</td>
+                            <td><input id="item_quantity" type="text" name="quantity" value="${item.quantity}"/></td>
+                            <td class="${item.id}"></td>
+                            <td class="delete"><a href="${ctx}/order/o.action?method=delBookFromOrder&orderNo=${order.orderNo}&isbn=${item.book.ISBN}">删除</a></td>                          
                         </tr>
                         </s:iterator>
                     </tbody>
                 </table>
             </div>
             <div class="btn">
-                <input id="confirm" type="button" value="确定" />
+                <input id="confirm" type="button" onclick="changeBook()" value="确定" />
                 <input id="cancel" type="button" value="取消" />
             </div>
         </div>
@@ -133,6 +133,45 @@
 	       $("#cover").attr("class","dn");
 	       $("#modifyBox").attr("class","dn");
 	   })
+	   
+	   function changeBook() {
+		 	//获取tbody下的所有tr原素
+			var tr = $("#change").find("tr");
+			//新建对象
+			bookItem = [];
+			//循环tr原素
+			$.each(tr, function(i, f) {
+				//找到所有input
+				var inputs = $(f).find('input');
+				//循环所有inputs，把input中的name和value变成对象中的属性和值
+				for (var j = 0; j < inputs.length; j++) {
+					var o = inputs[j];
+					var p = {}
+					p[$(o).attr('name')] = $(o).val();
+				}
+				p['id'] = tr[i].cells[6].className;
+				bookItem.push(p)
+			});
+			
+			var url = "${ctx}/order/o.action?method=updateOrder"
+			
+			$.ajax({
+				url : url,
+				data : {
+					orderItemJson : JSON.stringify(bookItem),
+				},
+				dataType : "JSON",
+				type : "POST",
+				cache : false,
+				async : false,
+				success : function(result) {
+					if (typeof (result) != undefined && result.status == '200') {
+						alert(result.message);
+						window.location.href = "${ctx}/order/o.action?method=orderList&orderNo=${order.orderNo}";
+					}
+				}
+			});
+	   }
     </script>
 </body>
 </html>
