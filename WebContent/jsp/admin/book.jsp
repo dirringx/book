@@ -4,10 +4,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<%@include file="/comm/base.jsp"%>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" type="text/css" href="${ctx}/styles/css/bookManage.css" />
-	<title>教材管理</title>
+<%@include file="/comm/base.jsp"%>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" type="text/css"
+	href="${ctx}/styles/css/bookManage.css" />
+<title>教材管理</title>
 </head>
 <body>
 	<div class="wrap">
@@ -65,15 +66,15 @@
 						<th class="unselect"></th>
 					</tr>
 				</thead>
-				<tbody>
+				<tbody id="tb">
 					<s:iterator value="#session.books" var="book">
 						<tr>
-							<td>${book.ISBN}</td>
-							<td>${book.name}</td>
-							<td>${book.press}</td>
-							<td>${book.author}</td>
-							<td>${book.price}</td>
-							<td>${book.discount}</td>
+							<td><span class="ISBN">${book.ISBN}</span></td>
+							<td><span class="name">${book.name}</span></td>
+							<td><span class="press">${book.press}</span></td>
+							<td><span class="author">${book.author}</span></td>
+							<td><span class="price">${book.price}</span></td>
+							<td><span class="discount">${book.discount}</span></td>
 							<td class="unselect"></td>
 						</tr>
 					</s:iterator>
@@ -81,7 +82,7 @@
 			</table>
 			<div class="btn">
 				<input id="addBook" type="button" value="添加书籍" /> <input
-					id="delBook" type="button" value="删除" />
+					onclick="delBook()" value="删除" />
 			</div>
 			<div class="dn" id="addBox">
 				<p class="tips">请输入以下教材信息</p>
@@ -106,13 +107,14 @@
 								<td class="dn"><input type="hidden" name="grade" value="" /></td>
 								<td class="dn"><input type="hidden" name="college" value="" /></td>
 								<td class="dn"><input type="hidden" name="major" value="" /></td>
-								<td style="border-left: none;"><input type="text" name="ISBN" /></td>
+								<td style="border-left: none;"><input type="text"
+									name="ISBN" /></td>
 								<td><input type="text" name="name" /></td>
 								<td><input type="text" name="press" /></td>
 								<td><input type="text" name="className" /></td>
 								<td><input type="text" name="price" /></td>
 								<td><input type="text" name="discount" /></td>
-								<td class="xx" onclick="saveVari()">添加</td>
+								<td class="xx" onclick="saveBook()">添加</td>
 							</tr>
 						</tbody>
 					</table>
@@ -125,7 +127,7 @@
 	<script type="text/javascript"
 		src="${ctx}/styles/js/jquery-1.8.0.min.js"></script>
 	<script type="text/javascript">
-		function saveVari() {
+		function saveBook() {
 			//获取tbody下的所有tr原素
 			var tr = $("#xtbody").find("tr");
 			//循环tr原素
@@ -147,16 +149,56 @@
 			book = JSON.stringify(book)
 			bookType = JSON.stringify(bookType)
 			url = "${ctx}/book/b.action?method=addBook";
-			//异步请求
 			$.ajax({
 				url : url,
-				data:{bookJson:book,bookTypeJson:bookType},
-				dataType:"JSON",
-				type:"POST",
-				cache:false,
-				async:false,
-				success:function(result) {
-					if (typeof(result) != undefined && result.status == '200') {
+				data : {
+					bookJson : book,
+					bookTypeJson : bookType
+				},
+				dataType : "JSON",
+				type : "POST",
+				cache : false,
+				async : false,
+				success : function(result) {
+					if (typeof (result) != undefined && result.status == '200') {
+						alert(result.message);
+						window.location.href = "${ctx}/admin/t.action?method=find";
+					}
+				}
+			});
+		}
+
+		function delBook() {
+			//获取tbody下的所有tr原素
+			var tr = $("#tb").find("tr");
+			//新建对象
+			delbook = [];
+			//循环tr原素
+			$.each(tr, function(i, f) {
+				if(tr[i].cells[6].className == 'select'){
+					//找到所有span
+					var spans = $(f).find('span');
+					var b = {};
+					//循环所有span，把span中的class和标签中的内容变成对象中的属性和值
+					for (var j = 0; j < spans.length; j++) {
+						var o = spans[j];
+						b[$(o).attr('class')] = $(o).html();
+					}
+					delbook.push(b);
+				}
+			});
+			url = "${ctx}/book/b.action?method=delBook";
+			$.ajax({
+				url : url,
+				data : {
+					bookJson : JSON.stringify(delbook)
+				},
+				dataType : "JSON",
+				type : "POST",
+				cache : false,
+				async : false,
+				success : function(result) {
+					if (typeof (result) != undefined && result.status == '200') {
 						alert(result.message);
 						window.location.href = "${ctx}/admin/t.action?method=find";
 					}

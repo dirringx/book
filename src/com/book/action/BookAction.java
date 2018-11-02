@@ -1,17 +1,19 @@
 package com.book.action;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import com.book.core.util.ActionContextUtils;
 import com.book.core.util.CommonMsg;
 import com.book.core.util.JsonUtils;
-import com.book.core.util.StringUtils;
 import com.book.core.web.action.BaseAction;
 import com.book.pojos.Book;
 import com.book.pojos.BookType;
 import com.book.pojos.Student;
 import com.book.service.BookService;
 import com.book.service.BookTypeService;
+
 
 public class BookAction extends BaseAction {
 	private static final long serialVersionUID = 1L;
@@ -21,9 +23,6 @@ public class BookAction extends BaseAction {
 
 	@Resource(name = "bookTypeService")
 	private BookTypeService bookTypeService;
-
-	/** ISBN **/
-	private String isbn;
 
 	/**
 	 * 书籍的json信息
@@ -40,12 +39,6 @@ public class BookAction extends BaseAction {
 	 */
 	public void show() {
 		this.bookList();
-	}
-
-	@Override
-	public void validate() {
-		System.out.println(bookJson);
-		System.out.println(bookTypeJson);
 	}
 
 	/**
@@ -79,17 +72,6 @@ public class BookAction extends BaseAction {
 	}
 
 	/**
-	 * 通过ISBN查找书籍
-	 * 
-	 * @return
-	 */
-	public String findByISBN() {
-		if (!StringUtils.isEmpty(this.isbn))
-			ActionContextUtils.setAtrributeToRequest("book", bookService.findBookByISBN(this.isbn));
-		return SUCCESS;
-	}
-
-	/**
 	 * 添加书籍
 	 * 
 	 * @return
@@ -109,7 +91,6 @@ public class BookAction extends BaseAction {
 		if (bookType != null) {
 			book.setBookType(bookType);
 		}
-
 		// 不存在时新添加一个书籍类别记录
 		else {
 			bookType = new BookType();
@@ -130,9 +111,25 @@ public class BookAction extends BaseAction {
 		cg.setMessage("添加成功");
 		cg.setData("NULL");
 		ActionContextUtils.setAtrributeToRequest("result", JsonUtils.beanToJson(cg));
-		
 		return "ajaxReturn";
 
+	}
+
+	/**
+	 * 删除书籍
+	 * 
+	 * @return
+	 */
+	public String delBook() {
+		System.out.println(bookJson);
+		List<Book> books = (List<Book>) JsonUtils.jsonToBeanList(bookJson, Book.class);
+		if(books.isEmpty() || books != null){
+			for(Book b : books){
+				System.out.println(b.getISBN());
+				bookService.deleteBookByISBN(b.getISBN());
+			}
+		}
+		return "ajaxReturn";
 	}
 
 	public String getBookTypeJson() {
@@ -149,13 +146,5 @@ public class BookAction extends BaseAction {
 
 	public void setBookJson(String bookJson) {
 		this.bookJson = bookJson;
-	}
-
-	public String getIsbn() {
-		return isbn;
-	}
-
-	public void setIsbn(String isbn) {
-		this.isbn = isbn;
 	}
 }

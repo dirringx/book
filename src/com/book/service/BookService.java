@@ -5,7 +5,7 @@ import java.util.List;
 import com.book.core.web.service.BaseService;
 import com.book.pojos.Book;
 
-public interface BookService extends BaseService<Book>{
+public interface BookService extends BaseService<Book> {
 
 	/**
 	 * 通过国际标准书号查询书籍
@@ -23,4 +23,11 @@ public interface BookService extends BaseService<Book>{
 	 * @return
 	 */
 	List<Book> findBookByType(int typeID);
+
+	/**
+	 * 通过书籍ISBN码来删除书籍
+	 * 
+	 * @param ISBN
+	 */
+	void deleteBookByISBN(String ISBN);
 }

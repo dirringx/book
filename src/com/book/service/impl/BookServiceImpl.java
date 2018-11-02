@@ -33,4 +33,8 @@ public class BookServiceImpl extends BaseServiceImpl<Book> implements BookServic
 	public List<Book> findBookByType(int typeID) {
 		return bookDao.findBookByType(typeID);
 	}
+	
+	public void deleteBookByISBN(String ISBN) {
+		bookDao.deleteBookByISBN(ISBN);
+	}
 }

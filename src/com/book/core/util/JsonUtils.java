@@ -194,7 +194,6 @@ public class JsonUtils {
 	 * @param beanClass
 	 * @return
 	 */
-	@SuppressWarnings("unchecked")
 	public static <T> List<T> jsonToBeanList(String jsonString, Class<T> beanClass) {
 		JSONArray jsonArray = JSONArray.fromObject(jsonString);
 		JSONObject jsonObject;
