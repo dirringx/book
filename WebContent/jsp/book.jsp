@@ -12,7 +12,7 @@
 <body>
     <h1 class="title">专业书籍</h1>
     <ul id="list">
-    	<s:iterator value="#session.bookList" status="i" var="book">
+    	<s:iterator value="#session.bookList" var="book">
         <li>
             <img class="select-box no" src="${ctx}/styles/img/unselect.png" />
             <img class="book-img" src="${ctx}/styles/${book.bookImage}" />
