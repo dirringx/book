@@ -12,18 +12,16 @@
 <body>
     <h1 class="title">专业书籍</h1>
     <ul id="list">
-    	<s:iterator value="#session.bookList" status="i" var="book">
+    	<s:iterator value="#session.bookList" var="book">
         <li>
             <img class="select-box no" src="${ctx}/styles/img/unselect.png" />
             <img class="book-img" src="${ctx}/styles/${book.bookImage}" />
-            <input type="hidden" name="ISBN" value="${book.ISBN}" />
-            <input type="hidden" name="name" value="${book.name}" />
             <div class="information">
-                <p class="book-name">${book.name}</p>
-                <span class="price">${book.discount}</span>
-                <p class="front">折前：<span class="front-price">${book.price}</span></p>
+                <p class="book-name">${book.name }</p>
+                <span class="price">¥${book.discount}</span>
+                <p class="front">折前：<span class="front-price">¥${book.price }</span></p>
                 <span class="number-text">数量：</span>
-                <input class="number" name="number" type="number" value="1"/>
+                <input class="number" type="number" min="0" value="1"/>
             </div>
         </li>
         </s:iterator>
@@ -53,19 +51,19 @@
     //每本数量
     var book_number = $(".number");
 	
-    //点击全选
+  //点击全选
     allSelect.click(function(){
         if(this.className == "unselect"){
             this.className = "select";
             for(var i=0;i<select_box .length;i++){
+            	if(select_box[i].className == "select-box no"){
+            		all_money +=parseFloat(price[i].innerHTML.substring(1, price[i].innerHTML.length))*parseInt(book_number[i].value);
+            	}
                 select_box[i].src = "${ctx}/styles/img/select.png";
                 select_box[i].className = "select-box yes";
             }
             number = select_box.length;
             settlement.val("结算"+"("+number+")");
-            for(i=0;i<price.length;i++){
-                all_money +=parseFloat(price[i].innerHTML)*parseInt(book_number[i].value);
-            }
             money.html("¥"+all_money.toFixed(2));
         }
         else{
@@ -87,7 +85,7 @@
         book_number[i].index = i;
         book_number[i].count = 1;
     }
-	
+
     $(".select-box").click(function(){
         if(this.className == "select-box no"){
             this.src = "${ctx}/styles/img/select.png";
@@ -96,7 +94,7 @@
             settlement.val("结算"+"("+number+")");
             if(number == select_box.length)
                 allSelect.attr("class","select");
-            all_money += parseFloat(price[this.index].innerHTML)*parseInt(book_number[this.index].value);
+            all_money += parseFloat(price[this.index].innerHTML.substring(1, price[this.index].innerHTML.length))*parseInt(book_number[this.index].value);
             money.html("¥"+all_money.toFixed(2));
         }
         else{
@@ -106,7 +104,7 @@
             settlement.val("结算"+"("+number+")");
             if(number<select_box.length && allSelect.attr("class") == "select")
                 allSelect.attr("class","unselect");
-            all_money -= parseFloat(price[this.index].innerHTML)*parseInt(book_number[this.index].value);
+            all_money -= parseFloat(price[this.index].innerHTML.substring(1, price[this.index].innerHTML.length))*parseInt(book_number[this.index].value);
             if(all_money<0)
                 money.html("¥0.00");
             else
@@ -116,11 +114,19 @@
 	
     //书的数量改变
     book_number.change(function(){
+    	//如果输入小于0的数量
+    	if(parseInt(book_number[this.index].value)<0){
+    		book_number[this.index].value = Math.abs(parseInt(book_number[this.index].value));
+    	}
+    	else if(book_number[this.index].value == ""){
+    		book_number[this.index].value = 0;
+    	}
         if(select_box[this.index].className == "select-box yes"){
-            all_money -= parseFloat(price[this.index].innerHTML)*book_number[this.index].count;
-            all_money += parseFloat(price[this.index].innerHTML)*parseInt(book_number[this.index].value);
-            book_number[this.index].count = parseInt(book_number[this.index].value);
-        }        
+            all_money -= parseFloat(price[this.index].innerHTML.substring(1, price[this.index].innerHTML.length))*book_number[this.index].count;
+            all_money += parseFloat(price[this.index].innerHTML.substring(1, price[this.index].innerHTML.length))*parseInt(book_number[this.index].value);
+        }
+        book_number[this.index].count = parseInt(book_number[this.index].value);
+        console.log(book_number[this.index].count);
         money.html("¥"+all_money.toFixed(2));
     })
     

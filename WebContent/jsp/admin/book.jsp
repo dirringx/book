@@ -107,13 +107,14 @@
 								<td class="dn"><input type="hidden" name="grade" value="" /></td>
 								<td class="dn"><input type="hidden" name="college" value="" /></td>
 								<td class="dn"><input type="hidden" name="major" value="" /></td>
-								<td style="border-left: none;"><input type="text" name="ISBN" /></td>
+								<td style="border-left: none;"><input type="text"
+									name="ISBN" /></td>
 								<td><input type="text" name="name" /></td>
 								<td><input type="text" name="press" /></td>
 								<td><input type="text" name="className" /></td>
 								<td><input type="text" name="price" /></td>
 								<td><input type="text" name="discount" /></td>
-								<td onclick="saveBook()">添加</td>
+								<td class="xx" onclick="saveBook()">添加</td>
 							</tr>
 						</tbody>
 					</table>
@@ -164,10 +165,6 @@
 						alert(result.message);
 						window.location.href = returnURL;
 					}
-					if (typeof (result) != undefined && result.status == '-1') {
-						alert(result.message);
-						window.location.href = returnURL;
-					}
 				}
 			});
 		}
@@ -191,6 +188,7 @@
 					delbook.push(b);
 				}
 			});
+			console.log(JSON.stringify(delbook))
 			url = "${ctx}/book/b.action?method=delBook";
 			$.ajax({
 				url : url,
