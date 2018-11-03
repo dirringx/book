@@ -20,7 +20,7 @@
 		<property name="driverClass" value="com.mysql.jdbc.Driver" />
 		<property name="jdbcUrl" value="jdbc:mysql://127.0.0.1:3306/book" />
 		<property name="user" value="root" />
-		<property name="password" value="mima123147" />
+		<property name="password" value="123456" />
 	</bean>
 
 	<!-- LocalSessionFactoryBean加载配置 -->
