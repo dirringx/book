@@ -17,17 +17,17 @@ public interface BookDao extends BaseDao<Book> {
 	Book findBookByISBN(String ISBN);
 
 	/**
+	 * 通过书籍ISBN码来删除书籍
+	 * 
+	 * @param ISBN
+	 */
+	void deleteBookByISBN(String ISBN);
+
+	/**
 	 * 通过书籍类别查询
 	 * 
 	 * @param typeID
 	 * @return
 	 */
 	List<Book> findBookByType(int typeID);
-
-	/**
-	 * 通过书籍ISBN码来删除书籍
-	 * 
-	 * @param ISBN
-	 */
-	void deleteBookByISBN(String ISBN);
 }

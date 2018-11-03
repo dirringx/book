@@ -16,21 +16,22 @@
 
 		<!-- 订单编号 -->
 		<property name="orderNo" column="order_no" type="java.lang.String"
-			 length="15" />
+			length="15" />
 
 		<!-- 价格 -->
-		<property name="price" column="price" type="java.lang.Float"
-			 />
+		<property name="price" column="price" type="java.lang.Float" />
 
 		<!-- 付款状态 -->
-		<property name="pay" column="pay" type="java.lang.Boolean"
-			 />
+		<property name="pay" column="pay" type="java.lang.Boolean" />
+		
+		<property name="groupOrder" column="group_order" type="java.lang.Boolean" />
 
 		<!-- 订单时间 -->
 		<property name="orderTime" column="order_time" type="timestamp"
-			length="15"  />
+			length="15" />
 
-		<set name="orderitems" cascade="save-update" lazy="false" inverse="true" table="orderItems">
+		<set name="orderitems" cascade="save-update" lazy="false" inverse="true"
+			table="orderItems">
 			<key column="order_id" />
 			<one-to-many class="com.book.pojos.OrderItem" />
 		</set>

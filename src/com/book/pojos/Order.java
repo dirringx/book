@@ -28,7 +28,16 @@ public class Order implements Serializable {
 	/** 付款状态 **/
 	private Boolean pay;
 
-
+	private Boolean groupOrder;
+	
+	public Boolean getGroupOrder() {
+		return groupOrder;
+	}
+	
+	public void setGroupOrder(Boolean groupOrder) {
+		this.groupOrder = groupOrder;
+	}
+	
 	public Float getPrice() {
 		return price;
 	}

@@ -23,7 +23,7 @@
                 <span class="price">${book.discount}</span>
                 <p class="front">折前：<span class="front-price">${book.price}</span></p>
                 <span class="number-text">数量：</span>
-                <input class="number" name="number" type="number" value="0"/>
+                <input class="number" name="number" type="number" value="1"/>
             </div>
         </li>
         </s:iterator>

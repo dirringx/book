@@ -20,8 +20,8 @@
 		<li><a href="${ctx}/order/o.action?method=show&np=2">已完成</a></li>
 	</ul>
 	<ul id="orderList">
-		<li>
-			<s:iterator value="#session.stu_orders" var="so">
+		<s:iterator value="#session.stu_orders" var="so">
+			<li>
 				<div class="details">
 					<span class="order-number">订单编号：${so.orderNo}</span> 
 					<span class="order-date">下单日期：
@@ -42,8 +42,8 @@
 						<span class="number">x${ot.quantity}</span>
 					</div>
 			    </c:forEach>
-			</s:iterator>
-		</li>
+			</li>
+		</s:iterator>
 	</ul>
 	<jsp:include page="/comm/view/NavBar.jsp"></jsp:include>
 	<script type="text/javascript">

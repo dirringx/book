@@ -63,8 +63,8 @@ public class OrderAction extends BaseAction {
 		if (student == null)
 			return "login";
 
+		Order order = null;
 		try {
-			Order order = null;
 			List<Order> orders = orderService.findOrderBystudentID(student.getId());
 			// 未完成订单集合
 			if ("1".equals(this.np)) {
@@ -234,7 +234,8 @@ public class OrderAction extends BaseAction {
 					}
 					// 订单添加订单项
 					order.getOrderitems().add(orderItem);
-				}else{
+				}
+				if(b.getNumber() < 0){
 					totalAmount = -1f;
 					break;
 				}
