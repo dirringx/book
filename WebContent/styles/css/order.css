@@ -115,13 +115,11 @@ html,body{
     color: #444;
     text-align: center;
 }
-
-#list a:visited{
-	color: #444;
-}
 #list>.select{
     border-bottom: 2px solid #f6bf68;
+    color: #f6bf68;
 }
+
 #orderList{
     /* padding-top: 1.5em; */
     width: 100%;

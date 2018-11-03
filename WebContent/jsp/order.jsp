@@ -15,7 +15,7 @@
 <body>
 	<h1 class="title">订单列表</h1>
 	<ul id="list">
-		<li><a href="${ctx}/order/o.action?method=show">全部订单</a></li>
+		<li class="select"><a href="${ctx}/order/o.action?method=show">全部订单</a></li>
 		<li><a href="${ctx}/order/o.action?method=show&np=1">待付款</a></li>
 		<li><a href="${ctx}/order/o.action?method=show&np=2">已完成</a></li>
 	</ul>
@@ -47,20 +47,15 @@
 	</ul>
 	<jsp:include page="/comm/view/NavBar.jsp"></jsp:include>
 	<script type="text/javascript">
-	    var s = location.search;
 		var list = document.getElementById("list");
 		var li = list.getElementsByTagName("li");
-		if(s == "?method=show"){
-			li[0].className="select";
-			li[0].children[0].style.color = "#f6bf68";
-		}
-		else if(s == "?method=show&np=1"){
-			li[1].className = "select";
-			li[1].children[0].style.color = "#f6bf68";
-		}
-		else{
-			li[2].className = "select";
-			li[2].children[0].style.color = "#f6bf68";
+		for (var i = 0; i < li.length; i++) {
+			li[i].onclick = function() {
+				for (var j = 0; j < li.length; j++) {
+					li[j].className = "";
+				}
+				this.className = "select";
+			}
 		}
 	</script>
 </body>

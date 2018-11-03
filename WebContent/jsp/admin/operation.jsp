@@ -10,13 +10,13 @@
 	<title>Manager</title>
 </head>
 <body>
-<div class="wrap">
-        <jsp:include page="/comm/view/admin/top.jsp"></jsp:include>
-        <div class="choose">
-            <input type="button" value="教材管理" id="bookManage">
-            <input type="button" value="授权管理" id="grantManage">
-        </div>
-    </div>
+	<div class="wrap">
+	    <jsp:include page="/comm/view/admin/top.jsp"></jsp:include>
+	    <div class="choose">
+	        <input type="button" value="教材管理" id="bookManage">
+	        <input type="button" value="授权管理" id="grantManage">
+	    </div>
+	</div>
     <script type="text/javascript">
         var bookManage = document.getElementById("bookManage");
         var grantManage = document.getElementById("grantManage");
