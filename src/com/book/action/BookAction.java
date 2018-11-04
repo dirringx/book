@@ -161,7 +161,7 @@ public class BookAction extends BaseAction {
 		}
 		return "ajaxReturn";
 	}
-
+	
 	public String getBookTypeJson() {
 		return bookTypeJson;
 	}

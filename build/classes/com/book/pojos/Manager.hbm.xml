@@ -12,19 +12,19 @@
 
 		<!-- 姓名 -->
 		<property name="name" column="man_name" type="java.lang.String"
-			length="10"  />
+			length="10" />
 
 		<!-- 密码 -->
 		<property name="password" column="man_password" type="java.lang.String"
-			length="32"  />
+			length="32" />
 
 		<!-- 工好 -->
 		<property name="workNumber" column="man_workNumber" type="java.lang.String"
-			length="8"  />
+			length="8" />
 
 		<!-- 权限 -->
 		<property name="permission" column="man_permission" type="java.lang.Integer"
-			length="2"  />
+			length="2" />
 
 	</class>
 </hibernate-mapping>

@@ -9,12 +9,12 @@
 		<id name="id" column="id">
 			<generator class="native" />
 		</id>
-		
-		<property name="major" column="major" type="java.lang.String"/>
-		
-		<property name="grade" column="grade" type="java.lang.String"/>
-		
-		<property name="college" column="college" type="java.lang.String"/>
-		
+
+		<property name="major" column="major" type="java.lang.String" />
+
+		<property name="grade" column="grade" type="java.lang.String" />
+
+		<property name="college" column="college" type="java.lang.String" />
+
 	</class>
 </hibernate-mapping>

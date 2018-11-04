@@ -23,7 +23,7 @@
 
 		<!-- 付款状态 -->
 		<property name="pay" column="pay" type="java.lang.Boolean" />
-		
+
 		<property name="groupOrder" column="group_order" type="java.lang.Boolean" />
 
 		<!-- 订单时间 -->

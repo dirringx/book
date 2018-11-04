@@ -128,7 +128,7 @@ public class OrderAction extends BaseAction {
 	}
 
 	/**
-	 * 显示订单信息
+	 * 管理员显示订单信息
 	 * 
 	 * @return
 	 */
