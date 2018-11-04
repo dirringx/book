@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2018-10-20 19:12:26
+Date: 2018-11-04 13:32:31
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -21,14 +21,14 @@ SET FOREIGN_KEY_CHECKS=0;
 DROP TABLE IF EXISTS `books`;
 CREATE TABLE `books` (
   `id` varchar(255) NOT NULL,
-  `book_name` varchar(20) ,
-  `book_class_name` varchar(20) ,
+  `book_name` varchar(20) DEFAULT NULL,
+  `book_class_name` varchar(20) DEFAULT NULL,
   `book_author` varchar(20) DEFAULT NULL,
-  `book_price` float ,
-  `book_discount` float ,
+  `book_price` float DEFAULT NULL,
+  `book_discount` float DEFAULT NULL,
   `book_description` varchar(255) DEFAULT NULL,
   `book_image` varchar(255) DEFAULT NULL,
-  `book_isbn` varchar(17) ,
+  `book_isbn` varchar(17) DEFAULT NULL,
   `book_press` varchar(50) DEFAULT NULL,
   `booktype_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -36,12 +36,20 @@ CREATE TABLE `books` (
   CONSTRAINT `FK4od1wqphgtj3l6956c6xxkl2t` FOREIGN KEY (`booktype_id`) REFERENCES `booktype` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- ----------------------------
--- Records of books
--- ----------------------------
 INSERT INTO `books` VALUES ('4028abf4669084c101669084c71c0000', '软件项目管理与案例分析', '项目管理', 'pasf', '29', '20', '管理', 'img/book.jpg', '978-7-3021-3052-5', '清华大学出版社', '1');
 INSERT INTO `books` VALUES ('4028abf4669084c101669084c7540001', '概率论与数理统计', '概率论', '阳平华', '29', '20', '数学', 'img/book.jpg', '978-7-5165-1661-4', '航空工业出版社', '1');
 INSERT INTO `books` VALUES ('4028abf4669084c101669084c76c0002', 'JavaEE框架应用开发', 'javaEE', 'QST青软', '90', '0.9', 'ssh', 'img/book.jpg', '123-4-5678-9123-4', '清华大学出版社', '1');
+INSERT INTO `books` VALUES ('4028abf4669084c101669084c76c0003', 'UML2基础、建模与设计教程', 'UML建模分析与设计', '杨弘平', '34.5', '24.5', '软件工程书籍', 'img/book.jpg', '978-4-5678-9123-4', '清华大学出版社', '1');
+INSERT INTO `books` VALUES ('4028abf4669084c101669084c76c0004', '计算机操作系统（第二版）', '操作系统', '郁红英、王磊、武磊、李春强', '34.5', '24.5', '计算机专业书籍', 'img/book.jpg', '978-7-5678-9123-2', '清华大学出版社', '1');
+INSERT INTO `books` VALUES ('4028abf4669084c101669084c76c0005', '编译原理（第3版）', '编译原理', '王生原 董渊 张素琴 吕映芝 蒋维杜', '49', '33.0', '计算机专业书籍', 'img/book.jpg', '978-7-1111-9123-2', '清华大学出版社', '1');
+INSERT INTO `books` VALUES ('4028abf4669084c101669084c71c0006', '第一行代码:Android(第2版)', 'Android UI设计', '郭霖', '79', '60.04', '管理', 'img/book.jpg', '978-7-3021-3112-5', '人民邮电出版社', '3');
+INSERT INTO `books` VALUES ('4028abf4669084c101669084c7540007', 'Web前端开发简明教程', '高级网页设计', '阳平华', '39.8', '30.248', 'web', 'img/book.jpg', '978-7-5165-1600-4', '人民邮电出版社', '3');
+INSERT INTO `books` VALUES ('4028abf4669084c101669084c76c0008', '人机交互基础教程（第3版）', '交互技术基础', 'QST青软', '49', '37.24', 'ssh', 'img/book.jpg', '123-4-5678-9023-4', '清华大学出版社', '3');
+INSERT INTO `books` VALUES ('4028abf4669084c101669084c76c0009', 'Cocos2d-x游戏开发实战精解', '二维游戏开发基础', '杨弘平', '69.8', '53.048', '软件工程书籍', 'img/book.jpg', '978-4-5678-9103-4', '清华大学出版社', '3');
+
+-- ----------------------------
+-- Records of books
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for booktype
@@ -53,12 +61,15 @@ CREATE TABLE `booktype` (
   `grade` varchar(255) DEFAULT NULL,
   `college` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of booktype
 -- ----------------------------
+
 INSERT INTO `booktype` VALUES ('1', '软件工程', '2016', '计算机工程学院');
+INSERT INTO `booktype` VALUES ('2', '网络工程', '2016', '计算机工程学院');
+INSERT INTO `booktype` VALUES ('3', '计算机科学与技术', '2016', '计算机工程学院');
 
 -- ----------------------------
 -- Table structure for mangers
@@ -66,16 +77,17 @@ INSERT INTO `booktype` VALUES ('1', '软件工程', '2016', '计算机工程学�
 DROP TABLE IF EXISTS `mangers`;
 CREATE TABLE `mangers` (
   `id` varchar(255) NOT NULL,
-  `man_name` varchar(10) ,
-  `man_password` varchar(32) ,
-  `man_workNumber` varchar(8) ,
-  `man_permission` int(11) ,
+  `man_name` varchar(10) DEFAULT NULL,
+  `man_password` varchar(32) DEFAULT NULL,
+  `man_workNumber` varchar(8) DEFAULT NULL,
+  `man_permission` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of mangers
 -- ----------------------------
+
 INSERT INTO `mangers` VALUES ('4028abf4669084c101669084c7850003', 'axc', 'E10ADC3949BA59ABBE56E057F20F883E', '20181001', '1');
 INSERT INTO `mangers` VALUES ('4028abf4669084c101669084c79e0004', 'sdf', 'E10ADC3949BA59ABBE56E057F20F883E', '20181006', '2');
 
@@ -87,18 +99,19 @@ CREATE TABLE `orderitems` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `order_id` varchar(255) DEFAULT NULL,
   `book_id` varchar(255) DEFAULT NULL,
-  `quantity` int(11) ,
-  `purchase_price` float ,
+  `quantity` int(11) DEFAULT NULL,
+  `purchase_price` float DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FK90td7v08r46nlwukfklfeaygq` (`order_id`),
   KEY `FK4goudlxr1jdchk0pivxaggtrw` (`book_id`),
   CONSTRAINT `FK4goudlxr1jdchk0pivxaggtrw` FOREIGN KEY (`book_id`) REFERENCES `books` (`id`),
   CONSTRAINT `FK90td7v08r46nlwukfklfeaygq` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of orderitems
 -- ----------------------------
+
 INSERT INTO `orderitems` VALUES ('1', '4028abf4669084c101669085294f0005', '4028abf4669084c101669084c71c0000', '1', '20');
 INSERT INTO `orderitems` VALUES ('2', '4028abf4669084c101669085294f0005', '4028abf4669084c101669084c7540001', '2', '0.9');
 INSERT INTO `orderitems` VALUES ('3', '4028abf4669084c101669085294f0005', '4028abf4669084c101669084c76c0002', '2', '20');
@@ -110,10 +123,11 @@ DROP TABLE IF EXISTS `orders`;
 CREATE TABLE `orders` (
   `id` varchar(255) NOT NULL,
   `student_id` int(11) DEFAULT NULL,
-  `order_no` varchar(15) ,
-  `price` float ,
-  `pay` bit(1) ,
-  `order_time` datetime ,
+  `order_no` varchar(15) DEFAULT NULL,
+  `price` float DEFAULT NULL,
+  `pay` bit(1) DEFAULT NULL,
+  `group_order` bit(1) DEFAULT NULL,
+  `order_time` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FKeudclkhb1qymuoqf76gg10i3t` (`student_id`),
   CONSTRAINT `FKeudclkhb1qymuoqf76gg10i3t` FOREIGN KEY (`student_id`) REFERENCES `students` (`id`)
@@ -122,7 +136,8 @@ CREATE TABLE `orders` (
 -- ----------------------------
 -- Records of orders
 -- ----------------------------
-INSERT INTO `orders` VALUES ('4028abf4669084c101669085294f0005', '234', '111810207927512', '61.8', '\0', '2018-10-20 16:08:57');
+
+INSERT INTO `orders` VALUES ('4028abf4669084c101669085294f0005', '234', '111810207927512', '61.8', '\0', '\0', '2018-10-20 16:08:57');
 
 -- ----------------------------
 -- Table structure for students
@@ -130,20 +145,22 @@ INSERT INTO `orders` VALUES ('4028abf4669084c101669085294f0005', '234', '1118102
 DROP TABLE IF EXISTS `students`;
 CREATE TABLE `students` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `stu_id` varchar(12) ,
-  `stu_name` varchar(10) ,
-  `stu_college` varchar(15) ,
-  `stu_grade` varchar(4) ,
-  `stu_major` varchar(10) ,
-  `stu_class` varchar(10) ,
-  `stu_pwd` varchar(32) ,
-  `permission` varchar(2) DEFAULT NULL,
+  `stu_id` varchar(12) DEFAULT NULL,
+  `stu_name` varchar(10) DEFAULT NULL,
+  `stu_college` varchar(15) DEFAULT NULL,
+  `stu_grade` varchar(4) DEFAULT NULL,
+  `stu_major` varchar(10) DEFAULT NULL,
+  `stu_class` varchar(10) DEFAULT NULL,
+  `stu_pwd` varchar(32) DEFAULT NULL,
+  `permission` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1001 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of students
 -- ----------------------------
+
+
 INSERT INTO `students` VALUES ('1', '2016100980', '0', '计算机工程学院', '2016', '软件工程', '5', '56D298AA8F02B36879D4FE7EC57E63B1', null);
 INSERT INTO `students` VALUES ('2', '2016100981', '1', '计算机工程学院', '2016', '软件工程', '5', '4F07C2A1C81D1065FEF7AC5DCBF981A4', null);
 INSERT INTO `students` VALUES ('3', '2016100982', '2', '计算机工程学院', '2016', '软件工程', '5', '74B23A8B198982EB7005F266A9F14B51', null);
@@ -644,206 +661,206 @@ INSERT INTO `students` VALUES ('497', '201610098496', '496', '计算机工程学
 INSERT INTO `students` VALUES ('498', '201610098497', '497', '计算机工程学院', '2016', '软件工程', '1', '07803B4350E9596E87F3B53E99DCB0F8', null);
 INSERT INTO `students` VALUES ('499', '201610098498', '498', '计算机工程学院', '2016', '软件工程', '1', '42A84649D08AED565CC7ECE13A56D372', null);
 INSERT INTO `students` VALUES ('500', '201610098499', '499', '计算机工程学院', '2016', '软件工程', '1', 'A4F510F2F6AFD5835AFB12C42BCF8F35', null);
-INSERT INTO `students` VALUES ('501', '201610098500', '500', '计算机工程学院', '2016', '软件工程', '3', '9F3A6431BA57CDF5F9B4ADB38FBC7C7E', null);
-INSERT INTO `students` VALUES ('502', '201610098501', '501', '计算机工程学院', '2016', '软件工程', '3', '853A4051F7FA2321417C0260C77A314B', null);
-INSERT INTO `students` VALUES ('503', '201610098502', '502', '计算机工程学院', '2016', '软件工程', '3', '585255B0A9851F2656A35E1E0F5198B1', null);
-INSERT INTO `students` VALUES ('504', '201610098503', '503', '计算机工程学院', '2016', '软件工程', '3', '34E7D241F44F648E820A652F0E0272D8', null);
-INSERT INTO `students` VALUES ('505', '201610098504', '504', '计算机工程学院', '2016', '软件工程', '3', '3EE5992A2A6342BD06428C1F39E50DCC', null);
-INSERT INTO `students` VALUES ('506', '201610098505', '505', '计算机工程学院', '2016', '软件工程', '3', '924D72AFD12168B13E63ED54B449ED74', null);
-INSERT INTO `students` VALUES ('507', '201610098506', '506', '计算机工程学院', '2016', '软件工程', '3', 'F015EB98CCEEC4A10F4E6DDA5BEC08B7', null);
-INSERT INTO `students` VALUES ('508', '201610098507', '507', '计算机工程学院', '2016', '软件工程', '3', 'AB0873C69789AC7A958E5BE9CE78352E', null);
-INSERT INTO `students` VALUES ('509', '201610098508', '508', '计算机工程学院', '2016', '软件工程', '3', '4ED95629E468C3D9C8D734936259DDD5', null);
-INSERT INTO `students` VALUES ('510', '201610098509', '509', '计算机工程学院', '2016', '软件工程', '3', '2040D65DA8B8D7225E1ABF36BF294279', null);
-INSERT INTO `students` VALUES ('511', '201610098510', '510', '计算机工程学院', '2016', '软件工程', '3', '968168A4487D28B046B3AEC6F7B83ADD', null);
-INSERT INTO `students` VALUES ('512', '201610098511', '511', '计算机工程学院', '2016', '软件工程', '3', 'E1A34648393D3E56EFBB8A9713D7C856', null);
-INSERT INTO `students` VALUES ('513', '201610098512', '512', '计算机工程学院', '2016', '软件工程', '3', 'E1FAE2782A4B1012FFC153F92BF39DA2', null);
-INSERT INTO `students` VALUES ('514', '201610098513', '513', '计算机工程学院', '2016', '软件工程', '3', 'BDB9B24942B3FECF57F1B924BE01A21A', null);
-INSERT INTO `students` VALUES ('515', '201610098514', '514', '计算机工程学院', '2016', '软件工程', '3', '261BD48E858115C010B3F5180F111A42', null);
-INSERT INTO `students` VALUES ('516', '201610098515', '515', '计算机工程学院', '2016', '软件工程', '3', 'A4A20CA3BAA0466A6946F14E0D40291D', null);
-INSERT INTO `students` VALUES ('517', '201610098516', '516', '计算机工程学院', '2016', '软件工程', '3', '297D7AF09681780C82041393EB61FB6A', null);
-INSERT INTO `students` VALUES ('518', '201610098517', '517', '计算机工程学院', '2016', '软件工程', '3', '7CE390EC0BD4B0871A8EC99260FE58C8', null);
-INSERT INTO `students` VALUES ('519', '201610098518', '518', '计算机工程学院', '2016', '软件工程', '3', '3FBB76EFCC2ED38038EEEBFB1ECE2AC8', null);
-INSERT INTO `students` VALUES ('520', '201610098519', '519', '计算机工程学院', '2016', '软件工程', '3', '002B3A324E36E93BD89171EFFD830090', null);
-INSERT INTO `students` VALUES ('521', '201610098520', '520', '计算机工程学院', '2016', '软件工程', '3', '64FFB748481107FE8F0EF317D2DB99B7', null);
-INSERT INTO `students` VALUES ('522', '201610098521', '521', '计算机工程学院', '2016', '软件工程', '3', '960EA86EBC50502FC526C0B95ECC5C3B', null);
-INSERT INTO `students` VALUES ('523', '201610098522', '522', '计算机工程学院', '2016', '软件工程', '3', 'F355502B88A4FAFBCA8ADE7D3399F0B3', null);
-INSERT INTO `students` VALUES ('524', '201610098523', '523', '计算机工程学院', '2016', '软件工程', '3', '508168B36A05FBF2846EA415A75B1019', null);
-INSERT INTO `students` VALUES ('525', '201610098524', '524', '计算机工程学院', '2016', '软件工程', '3', 'FA9FA865AE0E6CFD2EA18643C45480C8', null);
-INSERT INTO `students` VALUES ('526', '201610098525', '525', '计算机工程学院', '2016', '软件工程', '3', '3E717159F4068D73DC39DCE6B4609150', null);
-INSERT INTO `students` VALUES ('527', '201610098526', '526', '计算机工程学院', '2016', '软件工程', '3', 'BE7EC2D5858ECEA9DF943E5469C859FE', null);
-INSERT INTO `students` VALUES ('528', '201610098527', '527', '计算机工程学院', '2016', '软件工程', '3', '1C702CDE04A1408B15B616F70870833B', null);
-INSERT INTO `students` VALUES ('529', '201610098528', '528', '计算机工程学院', '2016', '软件工程', '3', 'D6904939F86F4B2DA87F51F38C6EBE64', null);
-INSERT INTO `students` VALUES ('530', '201610098529', '529', '计算机工程学院', '2016', '软件工程', '3', '1DED12F9CFCCE7C527245A8C2BE37076', null);
-INSERT INTO `students` VALUES ('531', '201610098530', '530', '计算机工程学院', '2016', '软件工程', '3', 'EDB8273A630E12A5EA757146373DF340', null);
-INSERT INTO `students` VALUES ('532', '201610098531', '531', '计算机工程学院', '2016', '软件工程', '3', '04A1AF28729F263D3E94918C14F26A88', null);
-INSERT INTO `students` VALUES ('533', '201610098532', '532', '计算机工程学院', '2016', '软件工程', '3', '26EB961B83B66DFECDF026FBE8B83BDA', null);
-INSERT INTO `students` VALUES ('534', '201610098533', '533', '计算机工程学院', '2016', '软件工程', '3', '3F5D5D3D420515EDABCE43DFF7CD321B', null);
-INSERT INTO `students` VALUES ('535', '201610098534', '534', '计算机工程学院', '2016', '软件工程', '3', 'E802324A480EE28A087A374E0AFC6730', null);
-INSERT INTO `students` VALUES ('536', '201610098535', '535', '计算机工程学院', '2016', '软件工程', '3', '3EBA0B297C8B2E4E0A3C9AC91F5F742C', null);
-INSERT INTO `students` VALUES ('537', '201610098536', '536', '计算机工程学院', '2016', '软件工程', '3', '026B127D7EBA87FA4094A6CC5B727D16', null);
-INSERT INTO `students` VALUES ('538', '201610098537', '537', '计算机工程学院', '2016', '软件工程', '3', 'A47F2E6F8C75EF3912CEFDE84CC71A65', null);
-INSERT INTO `students` VALUES ('539', '201610098538', '538', '计算机工程学院', '2016', '软件工程', '3', 'A7A864091D303B6A8D0DDC1E9F8B7C15', null);
-INSERT INTO `students` VALUES ('540', '201610098539', '539', '计算机工程学院', '2016', '软件工程', '3', '3E271618C336A28B10D514521F4D85C3', null);
-INSERT INTO `students` VALUES ('541', '201610098540', '540', '计算机工程学院', '2016', '软件工程', '3', '6AADF712692412E55157B29F00582CD8', null);
-INSERT INTO `students` VALUES ('542', '201610098541', '541', '计算机工程学院', '2016', '软件工程', '3', 'E4AF50073BEB20AB0406BB0F63D82114', null);
-INSERT INTO `students` VALUES ('543', '201610098542', '542', '计算机工程学院', '2016', '软件工程', '3', 'D951BAB60AEFFFB949E4F52C4D9853D5', null);
-INSERT INTO `students` VALUES ('544', '201610098543', '543', '计算机工程学院', '2016', '软件工程', '3', '193605A116C342C1E1644463DDEB9156', null);
-INSERT INTO `students` VALUES ('545', '201610098544', '544', '计算机工程学院', '2016', '软件工程', '3', 'AFE9385AA32A217F5E9EB49D6270A58C', null);
-INSERT INTO `students` VALUES ('546', '201610098545', '545', '计算机工程学院', '2016', '软件工程', '3', 'B3479618429479FABE47E1F682E4C4FB', null);
-INSERT INTO `students` VALUES ('547', '201610098546', '546', '计算机工程学院', '2016', '软件工程', '3', '4C82D5DB27816F07B4897403A40B9F35', null);
-INSERT INTO `students` VALUES ('548', '201610098547', '547', '计算机工程学院', '2016', '软件工程', '3', 'CA9F5ED144BBB48FD56F10B835493ABE', null);
-INSERT INTO `students` VALUES ('549', '201610098548', '548', '计算机工程学院', '2016', '软件工程', '3', '15B5E1BA3ECA72F9D3978BF2712AEC93', null);
-INSERT INTO `students` VALUES ('550', '201610098549', '549', '计算机工程学院', '2016', '软件工程', '3', 'F7511605D0A96AA9FF9E3C5ADF234AF3', null);
-INSERT INTO `students` VALUES ('551', '201610098550', '550', '计算机工程学院', '2016', '软件工程', '3', '1EFCA7FF64B6FBD93EB32B010AA88896', null);
-INSERT INTO `students` VALUES ('552', '201610098551', '551', '计算机工程学院', '2016', '软件工程', '3', '5AA066E24ECF903D249D12586617C9B3', null);
-INSERT INTO `students` VALUES ('553', '201610098552', '552', '计算机工程学院', '2016', '软件工程', '3', '4233E97ABE1BDBAF535898C5D24ED398', null);
-INSERT INTO `students` VALUES ('554', '201610098553', '553', '计算机工程学院', '2016', '软件工程', '3', 'C095C5D632E142F9426FFA371AA38360', null);
-INSERT INTO `students` VALUES ('555', '201610098554', '554', '计算机工程学院', '2016', '软件工程', '3', 'B2FEC0119C7EA13DA0D4E3B42534739D', null);
-INSERT INTO `students` VALUES ('556', '201610098555', '555', '计算机工程学院', '2016', '软件工程', '3', '654190A15DEDD43D8FB1D50F7C626236', null);
-INSERT INTO `students` VALUES ('557', '201610098556', '556', '计算机工程学院', '2016', '软件工程', '3', 'EA8876B20E1230B7DEE996C97188D950', null);
-INSERT INTO `students` VALUES ('558', '201610098557', '557', '计算机工程学院', '2016', '软件工程', '3', '93CFD2D95722FE58FBD7EF005B7EBF88', null);
-INSERT INTO `students` VALUES ('559', '201610098558', '558', '计算机工程学院', '2016', '软件工程', '3', 'E4003999E027C7B09ECB0CA3B1A56042', null);
-INSERT INTO `students` VALUES ('560', '201610098559', '559', '计算机工程学院', '2016', '软件工程', '3', 'A19DD37788FC3CA87305939353B3190C', null);
-INSERT INTO `students` VALUES ('561', '201610098560', '560', '计算机工程学院', '2016', '软件工程', '3', 'BE128C167F303A2B3F8D77DDFCD0CD06', null);
-INSERT INTO `students` VALUES ('562', '201610098561', '561', '计算机工程学院', '2016', '软件工程', '3', '667696D9272112B9BB0874D24398E9BC', null);
-INSERT INTO `students` VALUES ('563', '201610098562', '562', '计算机工程学院', '2016', '软件工程', '3', '084BBC372E3F6C49B91BDD2F4A05E5F7', null);
-INSERT INTO `students` VALUES ('564', '201610098563', '563', '计算机工程学院', '2016', '软件工程', '3', '3A2C0AE00246945BE52462C7DFEDD8DD', null);
-INSERT INTO `students` VALUES ('565', '201610098564', '564', '计算机工程学院', '2016', '软件工程', '3', 'BF1F5F4D570EE155B6CD7E29305C6BD6', null);
-INSERT INTO `students` VALUES ('566', '201610098565', '565', '计算机工程学院', '2016', '软件工程', '3', 'DA435F2DE4AD3F455A4CDE03467A40B3', null);
-INSERT INTO `students` VALUES ('567', '201610098566', '566', '计算机工程学院', '2016', '软件工程', '3', '4C6124F946DBF84D503C0D7D8E038ECC', null);
-INSERT INTO `students` VALUES ('568', '201610098567', '567', '计算机工程学院', '2016', '软件工程', '3', 'F830395F308ADBF144802C2E0B4203C0', null);
-INSERT INTO `students` VALUES ('569', '201610098568', '568', '计算机工程学院', '2016', '软件工程', '3', 'EA2B20021E10191B52733D0BFE82A37F', null);
-INSERT INTO `students` VALUES ('570', '201610098569', '569', '计算机工程学院', '2016', '软件工程', '3', '67653495FA5EB3D56FC50273419605CC', null);
-INSERT INTO `students` VALUES ('571', '201610098570', '570', '计算机工程学院', '2016', '软件工程', '3', '1936310E98DC68F91D7B7384D77A5CAE', null);
-INSERT INTO `students` VALUES ('572', '201610098571', '571', '计算机工程学院', '2016', '软件工程', '3', 'C201456E8F3A913D35F79651F67D8EA0', null);
-INSERT INTO `students` VALUES ('573', '201610098572', '572', '计算机工程学院', '2016', '软件工程', '3', '79FA3E4283C32F072D49F8CED7730A63', null);
-INSERT INTO `students` VALUES ('574', '201610098573', '573', '计算机工程学院', '2016', '软件工程', '3', '040DA35DD05A97267222CD8851AF882E', null);
-INSERT INTO `students` VALUES ('575', '201610098574', '574', '计算机工程学院', '2016', '软件工程', '3', '8C579FF3497FB5BDEA2931C101FE1AE6', null);
-INSERT INTO `students` VALUES ('576', '201610098575', '575', '计算机工程学院', '2016', '软件工程', '3', 'C65655000E51ED58E3B0C49ED954908C', null);
-INSERT INTO `students` VALUES ('577', '201610098576', '576', '计算机工程学院', '2016', '软件工程', '3', 'BDED7CFEC99B3A76882DE666DC62C5DB', null);
-INSERT INTO `students` VALUES ('578', '201610098577', '577', '计算机工程学院', '2016', '软件工程', '3', 'F3B2B8DA4AA741B81DC0BD588E82B6EA', null);
-INSERT INTO `students` VALUES ('579', '201610098578', '578', '计算机工程学院', '2016', '软件工程', '3', '33A6A2F7E7BE5648679B7F8B9939E7EE', null);
-INSERT INTO `students` VALUES ('580', '201610098579', '579', '计算机工程学院', '2016', '软件工程', '3', '346636521133DB6F8275CA29734F4D6D', null);
-INSERT INTO `students` VALUES ('581', '201610098580', '580', '计算机工程学院', '2016', '软件工程', '3', 'CAD9AA0B3A99984127AF1A49590DE794', null);
-INSERT INTO `students` VALUES ('582', '201610098581', '581', '计算机工程学院', '2016', '软件工程', '3', 'EDCEAA2050847D5EE3C8AD6A723E8F9D', null);
-INSERT INTO `students` VALUES ('583', '201610098582', '582', '计算机工程学院', '2016', '软件工程', '3', '4E42CEA19E84A3B19798A58CE948D23D', null);
-INSERT INTO `students` VALUES ('584', '201610098583', '583', '计算机工程学院', '2016', '软件工程', '3', '610FF473586F93532D1ACAE60F7F82A1', null);
-INSERT INTO `students` VALUES ('585', '201610098584', '584', '计算机工程学院', '2016', '软件工程', '3', 'F82508A6608A751D226A3BC649D9208E', null);
-INSERT INTO `students` VALUES ('586', '201610098585', '585', '计算机工程学院', '2016', '软件工程', '3', 'E1FAFBEB4D93F7C7BF111171FBF9456D', null);
-INSERT INTO `students` VALUES ('587', '201610098586', '586', '计算机工程学院', '2016', '软件工程', '3', 'F339127FC07EFE7F9719FE39C4199BD9', null);
-INSERT INTO `students` VALUES ('588', '201610098587', '587', '计算机工程学院', '2016', '软件工程', '3', '1C85736CBAA7898D6D4ED0DC19A5F84E', null);
-INSERT INTO `students` VALUES ('589', '201610098588', '588', '计算机工程学院', '2016', '软件工程', '3', '10B7EE6B332A8BC940DA060E7D592D3D', null);
-INSERT INTO `students` VALUES ('590', '201610098589', '589', '计算机工程学院', '2016', '软件工程', '3', '27E75B8371C50AA2C40AF5D1FC6B6E52', null);
-INSERT INTO `students` VALUES ('591', '201610098590', '590', '计算机工程学院', '2016', '软件工程', '3', '1FA576CBF70569CBE0E6D734FF7F9C19', null);
-INSERT INTO `students` VALUES ('592', '201610098591', '591', '计算机工程学院', '2016', '软件工程', '3', 'E92337ABFE6C07C0CFE7589E0ABF316E', null);
-INSERT INTO `students` VALUES ('593', '201610098592', '592', '计算机工程学院', '2016', '软件工程', '3', '1CF854EA974421E72A5B131F72A63092', null);
-INSERT INTO `students` VALUES ('594', '201610098593', '593', '计算机工程学院', '2016', '软件工程', '3', 'FFEBB4909DA14EB3FB2A2C3D808A32D6', null);
-INSERT INTO `students` VALUES ('595', '201610098594', '594', '计算机工程学院', '2016', '软件工程', '3', '9B8EF00149D2974B2BEB7190A234E34A', null);
-INSERT INTO `students` VALUES ('596', '201610098595', '595', '计算机工程学院', '2016', '软件工程', '3', '7E80927531F83CD05842DE7B4032C36A', null);
-INSERT INTO `students` VALUES ('597', '201610098596', '596', '计算机工程学院', '2016', '软件工程', '3', 'AFCEE81CF2DC0002E5D299C7CEEEE5E4', null);
-INSERT INTO `students` VALUES ('598', '201610098597', '597', '计算机工程学院', '2016', '软件工程', '3', '9471B61453A432163AE237CA8544A1FA', null);
-INSERT INTO `students` VALUES ('599', '201610098598', '598', '计算机工程学院', '2016', '软件工程', '3', '3D6C29E01AD6C518AADB5FC96D51C85D', null);
-INSERT INTO `students` VALUES ('600', '201610098599', '599', '计算机工程学院', '2016', '软件工程', '3', '96BE67403CFF4D789853FE925DBB7FD2', null);
-INSERT INTO `students` VALUES ('601', '201610098600', '600', '计算机工程学院', '2016', '软件工程', '3', '73AFC747827953506381CC07D5B1FDFF', null);
-INSERT INTO `students` VALUES ('602', '201610098601', '601', '计算机工程学院', '2016', '软件工程', '3', '7D51A4BB657E7ACFE26D7B92EBF04B3D', null);
-INSERT INTO `students` VALUES ('603', '201610098602', '602', '计算机工程学院', '2016', '软件工程', '3', 'EF1143E88B69081EB50A0D27F0B43F42', null);
-INSERT INTO `students` VALUES ('604', '201610098603', '603', '计算机工程学院', '2016', '软件工程', '3', '9691577D0092EAE77329CFA6F33BAB63', null);
-INSERT INTO `students` VALUES ('605', '201610098604', '604', '计算机工程学院', '2016', '软件工程', '3', '7A1C148F327DA579B0895F7246A985E8', null);
-INSERT INTO `students` VALUES ('606', '201610098605', '605', '计算机工程学院', '2016', '软件工程', '3', 'C4A4DB00CA1B726772ABF6CF6026F48A', null);
-INSERT INTO `students` VALUES ('607', '201610098606', '606', '计算机工程学院', '2016', '软件工程', '3', 'A391C6C9F772191F869ED4689BC08EB5', null);
-INSERT INTO `students` VALUES ('608', '201610098607', '607', '计算机工程学院', '2016', '软件工程', '3', '4CADBD817E0BC0BFB1A6C58B5A96D6BE', null);
-INSERT INTO `students` VALUES ('609', '201610098608', '608', '计算机工程学院', '2016', '软件工程', '3', '3DFB9CFC8882D39E1FF70E37BBC975D9', null);
-INSERT INTO `students` VALUES ('610', '201610098609', '609', '计算机工程学院', '2016', '软件工程', '3', '948586FBE073BB71BF0499BD24635428', null);
-INSERT INTO `students` VALUES ('611', '201610098610', '610', '计算机工程学院', '2016', '软件工程', '3', '71972ECEECDDD4E3C9F8DABBE258536F', null);
-INSERT INTO `students` VALUES ('612', '201610098611', '611', '计算机工程学院', '2016', '软件工程', '3', '2FF6E83CEB4DC6DA4DAF5ED3AF2E4CFD', null);
-INSERT INTO `students` VALUES ('613', '201610098612', '612', '计算机工程学院', '2016', '软件工程', '3', '3D34CA50535381A6FD714D342A969F20', null);
-INSERT INTO `students` VALUES ('614', '201610098613', '613', '计算机工程学院', '2016', '软件工程', '3', '47565D3C6DD314D045F57DBB0C94A8FA', null);
-INSERT INTO `students` VALUES ('615', '201610098614', '614', '计算机工程学院', '2016', '软件工程', '3', 'D617281F4320C0AFDB6F31A2E3203F79', null);
-INSERT INTO `students` VALUES ('616', '201610098615', '615', '计算机工程学院', '2016', '软件工程', '3', 'DFC94337D72216959D3DA6FF9D2DE834', null);
-INSERT INTO `students` VALUES ('617', '201610098616', '616', '计算机工程学院', '2016', '软件工程', '3', 'D747630A78733DDA25106E974BF69D86', null);
-INSERT INTO `students` VALUES ('618', '201610098617', '617', '计算机工程学院', '2016', '软件工程', '3', '177DDE37601FE82F5DFD7B4040F686BE', null);
-INSERT INTO `students` VALUES ('619', '201610098618', '618', '计算机工程学院', '2016', '软件工程', '3', '685219E3CBBD0243431179F66ED6852C', null);
-INSERT INTO `students` VALUES ('620', '201610098619', '619', '计算机工程学院', '2016', '软件工程', '3', '27832472EE1A295FE83986C957B0F8B7', null);
-INSERT INTO `students` VALUES ('621', '201610098620', '620', '计算机工程学院', '2016', '软件工程', '3', '050A4FC7C5DB76245D79327E8308C7FC', null);
-INSERT INTO `students` VALUES ('622', '201610098621', '621', '计算机工程学院', '2016', '软件工程', '3', 'B184DC6BCC57B1FC7D38351B42B9ECF4', null);
-INSERT INTO `students` VALUES ('623', '201610098622', '622', '计算机工程学院', '2016', '软件工程', '3', '947C72A8E6932EFB8649E10BE09CD627', null);
-INSERT INTO `students` VALUES ('624', '201610098623', '623', '计算机工程学院', '2016', '软件工程', '3', '36C7FDFAD7DCB8646BCEA386A62E5AB4', null);
-INSERT INTO `students` VALUES ('625', '201610098624', '624', '计算机工程学院', '2016', '软件工程', '3', 'FF06DB9ADFA8EA8F0F37BC3E2A721F26', null);
-INSERT INTO `students` VALUES ('626', '201610098625', '625', '计算机工程学院', '2016', '软件工程', '3', '98247A46FEF5556AAEEADA923C6BF731', null);
-INSERT INTO `students` VALUES ('627', '201610098626', '626', '计算机工程学院', '2016', '软件工程', '3', 'E61E1C2E6016E5C55EA766C7B9399418', null);
-INSERT INTO `students` VALUES ('628', '201610098627', '627', '计算机工程学院', '2016', '软件工程', '3', '0B8C551E1B53AAA87FB9E18C0CE49B5D', null);
-INSERT INTO `students` VALUES ('629', '201610098628', '628', '计算机工程学院', '2016', '软件工程', '3', 'DABB87489A97EE0FC6322C76042A8C63', null);
-INSERT INTO `students` VALUES ('630', '201610098629', '629', '计算机工程学院', '2016', '软件工程', '3', 'EA3A6451755091972225EF00CA6BED45', null);
-INSERT INTO `students` VALUES ('631', '201610098630', '630', '计算机工程学院', '2016', '软件工程', '3', '3FC5B2E04383A2652B2F036E10402C7F', null);
-INSERT INTO `students` VALUES ('632', '201610098631', '631', '计算机工程学院', '2016', '软件工程', '3', '4CC7BD48B7162C7AFD7955B1C8E1415D', null);
-INSERT INTO `students` VALUES ('633', '201610098632', '632', '计算机工程学院', '2016', '软件工程', '3', 'BA1A7AA47A9359522C3DB8747C84ACB2', null);
-INSERT INTO `students` VALUES ('634', '201610098633', '633', '计算机工程学院', '2016', '软件工程', '3', '6F18D87A43CC9943428D645C57D696AE', null);
-INSERT INTO `students` VALUES ('635', '201610098634', '634', '计算机工程学院', '2016', '软件工程', '3', '5A71ED6221E70D873309416C2D9C5158', null);
-INSERT INTO `students` VALUES ('636', '201610098635', '635', '计算机工程学院', '2016', '软件工程', '3', 'AD51E721F7BCCF8BF2F5D6ED7B72B619', null);
-INSERT INTO `students` VALUES ('637', '201610098636', '636', '计算机工程学院', '2016', '软件工程', '3', '8F5D3446CF3E83A79E198F3DCBEFF3C0', null);
-INSERT INTO `students` VALUES ('638', '201610098637', '637', '计算机工程学院', '2016', '软件工程', '3', '82DEA2B651E04CCE9D85B73B10EEF203', null);
-INSERT INTO `students` VALUES ('639', '201610098638', '638', '计算机工程学院', '2016', '软件工程', '3', '2467A65D9DAEECD7BE87CCFDA21ECD03', null);
-INSERT INTO `students` VALUES ('640', '201610098639', '639', '计算机工程学院', '2016', '软件工程', '3', '78A0ED2D22C6156F2CA64A744F6EA5BD', null);
-INSERT INTO `students` VALUES ('641', '201610098640', '640', '计算机工程学院', '2016', '软件工程', '3', 'BD2BD7F7F9E0E32476264EDC2FEB66F3', null);
-INSERT INTO `students` VALUES ('642', '201610098641', '641', '计算机工程学院', '2016', '软件工程', '3', '306B3B13F05CBCEF27857DE8FDE4CF1C', null);
-INSERT INTO `students` VALUES ('643', '201610098642', '642', '计算机工程学院', '2016', '软件工程', '3', '88F83B8A406D8BEA71CB447668A40841', null);
-INSERT INTO `students` VALUES ('644', '201610098643', '643', '计算机工程学院', '2016', '软件工程', '3', '34BAB5B41D4BB5A946B5E1E869E68771', null);
-INSERT INTO `students` VALUES ('645', '201610098644', '644', '计算机工程学院', '2016', '软件工程', '3', '3128DCA8FBD2DBFA942841EF332F9069', null);
-INSERT INTO `students` VALUES ('646', '201610098645', '645', '计算机工程学院', '2016', '软件工程', '3', '5B3AB80D72F4434B07C3D86A7ED9923B', null);
-INSERT INTO `students` VALUES ('647', '201610098646', '646', '计算机工程学院', '2016', '软件工程', '3', '1CDF472E4272E00BD6ABB9C057249F3E', null);
-INSERT INTO `students` VALUES ('648', '201610098647', '647', '计算机工程学院', '2016', '软件工程', '3', '2D9D946DFA0D61D394E7A8F805C7B6EC', null);
-INSERT INTO `students` VALUES ('649', '201610098648', '648', '计算机工程学院', '2016', '软件工程', '3', '6F727C26B2EFCDD23B96E4129FE17E99', null);
-INSERT INTO `students` VALUES ('650', '201610098649', '649', '计算机工程学院', '2016', '软件工程', '3', 'E5EA36750C9D9464990BF2A9BC221885', null);
-INSERT INTO `students` VALUES ('651', '201610098650', '650', '计算机工程学院', '2016', '软件工程', '3', '146D14839E0039370554776294E31B17', null);
-INSERT INTO `students` VALUES ('652', '201610098651', '651', '计算机工程学院', '2016', '软件工程', '3', '49B7719F687519F19762CD412CF5A19A', null);
-INSERT INTO `students` VALUES ('653', '201610098652', '652', '计算机工程学院', '2016', '软件工程', '3', 'F2D2AB0B41CE066094EE70AC57743D6B', null);
-INSERT INTO `students` VALUES ('654', '201610098653', '653', '计算机工程学院', '2016', '软件工程', '3', '79858D081B3374A1CA0459DB16427CF1', null);
-INSERT INTO `students` VALUES ('655', '201610098654', '654', '计算机工程学院', '2016', '软件工程', '3', 'EB39F9315CD08ABF2D9F3F08E4C39205', null);
-INSERT INTO `students` VALUES ('656', '201610098655', '655', '计算机工程学院', '2016', '软件工程', '3', 'DDAF8A2D0168FA2AA8FBD8814D33ADBE', null);
-INSERT INTO `students` VALUES ('657', '201610098656', '656', '计算机工程学院', '2016', '软件工程', '3', '94ABC1FC949AAEBB816015A3FAAB28A2', null);
-INSERT INTO `students` VALUES ('658', '201610098657', '657', '计算机工程学院', '2016', '软件工程', '3', '5E8D32116D65248CEE1AB90CE6303524', null);
-INSERT INTO `students` VALUES ('659', '201610098658', '658', '计算机工程学院', '2016', '软件工程', '3', 'D7514C7BEB73B563994D85C2DECD42D7', null);
-INSERT INTO `students` VALUES ('660', '201610098659', '659', '计算机工程学院', '2016', '软件工程', '3', '7D89F2D97ADEC843E7CC3DE779F7BB9C', null);
-INSERT INTO `students` VALUES ('661', '201610098660', '660', '计算机工程学院', '2016', '软件工程', '3', 'B0084BFF1E8D767122C00B84A5B7CFB1', null);
-INSERT INTO `students` VALUES ('662', '201610098661', '661', '计算机工程学院', '2016', '软件工程', '3', '63B93AE2BF3D9A32C2AA0E9BAF22EA71', null);
-INSERT INTO `students` VALUES ('663', '201610098662', '662', '计算机工程学院', '2016', '软件工程', '3', '2EEBD01143DAC2D6ADCD3BACA1079D22', null);
-INSERT INTO `students` VALUES ('664', '201610098663', '663', '计算机工程学院', '2016', '软件工程', '3', '8E34F47B2D921A517158EC175BFED022', null);
-INSERT INTO `students` VALUES ('665', '201610098664', '664', '计算机工程学院', '2016', '软件工程', '3', 'D507EA878658DC2EF616B999B76AB077', null);
-INSERT INTO `students` VALUES ('666', '201610098665', '665', '计算机工程学院', '2016', '软件工程', '3', 'A3CED1A78B168FD0BEF5E3E2E6087975', null);
-INSERT INTO `students` VALUES ('667', '201610098666', '666', '计算机工程学院', '2016', '软件工程', '3', 'D4604471222A4EFEA3402DC91599A1E8', null);
-INSERT INTO `students` VALUES ('668', '201610098667', '667', '计算机工程学院', '2016', '软件工程', '3', '95106ECD3345951DC15605D7205F4902', null);
-INSERT INTO `students` VALUES ('669', '201610098668', '668', '计算机工程学院', '2016', '软件工程', '3', '20B7F465FEB3B9CF8DEA2406070D4461', null);
-INSERT INTO `students` VALUES ('670', '201610098669', '669', '计算机工程学院', '2016', '软件工程', '3', 'DAA009BD10479811D18B31D56B2C8EF6', null);
-INSERT INTO `students` VALUES ('671', '201610098670', '670', '计算机工程学院', '2016', '软件工程', '3', '27FE67F75B067DEFBEA4255CD2DD7A34', null);
-INSERT INTO `students` VALUES ('672', '201610098671', '671', '计算机工程学院', '2016', '软件工程', '3', 'C46F74E6FEAD22A6B688AE979B6CA409', null);
-INSERT INTO `students` VALUES ('673', '201610098672', '672', '计算机工程学院', '2016', '软件工程', '3', 'F9C2C1D2F58336DF4FEA279EB07DE0F1', null);
-INSERT INTO `students` VALUES ('674', '201610098673', '673', '计算机工程学院', '2016', '软件工程', '3', '3A09612863D578E3BCCC9338D60A03A9', null);
-INSERT INTO `students` VALUES ('675', '201610098674', '674', '计算机工程学院', '2016', '软件工程', '3', 'AFBA62B24A2C4987BC943D573211A963', null);
-INSERT INTO `students` VALUES ('676', '201610098675', '675', '计算机工程学院', '2016', '软件工程', '3', 'CA629D01E31399078E00A340CF868450', null);
-INSERT INTO `students` VALUES ('677', '201610098676', '676', '计算机工程学院', '2016', '软件工程', '3', '639A2F215CD64C4A642F7C1CFCF83980', null);
-INSERT INTO `students` VALUES ('678', '201610098677', '677', '计算机工程学院', '2016', '软件工程', '3', 'E2E26FDD3887889597FC039DD5994207', null);
-INSERT INTO `students` VALUES ('679', '201610098678', '678', '计算机工程学院', '2016', '软件工程', '3', 'ED38A907E064B42440CB134D329F2682', null);
-INSERT INTO `students` VALUES ('680', '201610098679', '679', '计算机工程学院', '2016', '软件工程', '3', 'C97D5913F11AB1872E014EBE4A283D7D', null);
-INSERT INTO `students` VALUES ('681', '201610098680', '680', '计算机工程学院', '2016', '软件工程', '3', '763CAB90A419482E81240F20995B0DC8', null);
-INSERT INTO `students` VALUES ('682', '201610098681', '681', '计算机工程学院', '2016', '软件工程', '3', '63BF52F1448C853131B8EAF9D610D973', null);
-INSERT INTO `students` VALUES ('683', '201610098682', '682', '计算机工程学院', '2016', '软件工程', '3', 'AF3AB32C25F0BCE5F7D4FECC434E77A8', null);
-INSERT INTO `students` VALUES ('684', '201610098683', '683', '计算机工程学院', '2016', '软件工程', '3', 'C721982B9967B019618A11D0302871C3', null);
-INSERT INTO `students` VALUES ('685', '201610098684', '684', '计算机工程学院', '2016', '软件工程', '3', '99369F0A59FF2EB97B9851CD728CB21F', null);
-INSERT INTO `students` VALUES ('686', '201610098685', '685', '计算机工程学院', '2016', '软件工程', '3', 'F8F3AE576CE394BA9AA4BDAA6BDEA0BA', null);
-INSERT INTO `students` VALUES ('687', '201610098686', '686', '计算机工程学院', '2016', '软件工程', '3', 'D3CF7325D168AE570FB163E580B85987', null);
-INSERT INTO `students` VALUES ('688', '201610098687', '687', '计算机工程学院', '2016', '软件工程', '3', '9FAF3108CF8FF661878F0DDD33129140', null);
-INSERT INTO `students` VALUES ('689', '201610098688', '688', '计算机工程学院', '2016', '软件工程', '3', 'B564461DB20A5BCEEC63DA1922458553', null);
-INSERT INTO `students` VALUES ('690', '201610098689', '689', '计算机工程学院', '2016', '软件工程', '3', 'AFDD4B13703E5FD750A691426BB3329B', null);
-INSERT INTO `students` VALUES ('691', '201610098690', '690', '计算机工程学院', '2016', '软件工程', '3', 'EAC2B81E97BA26BE757551F29CF3C79B', null);
-INSERT INTO `students` VALUES ('692', '201610098691', '691', '计算机工程学院', '2016', '软件工程', '3', '837CB8FF67043EE6E003C71BD8199A05', null);
-INSERT INTO `students` VALUES ('693', '201610098692', '692', '计算机工程学院', '2016', '软件工程', '3', '0F88270E90460986EA6A0F2DADAA8118', null);
-INSERT INTO `students` VALUES ('694', '201610098693', '693', '计算机工程学院', '2016', '软件工程', '3', '177DEB3DC86B997AF6FF2670C3B2867B', null);
-INSERT INTO `students` VALUES ('695', '201610098694', '694', '计算机工程学院', '2016', '软件工程', '3', 'B38AD667B4F2D297C26938BF40659CFF', null);
-INSERT INTO `students` VALUES ('696', '201610098695', '695', '计算机工程学院', '2016', '软件工程', '3', '5270CABF6331D3E3790C846DDF7C5507', null);
-INSERT INTO `students` VALUES ('697', '201610098696', '696', '计算机工程学院', '2016', '软件工程', '3', 'D6BD4080F1A0E5A618C04061A811B05F', null);
-INSERT INTO `students` VALUES ('698', '201610098697', '697', '计算机工程学院', '2016', '软件工程', '3', 'AD24969E9CF10E9742CF6F552B393EAD', null);
-INSERT INTO `students` VALUES ('699', '201610098698', '698', '计算机工程学院', '2016', '软件工程', '3', '259DF86E309F6246EDDACD8FABDF778C', null);
-INSERT INTO `students` VALUES ('700', '201610098699', '699', '计算机工程学院', '2016', '软件工程', '3', 'C2064D2BB47A301BFFA281AE1DFF91C4', null);
+INSERT INTO `students` VALUES ('501', '201610098500', '500', '计算机工程学院', '2016', '计算机科学与技术', '3', '9F3A6431BA57CDF5F9B4ADB38FBC7C7E', null);
+INSERT INTO `students` VALUES ('502', '201610098501', '501', '计算机工程学院', '2016', '计算机科学与技术', '3', '853A4051F7FA2321417C0260C77A314B', null);
+INSERT INTO `students` VALUES ('503', '201610098502', '502', '计算机工程学院', '2016', '计算机科学与技术', '3', '585255B0A9851F2656A35E1E0F5198B1', null);
+INSERT INTO `students` VALUES ('504', '201610098503', '503', '计算机工程学院', '2016', '计算机科学与技术', '3', '34E7D241F44F648E820A652F0E0272D8', null);
+INSERT INTO `students` VALUES ('505', '201610098504', '504', '计算机工程学院', '2016', '计算机科学与技术', '3', '3EE5992A2A6342BD06428C1F39E50DCC', null);
+INSERT INTO `students` VALUES ('506', '201610098505', '505', '计算机工程学院', '2016', '计算机科学与技术', '3', '924D72AFD12168B13E63ED54B449ED74', null);
+INSERT INTO `students` VALUES ('507', '201610098506', '506', '计算机工程学院', '2016', '计算机科学与技术', '3', 'F015EB98CCEEC4A10F4E6DDA5BEC08B7', null);
+INSERT INTO `students` VALUES ('508', '201610098507', '507', '计算机工程学院', '2016', '计算机科学与技术', '3', 'AB0873C69789AC7A958E5BE9CE78352E', null);
+INSERT INTO `students` VALUES ('509', '201610098508', '508', '计算机工程学院', '2016', '计算机科学与技术', '3', '4ED95629E468C3D9C8D734936259DDD5', null);
+INSERT INTO `students` VALUES ('510', '201610098509', '509', '计算机工程学院', '2016', '计算机科学与技术', '3', '2040D65DA8B8D7225E1ABF36BF294279', null);
+INSERT INTO `students` VALUES ('511', '201610098510', '510', '计算机工程学院', '2016', '计算机科学与技术', '3', '968168A4487D28B046B3AEC6F7B83ADD', null);
+INSERT INTO `students` VALUES ('512', '201610098511', '511', '计算机工程学院', '2016', '计算机科学与技术', '3', 'E1A34648393D3E56EFBB8A9713D7C856', null);
+INSERT INTO `students` VALUES ('513', '201610098512', '512', '计算机工程学院', '2016', '计算机科学与技术', '3', 'E1FAE2782A4B1012FFC153F92BF39DA2', null);
+INSERT INTO `students` VALUES ('514', '201610098513', '513', '计算机工程学院', '2016', '计算机科学与技术', '3', 'BDB9B24942B3FECF57F1B924BE01A21A', null);
+INSERT INTO `students` VALUES ('515', '201610098514', '514', '计算机工程学院', '2016', '计算机科学与技术', '3', '261BD48E858115C010B3F5180F111A42', null);
+INSERT INTO `students` VALUES ('516', '201610098515', '515', '计算机工程学院', '2016', '计算机科学与技术', '3', 'A4A20CA3BAA0466A6946F14E0D40291D', null);
+INSERT INTO `students` VALUES ('517', '201610098516', '516', '计算机工程学院', '2016', '计算机科学与技术', '3', '297D7AF09681780C82041393EB61FB6A', null);
+INSERT INTO `students` VALUES ('518', '201610098517', '517', '计算机工程学院', '2016', '计算机科学与技术', '3', '7CE390EC0BD4B0871A8EC99260FE58C8', null);
+INSERT INTO `students` VALUES ('519', '201610098518', '518', '计算机工程学院', '2016', '计算机科学与技术', '3', '3FBB76EFCC2ED38038EEEBFB1ECE2AC8', null);
+INSERT INTO `students` VALUES ('520', '201610098519', '519', '计算机工程学院', '2016', '计算机科学与技术', '3', '002B3A324E36E93BD89171EFFD830090', null);
+INSERT INTO `students` VALUES ('521', '201610098520', '520', '计算机工程学院', '2016', '计算机科学与技术', '3', '64FFB748481107FE8F0EF317D2DB99B7', null);
+INSERT INTO `students` VALUES ('522', '201610098521', '521', '计算机工程学院', '2016', '计算机科学与技术', '3', '960EA86EBC50502FC526C0B95ECC5C3B', null);
+INSERT INTO `students` VALUES ('523', '201610098522', '522', '计算机工程学院', '2016', '计算机科学与技术', '3', 'F355502B88A4FAFBCA8ADE7D3399F0B3', null);
+INSERT INTO `students` VALUES ('524', '201610098523', '523', '计算机工程学院', '2016', '计算机科学与技术', '3', '508168B36A05FBF2846EA415A75B1019', null);
+INSERT INTO `students` VALUES ('525', '201610098524', '524', '计算机工程学院', '2016', '计算机科学与技术', '3', 'FA9FA865AE0E6CFD2EA18643C45480C8', null);
+INSERT INTO `students` VALUES ('526', '201610098525', '525', '计算机工程学院', '2016', '计算机科学与技术', '3', '3E717159F4068D73DC39DCE6B4609150', null);
+INSERT INTO `students` VALUES ('527', '201610098526', '526', '计算机工程学院', '2016', '计算机科学与技术', '3', 'BE7EC2D5858ECEA9DF943E5469C859FE', null);
+INSERT INTO `students` VALUES ('528', '201610098527', '527', '计算机工程学院', '2016', '计算机科学与技术', '3', '1C702CDE04A1408B15B616F70870833B', null);
+INSERT INTO `students` VALUES ('529', '201610098528', '528', '计算机工程学院', '2016', '计算机科学与技术', '3', 'D6904939F86F4B2DA87F51F38C6EBE64', null);
+INSERT INTO `students` VALUES ('530', '201610098529', '529', '计算机工程学院', '2016', '计算机科学与技术', '3', '1DED12F9CFCCE7C527245A8C2BE37076', null);
+INSERT INTO `students` VALUES ('531', '201610098530', '530', '计算机工程学院', '2016', '计算机科学与技术', '3', 'EDB8273A630E12A5EA757146373DF340', null);
+INSERT INTO `students` VALUES ('532', '201610098531', '531', '计算机工程学院', '2016', '计算机科学与技术', '3', '04A1AF28729F263D3E94918C14F26A88', null);
+INSERT INTO `students` VALUES ('533', '201610098532', '532', '计算机工程学院', '2016', '计算机科学与技术', '3', '26EB961B83B66DFECDF026FBE8B83BDA', null);
+INSERT INTO `students` VALUES ('534', '201610098533', '533', '计算机工程学院', '2016', '计算机科学与技术', '3', '3F5D5D3D420515EDABCE43DFF7CD321B', null);
+INSERT INTO `students` VALUES ('535', '201610098534', '534', '计算机工程学院', '2016', '计算机科学与技术', '3', 'E802324A480EE28A087A374E0AFC6730', null);
+INSERT INTO `students` VALUES ('536', '201610098535', '535', '计算机工程学院', '2016', '计算机科学与技术', '3', '3EBA0B297C8B2E4E0A3C9AC91F5F742C', null);
+INSERT INTO `students` VALUES ('537', '201610098536', '536', '计算机工程学院', '2016', '计算机科学与技术', '3', '026B127D7EBA87FA4094A6CC5B727D16', null);
+INSERT INTO `students` VALUES ('538', '201610098537', '537', '计算机工程学院', '2016', '计算机科学与技术', '3', 'A47F2E6F8C75EF3912CEFDE84CC71A65', null);
+INSERT INTO `students` VALUES ('539', '201610098538', '538', '计算机工程学院', '2016', '计算机科学与技术', '3', 'A7A864091D303B6A8D0DDC1E9F8B7C15', null);
+INSERT INTO `students` VALUES ('540', '201610098539', '539', '计算机工程学院', '2016', '计算机科学与技术', '3', '3E271618C336A28B10D514521F4D85C3', null);
+INSERT INTO `students` VALUES ('541', '201610098540', '540', '计算机工程学院', '2016', '计算机科学与技术', '3', '6AADF712692412E55157B29F00582CD8', null);
+INSERT INTO `students` VALUES ('542', '201610098541', '541', '计算机工程学院', '2016', '计算机科学与技术', '3', 'E4AF50073BEB20AB0406BB0F63D82114', null);
+INSERT INTO `students` VALUES ('543', '201610098542', '542', '计算机工程学院', '2016', '计算机科学与技术', '3', 'D951BAB60AEFFFB949E4F52C4D9853D5', null);
+INSERT INTO `students` VALUES ('544', '201610098543', '543', '计算机工程学院', '2016', '计算机科学与技术', '3', '193605A116C342C1E1644463DDEB9156', null);
+INSERT INTO `students` VALUES ('545', '201610098544', '544', '计算机工程学院', '2016', '计算机科学与技术', '3', 'AFE9385AA32A217F5E9EB49D6270A58C', null);
+INSERT INTO `students` VALUES ('546', '201610098545', '545', '计算机工程学院', '2016', '计算机科学与技术', '3', 'B3479618429479FABE47E1F682E4C4FB', null);
+INSERT INTO `students` VALUES ('547', '201610098546', '546', '计算机工程学院', '2016', '计算机科学与技术', '3', '4C82D5DB27816F07B4897403A40B9F35', null);
+INSERT INTO `students` VALUES ('548', '201610098547', '547', '计算机工程学院', '2016', '计算机科学与技术', '3', 'CA9F5ED144BBB48FD56F10B835493ABE', null);
+INSERT INTO `students` VALUES ('549', '201610098548', '548', '计算机工程学院', '2016', '计算机科学与技术', '3', '15B5E1BA3ECA72F9D3978BF2712AEC93', null);
+INSERT INTO `students` VALUES ('550', '201610098549', '549', '计算机工程学院', '2016', '计算机科学与技术', '3', 'F7511605D0A96AA9FF9E3C5ADF234AF3', null);
+INSERT INTO `students` VALUES ('551', '201610098550', '550', '计算机工程学院', '2016', '计算机科学与技术', '3', '1EFCA7FF64B6FBD93EB32B010AA88896', null);
+INSERT INTO `students` VALUES ('552', '201610098551', '551', '计算机工程学院', '2016', '计算机科学与技术', '3', '5AA066E24ECF903D249D12586617C9B3', null);
+INSERT INTO `students` VALUES ('553', '201610098552', '552', '计算机工程学院', '2016', '计算机科学与技术', '3', '4233E97ABE1BDBAF535898C5D24ED398', null);
+INSERT INTO `students` VALUES ('554', '201610098553', '553', '计算机工程学院', '2016', '计算机科学与技术', '3', 'C095C5D632E142F9426FFA371AA38360', null);
+INSERT INTO `students` VALUES ('555', '201610098554', '554', '计算机工程学院', '2016', '计算机科学与技术', '3', 'B2FEC0119C7EA13DA0D4E3B42534739D', null);
+INSERT INTO `students` VALUES ('556', '201610098555', '555', '计算机工程学院', '2016', '计算机科学与技术', '3', '654190A15DEDD43D8FB1D50F7C626236', null);
+INSERT INTO `students` VALUES ('557', '201610098556', '556', '计算机工程学院', '2016', '计算机科学与技术', '3', 'EA8876B20E1230B7DEE996C97188D950', null);
+INSERT INTO `students` VALUES ('558', '201610098557', '557', '计算机工程学院', '2016', '计算机科学与技术', '3', '93CFD2D95722FE58FBD7EF005B7EBF88', null);
+INSERT INTO `students` VALUES ('559', '201610098558', '558', '计算机工程学院', '2016', '计算机科学与技术', '3', 'E4003999E027C7B09ECB0CA3B1A56042', null);
+INSERT INTO `students` VALUES ('560', '201610098559', '559', '计算机工程学院', '2016', '计算机科学与技术', '3', 'A19DD37788FC3CA87305939353B3190C', null);
+INSERT INTO `students` VALUES ('561', '201610098560', '560', '计算机工程学院', '2016', '计算机科学与技术', '3', 'BE128C167F303A2B3F8D77DDFCD0CD06', null);
+INSERT INTO `students` VALUES ('562', '201610098561', '561', '计算机工程学院', '2016', '计算机科学与技术', '3', '667696D9272112B9BB0874D24398E9BC', null);
+INSERT INTO `students` VALUES ('563', '201610098562', '562', '计算机工程学院', '2016', '计算机科学与技术', '3', '084BBC372E3F6C49B91BDD2F4A05E5F7', null);
+INSERT INTO `students` VALUES ('564', '201610098563', '563', '计算机工程学院', '2016', '计算机科学与技术', '3', '3A2C0AE00246945BE52462C7DFEDD8DD', null);
+INSERT INTO `students` VALUES ('565', '201610098564', '564', '计算机工程学院', '2016', '计算机科学与技术', '3', 'BF1F5F4D570EE155B6CD7E29305C6BD6', null);
+INSERT INTO `students` VALUES ('566', '201610098565', '565', '计算机工程学院', '2016', '计算机科学与技术', '3', 'DA435F2DE4AD3F455A4CDE03467A40B3', null);
+INSERT INTO `students` VALUES ('567', '201610098566', '566', '计算机工程学院', '2016', '计算机科学与技术', '3', '4C6124F946DBF84D503C0D7D8E038ECC', null);
+INSERT INTO `students` VALUES ('568', '201610098567', '567', '计算机工程学院', '2016', '计算机科学与技术', '3', 'F830395F308ADBF144802C2E0B4203C0', null);
+INSERT INTO `students` VALUES ('569', '201610098568', '568', '计算机工程学院', '2016', '计算机科学与技术', '3', 'EA2B20021E10191B52733D0BFE82A37F', null);
+INSERT INTO `students` VALUES ('570', '201610098569', '569', '计算机工程学院', '2016', '计算机科学与技术', '3', '67653495FA5EB3D56FC50273419605CC', null);
+INSERT INTO `students` VALUES ('571', '201610098570', '570', '计算机工程学院', '2016', '计算机科学与技术', '3', '1936310E98DC68F91D7B7384D77A5CAE', null);
+INSERT INTO `students` VALUES ('572', '201610098571', '571', '计算机工程学院', '2016', '计算机科学与技术', '3', 'C201456E8F3A913D35F79651F67D8EA0', null);
+INSERT INTO `students` VALUES ('573', '201610098572', '572', '计算机工程学院', '2016', '计算机科学与技术', '3', '79FA3E4283C32F072D49F8CED7730A63', null);
+INSERT INTO `students` VALUES ('574', '201610098573', '573', '计算机工程学院', '2016', '计算机科学与技术', '3', '040DA35DD05A97267222CD8851AF882E', null);
+INSERT INTO `students` VALUES ('575', '201610098574', '574', '计算机工程学院', '2016', '计算机科学与技术', '3', '8C579FF3497FB5BDEA2931C101FE1AE6', null);
+INSERT INTO `students` VALUES ('576', '201610098575', '575', '计算机工程学院', '2016', '计算机科学与技术', '3', 'C65655000E51ED58E3B0C49ED954908C', null);
+INSERT INTO `students` VALUES ('577', '201610098576', '576', '计算机工程学院', '2016', '计算机科学与技术', '3', 'BDED7CFEC99B3A76882DE666DC62C5DB', null);
+INSERT INTO `students` VALUES ('578', '201610098577', '577', '计算机工程学院', '2016', '计算机科学与技术', '3', 'F3B2B8DA4AA741B81DC0BD588E82B6EA', null);
+INSERT INTO `students` VALUES ('579', '201610098578', '578', '计算机工程学院', '2016', '计算机科学与技术', '3', '33A6A2F7E7BE5648679B7F8B9939E7EE', null);
+INSERT INTO `students` VALUES ('580', '201610098579', '579', '计算机工程学院', '2016', '计算机科学与技术', '3', '346636521133DB6F8275CA29734F4D6D', null);
+INSERT INTO `students` VALUES ('581', '201610098580', '580', '计算机工程学院', '2016', '计算机科学与技术', '3', 'CAD9AA0B3A99984127AF1A49590DE794', null);
+INSERT INTO `students` VALUES ('582', '201610098581', '581', '计算机工程学院', '2016', '计算机科学与技术', '3', 'EDCEAA2050847D5EE3C8AD6A723E8F9D', null);
+INSERT INTO `students` VALUES ('583', '201610098582', '582', '计算机工程学院', '2016', '计算机科学与技术', '3', '4E42CEA19E84A3B19798A58CE948D23D', null);
+INSERT INTO `students` VALUES ('584', '201610098583', '583', '计算机工程学院', '2016', '计算机科学与技术', '3', '610FF473586F93532D1ACAE60F7F82A1', null);
+INSERT INTO `students` VALUES ('585', '201610098584', '584', '计算机工程学院', '2016', '计算机科学与技术', '3', 'F82508A6608A751D226A3BC649D9208E', null);
+INSERT INTO `students` VALUES ('586', '201610098585', '585', '计算机工程学院', '2016', '计算机科学与技术', '3', 'E1FAFBEB4D93F7C7BF111171FBF9456D', null);
+INSERT INTO `students` VALUES ('587', '201610098586', '586', '计算机工程学院', '2016', '计算机科学与技术', '3', 'F339127FC07EFE7F9719FE39C4199BD9', null);
+INSERT INTO `students` VALUES ('588', '201610098587', '587', '计算机工程学院', '2016', '计算机科学与技术', '3', '1C85736CBAA7898D6D4ED0DC19A5F84E', null);
+INSERT INTO `students` VALUES ('589', '201610098588', '588', '计算机工程学院', '2016', '计算机科学与技术', '3', '10B7EE6B332A8BC940DA060E7D592D3D', null);
+INSERT INTO `students` VALUES ('590', '201610098589', '589', '计算机工程学院', '2016', '计算机科学与技术', '3', '27E75B8371C50AA2C40AF5D1FC6B6E52', null);
+INSERT INTO `students` VALUES ('591', '201610098590', '590', '计算机工程学院', '2016', '计算机科学与技术', '3', '1FA576CBF70569CBE0E6D734FF7F9C19', null);
+INSERT INTO `students` VALUES ('592', '201610098591', '591', '计算机工程学院', '2016', '计算机科学与技术', '3', 'E92337ABFE6C07C0CFE7589E0ABF316E', null);
+INSERT INTO `students` VALUES ('593', '201610098592', '592', '计算机工程学院', '2016', '计算机科学与技术', '3', '1CF854EA974421E72A5B131F72A63092', null);
+INSERT INTO `students` VALUES ('594', '201610098593', '593', '计算机工程学院', '2016', '计算机科学与技术', '3', 'FFEBB4909DA14EB3FB2A2C3D808A32D6', null);
+INSERT INTO `students` VALUES ('595', '201610098594', '594', '计算机工程学院', '2016', '计算机科学与技术', '3', '9B8EF00149D2974B2BEB7190A234E34A', null);
+INSERT INTO `students` VALUES ('596', '201610098595', '595', '计算机工程学院', '2016', '计算机科学与技术', '3', '7E80927531F83CD05842DE7B4032C36A', null);
+INSERT INTO `students` VALUES ('597', '201610098596', '596', '计算机工程学院', '2016', '计算机科学与技术', '3', 'AFCEE81CF2DC0002E5D299C7CEEEE5E4', null);
+INSERT INTO `students` VALUES ('598', '201610098597', '597', '计算机工程学院', '2016', '计算机科学与技术', '3', '9471B61453A432163AE237CA8544A1FA', null);
+INSERT INTO `students` VALUES ('599', '201610098598', '598', '计算机工程学院', '2016', '计算机科学与技术', '3', '3D6C29E01AD6C518AADB5FC96D51C85D', null);
+INSERT INTO `students` VALUES ('600', '201610098599', '599', '计算机工程学院', '2016', '计算机科学与技术', '3', '96BE67403CFF4D789853FE925DBB7FD2', null);
+INSERT INTO `students` VALUES ('601', '201610098600', '600', '计算机工程学院', '2016', '计算机科学与技术', '3', '73AFC747827953506381CC07D5B1FDFF', null);
+INSERT INTO `students` VALUES ('602', '201610098601', '601', '计算机工程学院', '2016', '计算机科学与技术', '3', '7D51A4BB657E7ACFE26D7B92EBF04B3D', null);
+INSERT INTO `students` VALUES ('603', '201610098602', '602', '计算机工程学院', '2016', '计算机科学与技术', '3', 'EF1143E88B69081EB50A0D27F0B43F42', null);
+INSERT INTO `students` VALUES ('604', '201610098603', '603', '计算机工程学院', '2016', '计算机科学与技术', '3', '9691577D0092EAE77329CFA6F33BAB63', null);
+INSERT INTO `students` VALUES ('605', '201610098604', '604', '计算机工程学院', '2016', '计算机科学与技术', '3', '7A1C148F327DA579B0895F7246A985E8', null);
+INSERT INTO `students` VALUES ('606', '201610098605', '605', '计算机工程学院', '2016', '计算机科学与技术', '3', 'C4A4DB00CA1B726772ABF6CF6026F48A', null);
+INSERT INTO `students` VALUES ('607', '201610098606', '606', '计算机工程学院', '2016', '计算机科学与技术', '3', 'A391C6C9F772191F869ED4689BC08EB5', null);
+INSERT INTO `students` VALUES ('608', '201610098607', '607', '计算机工程学院', '2016', '计算机科学与技术', '3', '4CADBD817E0BC0BFB1A6C58B5A96D6BE', null);
+INSERT INTO `students` VALUES ('609', '201610098608', '608', '计算机工程学院', '2016', '计算机科学与技术', '3', '3DFB9CFC8882D39E1FF70E37BBC975D9', null);
+INSERT INTO `students` VALUES ('610', '201610098609', '609', '计算机工程学院', '2016', '计算机科学与技术', '3', '948586FBE073BB71BF0499BD24635428', null);
+INSERT INTO `students` VALUES ('611', '201610098610', '610', '计算机工程学院', '2016', '计算机科学与技术', '3', '71972ECEECDDD4E3C9F8DABBE258536F', null);
+INSERT INTO `students` VALUES ('612', '201610098611', '611', '计算机工程学院', '2016', '计算机科学与技术', '3', '2FF6E83CEB4DC6DA4DAF5ED3AF2E4CFD', null);
+INSERT INTO `students` VALUES ('613', '201610098612', '612', '计算机工程学院', '2016', '计算机科学与技术', '3', '3D34CA50535381A6FD714D342A969F20', null);
+INSERT INTO `students` VALUES ('614', '201610098613', '613', '计算机工程学院', '2016', '计算机科学与技术', '3', '47565D3C6DD314D045F57DBB0C94A8FA', null);
+INSERT INTO `students` VALUES ('615', '201610098614', '614', '计算机工程学院', '2016', '计算机科学与技术', '3', 'D617281F4320C0AFDB6F31A2E3203F79', null);
+INSERT INTO `students` VALUES ('616', '201610098615', '615', '计算机工程学院', '2016', '计算机科学与技术', '3', 'DFC94337D72216959D3DA6FF9D2DE834', null);
+INSERT INTO `students` VALUES ('617', '201610098616', '616', '计算机工程学院', '2016', '计算机科学与技术', '3', 'D747630A78733DDA25106E974BF69D86', null);
+INSERT INTO `students` VALUES ('618', '201610098617', '617', '计算机工程学院', '2016', '计算机科学与技术', '3', '177DDE37601FE82F5DFD7B4040F686BE', null);
+INSERT INTO `students` VALUES ('619', '201610098618', '618', '计算机工程学院', '2016', '计算机科学与技术', '3', '685219E3CBBD0243431179F66ED6852C', null);
+INSERT INTO `students` VALUES ('620', '201610098619', '619', '计算机工程学院', '2016', '计算机科学与技术', '3', '27832472EE1A295FE83986C957B0F8B7', null);
+INSERT INTO `students` VALUES ('621', '201610098620', '620', '计算机工程学院', '2016', '计算机科学与技术', '3', '050A4FC7C5DB76245D79327E8308C7FC', null);
+INSERT INTO `students` VALUES ('622', '201610098621', '621', '计算机工程学院', '2016', '计算机科学与技术', '3', 'B184DC6BCC57B1FC7D38351B42B9ECF4', null);
+INSERT INTO `students` VALUES ('623', '201610098622', '622', '计算机工程学院', '2016', '计算机科学与技术', '3', '947C72A8E6932EFB8649E10BE09CD627', null);
+INSERT INTO `students` VALUES ('624', '201610098623', '623', '计算机工程学院', '2016', '计算机科学与技术', '3', '36C7FDFAD7DCB8646BCEA386A62E5AB4', null);
+INSERT INTO `students` VALUES ('625', '201610098624', '624', '计算机工程学院', '2016', '计算机科学与技术', '3', 'FF06DB9ADFA8EA8F0F37BC3E2A721F26', null);
+INSERT INTO `students` VALUES ('626', '201610098625', '625', '计算机工程学院', '2016', '计算机科学与技术', '3', '98247A46FEF5556AAEEADA923C6BF731', null);
+INSERT INTO `students` VALUES ('627', '201610098626', '626', '计算机工程学院', '2016', '计算机科学与技术', '3', 'E61E1C2E6016E5C55EA766C7B9399418', null);
+INSERT INTO `students` VALUES ('628', '201610098627', '627', '计算机工程学院', '2016', '计算机科学与技术', '3', '0B8C551E1B53AAA87FB9E18C0CE49B5D', null);
+INSERT INTO `students` VALUES ('629', '201610098628', '628', '计算机工程学院', '2016', '计算机科学与技术', '3', 'DABB87489A97EE0FC6322C76042A8C63', null);
+INSERT INTO `students` VALUES ('630', '201610098629', '629', '计算机工程学院', '2016', '计算机科学与技术', '3', 'EA3A6451755091972225EF00CA6BED45', null);
+INSERT INTO `students` VALUES ('631', '201610098630', '630', '计算机工程学院', '2016', '计算机科学与技术', '3', '3FC5B2E04383A2652B2F036E10402C7F', null);
+INSERT INTO `students` VALUES ('632', '201610098631', '631', '计算机工程学院', '2016', '计算机科学与技术', '3', '4CC7BD48B7162C7AFD7955B1C8E1415D', null);
+INSERT INTO `students` VALUES ('633', '201610098632', '632', '计算机工程学院', '2016', '计算机科学与技术', '3', 'BA1A7AA47A9359522C3DB8747C84ACB2', null);
+INSERT INTO `students` VALUES ('634', '201610098633', '633', '计算机工程学院', '2016', '计算机科学与技术', '3', '6F18D87A43CC9943428D645C57D696AE', null);
+INSERT INTO `students` VALUES ('635', '201610098634', '634', '计算机工程学院', '2016', '计算机科学与技术', '3', '5A71ED6221E70D873309416C2D9C5158', null);
+INSERT INTO `students` VALUES ('636', '201610098635', '635', '计算机工程学院', '2016', '计算机科学与技术', '3', 'AD51E721F7BCCF8BF2F5D6ED7B72B619', null);
+INSERT INTO `students` VALUES ('637', '201610098636', '636', '计算机工程学院', '2016', '计算机科学与技术', '3', '8F5D3446CF3E83A79E198F3DCBEFF3C0', null);
+INSERT INTO `students` VALUES ('638', '201610098637', '637', '计算机工程学院', '2016', '计算机科学与技术', '3', '82DEA2B651E04CCE9D85B73B10EEF203', null);
+INSERT INTO `students` VALUES ('639', '201610098638', '638', '计算机工程学院', '2016', '计算机科学与技术', '3', '2467A65D9DAEECD7BE87CCFDA21ECD03', null);
+INSERT INTO `students` VALUES ('640', '201610098639', '639', '计算机工程学院', '2016', '计算机科学与技术', '3', '78A0ED2D22C6156F2CA64A744F6EA5BD', null);
+INSERT INTO `students` VALUES ('641', '201610098640', '640', '计算机工程学院', '2016', '计算机科学与技术', '3', 'BD2BD7F7F9E0E32476264EDC2FEB66F3', null);
+INSERT INTO `students` VALUES ('642', '201610098641', '641', '计算机工程学院', '2016', '计算机科学与技术', '3', '306B3B13F05CBCEF27857DE8FDE4CF1C', null);
+INSERT INTO `students` VALUES ('643', '201610098642', '642', '计算机工程学院', '2016', '计算机科学与技术', '3', '88F83B8A406D8BEA71CB447668A40841', null);
+INSERT INTO `students` VALUES ('644', '201610098643', '643', '计算机工程学院', '2016', '计算机科学与技术', '3', '34BAB5B41D4BB5A946B5E1E869E68771', null);
+INSERT INTO `students` VALUES ('645', '201610098644', '644', '计算机工程学院', '2016', '计算机科学与技术', '3', '3128DCA8FBD2DBFA942841EF332F9069', null);
+INSERT INTO `students` VALUES ('646', '201610098645', '645', '计算机工程学院', '2016', '计算机科学与技术', '3', '5B3AB80D72F4434B07C3D86A7ED9923B', null);
+INSERT INTO `students` VALUES ('647', '201610098646', '646', '计算机工程学院', '2016', '计算机科学与技术', '3', '1CDF472E4272E00BD6ABB9C057249F3E', null);
+INSERT INTO `students` VALUES ('648', '201610098647', '647', '计算机工程学院', '2016', '计算机科学与技术', '3', '2D9D946DFA0D61D394E7A8F805C7B6EC', null);
+INSERT INTO `students` VALUES ('649', '201610098648', '648', '计算机工程学院', '2016', '计算机科学与技术', '3', '6F727C26B2EFCDD23B96E4129FE17E99', null);
+INSERT INTO `students` VALUES ('650', '201610098649', '649', '计算机工程学院', '2016', '计算机科学与技术', '3', 'E5EA36750C9D9464990BF2A9BC221885', null);
+INSERT INTO `students` VALUES ('651', '201610098650', '650', '计算机工程学院', '2016', '计算机科学与技术', '3', '146D14839E0039370554776294E31B17', null);
+INSERT INTO `students` VALUES ('652', '201610098651', '651', '计算机工程学院', '2016', '计算机科学与技术', '3', '49B7719F687519F19762CD412CF5A19A', null);
+INSERT INTO `students` VALUES ('653', '201610098652', '652', '计算机工程学院', '2016', '计算机科学与技术', '3', 'F2D2AB0B41CE066094EE70AC57743D6B', null);
+INSERT INTO `students` VALUES ('654', '201610098653', '653', '计算机工程学院', '2016', '计算机科学与技术', '3', '79858D081B3374A1CA0459DB16427CF1', null);
+INSERT INTO `students` VALUES ('655', '201610098654', '654', '计算机工程学院', '2016', '计算机科学与技术', '3', 'EB39F9315CD08ABF2D9F3F08E4C39205', null);
+INSERT INTO `students` VALUES ('656', '201610098655', '655', '计算机工程学院', '2016', '计算机科学与技术', '3', 'DDAF8A2D0168FA2AA8FBD8814D33ADBE', null);
+INSERT INTO `students` VALUES ('657', '201610098656', '656', '计算机工程学院', '2016', '计算机科学与技术', '3', '94ABC1FC949AAEBB816015A3FAAB28A2', null);
+INSERT INTO `students` VALUES ('658', '201610098657', '657', '计算机工程学院', '2016', '计算机科学与技术', '3', '5E8D32116D65248CEE1AB90CE6303524', null);
+INSERT INTO `students` VALUES ('659', '201610098658', '658', '计算机工程学院', '2016', '计算机科学与技术', '3', 'D7514C7BEB73B563994D85C2DECD42D7', null);
+INSERT INTO `students` VALUES ('660', '201610098659', '659', '计算机工程学院', '2016', '计算机科学与技术', '3', '7D89F2D97ADEC843E7CC3DE779F7BB9C', null);
+INSERT INTO `students` VALUES ('661', '201610098660', '660', '计算机工程学院', '2016', '计算机科学与技术', '3', 'B0084BFF1E8D767122C00B84A5B7CFB1', null);
+INSERT INTO `students` VALUES ('662', '201610098661', '661', '计算机工程学院', '2016', '计算机科学与技术', '3', '63B93AE2BF3D9A32C2AA0E9BAF22EA71', null);
+INSERT INTO `students` VALUES ('663', '201610098662', '662', '计算机工程学院', '2016', '计算机科学与技术', '3', '2EEBD01143DAC2D6ADCD3BACA1079D22', null);
+INSERT INTO `students` VALUES ('664', '201610098663', '663', '计算机工程学院', '2016', '计算机科学与技术', '3', '8E34F47B2D921A517158EC175BFED022', null);
+INSERT INTO `students` VALUES ('665', '201610098664', '664', '计算机工程学院', '2016', '计算机科学与技术', '3', 'D507EA878658DC2EF616B999B76AB077', null);
+INSERT INTO `students` VALUES ('666', '201610098665', '665', '计算机工程学院', '2016', '计算机科学与技术', '3', 'A3CED1A78B168FD0BEF5E3E2E6087975', null);
+INSERT INTO `students` VALUES ('667', '201610098666', '666', '计算机工程学院', '2016', '计算机科学与技术', '3', 'D4604471222A4EFEA3402DC91599A1E8', null);
+INSERT INTO `students` VALUES ('668', '201610098667', '667', '计算机工程学院', '2016', '计算机科学与技术', '3', '95106ECD3345951DC15605D7205F4902', null);
+INSERT INTO `students` VALUES ('669', '201610098668', '668', '计算机工程学院', '2016', '计算机科学与技术', '3', '20B7F465FEB3B9CF8DEA2406070D4461', null);
+INSERT INTO `students` VALUES ('670', '201610098669', '669', '计算机工程学院', '2016', '计算机科学与技术', '3', 'DAA009BD10479811D18B31D56B2C8EF6', null);
+INSERT INTO `students` VALUES ('671', '201610098670', '670', '计算机工程学院', '2016', '计算机科学与技术', '3', '27FE67F75B067DEFBEA4255CD2DD7A34', null);
+INSERT INTO `students` VALUES ('672', '201610098671', '671', '计算机工程学院', '2016', '计算机科学与技术', '3', 'C46F74E6FEAD22A6B688AE979B6CA409', null);
+INSERT INTO `students` VALUES ('673', '201610098672', '672', '计算机工程学院', '2016', '计算机科学与技术', '3', 'F9C2C1D2F58336DF4FEA279EB07DE0F1', null);
+INSERT INTO `students` VALUES ('674', '201610098673', '673', '计算机工程学院', '2016', '计算机科学与技术', '3', '3A09612863D578E3BCCC9338D60A03A9', null);
+INSERT INTO `students` VALUES ('675', '201610098674', '674', '计算机工程学院', '2016', '计算机科学与技术', '3', 'AFBA62B24A2C4987BC943D573211A963', null);
+INSERT INTO `students` VALUES ('676', '201610098675', '675', '计算机工程学院', '2016', '计算机科学与技术', '3', 'CA629D01E31399078E00A340CF868450', null);
+INSERT INTO `students` VALUES ('677', '201610098676', '676', '计算机工程学院', '2016', '计算机科学与技术', '3', '639A2F215CD64C4A642F7C1CFCF83980', null);
+INSERT INTO `students` VALUES ('678', '201610098677', '677', '计算机工程学院', '2016', '计算机科学与技术', '3', 'E2E26FDD3887889597FC039DD5994207', null);
+INSERT INTO `students` VALUES ('679', '201610098678', '678', '计算机工程学院', '2016', '计算机科学与技术', '3', 'ED38A907E064B42440CB134D329F2682', null);
+INSERT INTO `students` VALUES ('680', '201610098679', '679', '计算机工程学院', '2016', '计算机科学与技术', '3', 'C97D5913F11AB1872E014EBE4A283D7D', null);
+INSERT INTO `students` VALUES ('681', '201610098680', '680', '计算机工程学院', '2016', '计算机科学与技术', '3', '763CAB90A419482E81240F20995B0DC8', null);
+INSERT INTO `students` VALUES ('682', '201610098681', '681', '计算机工程学院', '2016', '计算机科学与技术', '3', '63BF52F1448C853131B8EAF9D610D973', null);
+INSERT INTO `students` VALUES ('683', '201610098682', '682', '计算机工程学院', '2016', '计算机科学与技术', '3', 'AF3AB32C25F0BCE5F7D4FECC434E77A8', null);
+INSERT INTO `students` VALUES ('684', '201610098683', '683', '计算机工程学院', '2016', '计算机科学与技术', '3', 'C721982B9967B019618A11D0302871C3', null);
+INSERT INTO `students` VALUES ('685', '201610098684', '684', '计算机工程学院', '2016', '计算机科学与技术', '3', '99369F0A59FF2EB97B9851CD728CB21F', null);
+INSERT INTO `students` VALUES ('686', '201610098685', '685', '计算机工程学院', '2016', '计算机科学与技术', '3', 'F8F3AE576CE394BA9AA4BDAA6BDEA0BA', null);
+INSERT INTO `students` VALUES ('687', '201610098686', '686', '计算机工程学院', '2016', '计算机科学与技术', '3', 'D3CF7325D168AE570FB163E580B85987', null);
+INSERT INTO `students` VALUES ('688', '201610098687', '687', '计算机工程学院', '2016', '计算机科学与技术', '3', '9FAF3108CF8FF661878F0DDD33129140', null);
+INSERT INTO `students` VALUES ('689', '201610098688', '688', '计算机工程学院', '2016', '计算机科学与技术', '3', 'B564461DB20A5BCEEC63DA1922458553', null);
+INSERT INTO `students` VALUES ('690', '201610098689', '689', '计算机工程学院', '2016', '计算机科学与技术', '3', 'AFDD4B13703E5FD750A691426BB3329B', null);
+INSERT INTO `students` VALUES ('691', '201610098690', '690', '计算机工程学院', '2016', '计算机科学与技术', '3', 'EAC2B81E97BA26BE757551F29CF3C79B', null);
+INSERT INTO `students` VALUES ('692', '201610098691', '691', '计算机工程学院', '2016', '计算机科学与技术', '3', '837CB8FF67043EE6E003C71BD8199A05', null);
+INSERT INTO `students` VALUES ('693', '201610098692', '692', '计算机工程学院', '2016', '计算机科学与技术', '3', '0F88270E90460986EA6A0F2DADAA8118', null);
+INSERT INTO `students` VALUES ('694', '201610098693', '693', '计算机工程学院', '2016', '计算机科学与技术', '3', '177DEB3DC86B997AF6FF2670C3B2867B', null);
+INSERT INTO `students` VALUES ('695', '201610098694', '694', '计算机工程学院', '2016', '计算机科学与技术', '3', 'B38AD667B4F2D297C26938BF40659CFF', null);
+INSERT INTO `students` VALUES ('696', '201610098695', '695', '计算机工程学院', '2016', '计算机科学与技术', '3', '5270CABF6331D3E3790C846DDF7C5507', null);
+INSERT INTO `students` VALUES ('697', '201610098696', '696', '计算机工程学院', '2016', '计算机科学与技术', '3', 'D6BD4080F1A0E5A618C04061A811B05F', null);
+INSERT INTO `students` VALUES ('698', '201610098697', '697', '计算机工程学院', '2016', '计算机科学与技术', '3', 'AD24969E9CF10E9742CF6F552B393EAD', null);
+INSERT INTO `students` VALUES ('699', '201610098698', '698', '计算机工程学院', '2016', '计算机科学与技术', '3', '259DF86E309F6246EDDACD8FABDF778C', null);
+INSERT INTO `students` VALUES ('700', '201610098699', '699', '计算机工程学院', '2016', '计算机科学与技术', '3', 'C2064D2BB47A301BFFA281AE1DFF91C4', null);
 INSERT INTO `students` VALUES ('701', '201610098700', '700', '计算机工程学院', '2016', '软件工程', '2', '10268EDBA8E7659246553825A6C2B244', null);
 INSERT INTO `students` VALUES ('702', '201610098701', '701', '计算机工程学院', '2016', '软件工程', '2', 'C912B42F5CE3CD975FD9828D324B6296', null);
 INSERT INTO `students` VALUES ('703', '201610098702', '702', '计算机工程学院', '2016', '软件工程', '2', '07DFACCBA7F121E369891A8220D28005', null);
@@ -1007,140 +1024,142 @@ INSERT INTO `students` VALUES ('860', '201610098859', '859', '计算机工程学
 INSERT INTO `students` VALUES ('861', '201610098860', '860', '计算机工程学院', '2016', '软件工程', '2', '7026B5A24A8C36601359C59336149D81', null);
 INSERT INTO `students` VALUES ('862', '201610098861', '861', '计算机工程学院', '2016', '软件工程', '2', 'CB20399C7C970A15B30D3B1BD642E44F', null);
 INSERT INTO `students` VALUES ('863', '201610098862', '862', '计算机工程学院', '2016', '软件工程', '2', '55AFB859FC3368C7780F50E53AA4FEF8', null);
-INSERT INTO `students` VALUES ('864', '201610098863', '863', '计算机工程学院', '2016', '软件工程', '2', '30986BE4B7733E97B3C8915FD2B48BCC', null);
-INSERT INTO `students` VALUES ('865', '201610098864', '864', '计算机工程学院', '2016', '软件工程', '2', 'F495488A35A52771B21D2169A0E516DD', null);
-INSERT INTO `students` VALUES ('866', '201610098865', '865', '计算机工程学院', '2016', '软件工程', '2', 'D1A0EFF593A56272A5A9F1FDDB767C94', null);
-INSERT INTO `students` VALUES ('867', '201610098866', '866', '计算机工程学院', '2016', '软件工程', '2', '7B6E65B9A7DA1C497D71B585AF054184', null);
-INSERT INTO `students` VALUES ('868', '201610098867', '867', '计算机工程学院', '2016', '软件工程', '2', '5FBB3DA7B84C05E982118B4F1E2491C3', null);
-INSERT INTO `students` VALUES ('869', '201610098868', '868', '计算机工程学院', '2016', '软件工程', '2', '87C6826655C891CEBD7D02B029FDD9B4', null);
-INSERT INTO `students` VALUES ('870', '201610098869', '869', '计算机工程学院', '2016', '软件工程', '2', '1143D0E6160FAC4EBA4A93CD89BDA1EF', null);
-INSERT INTO `students` VALUES ('871', '201610098870', '870', '计算机工程学院', '2016', '软件工程', '2', '93F063FE1C67DA44768DECBC80434F66', null);
-INSERT INTO `students` VALUES ('872', '201610098871', '871', '计算机工程学院', '2016', '软件工程', '2', '8D6A2AD84CB80621A64C6BEFDF63FA27', null);
-INSERT INTO `students` VALUES ('873', '201610098872', '872', '计算机工程学院', '2016', '软件工程', '2', 'DB57EAB088E4EE8DF9E33056A6ED3458', null);
-INSERT INTO `students` VALUES ('874', '201610098873', '873', '计算机工程学院', '2016', '软件工程', '2', '7242C6315199DBFA6A5495FAD049A233', null);
-INSERT INTO `students` VALUES ('875', '201610098874', '874', '计算机工程学院', '2016', '软件工程', '2', '7C3A5FCDB6AAC50FDFB6317E9901E7B3', null);
-INSERT INTO `students` VALUES ('876', '201610098875', '875', '计算机工程学院', '2016', '软件工程', '2', '84DB88180C7A5074D90CAC23F2400FD5', null);
-INSERT INTO `students` VALUES ('877', '201610098876', '876', '计算机工程学院', '2016', '软件工程', '2', '5B1A48B5FFF82D5A4B518153F7EDB6F8', null);
-INSERT INTO `students` VALUES ('878', '201610098877', '877', '计算机工程学院', '2016', '软件工程', '2', '1BAD89F3D6CACBEA10E12C901F358110', null);
-INSERT INTO `students` VALUES ('879', '201610098878', '878', '计算机工程学院', '2016', '软件工程', '2', '01DB8500024133791644404F5C31AB75', null);
-INSERT INTO `students` VALUES ('880', '201610098879', '879', '计算机工程学院', '2016', '软件工程', '2', '2DFE627842E9BC4BB61215B49B313B7D', null);
-INSERT INTO `students` VALUES ('881', '201610098880', '880', '计算机工程学院', '2016', '软件工程', '2', '434AA09C6A91B27BA7B9D3C644D0DB73', null);
-INSERT INTO `students` VALUES ('882', '201610098881', '881', '计算机工程学院', '2016', '软件工程', '2', '54FC8D25E3ECC364514AB7B780F232CB', null);
-INSERT INTO `students` VALUES ('883', '201610098882', '882', '计算机工程学院', '2016', '软件工程', '2', '3E0B3970E2BFE3F883466783CCC5D234', null);
-INSERT INTO `students` VALUES ('884', '201610098883', '883', '计算机工程学院', '2016', '软件工程', '2', '885052F533B5DFC2F226796EB430D336', null);
-INSERT INTO `students` VALUES ('885', '201610098884', '884', '计算机工程学院', '2016', '软件工程', '2', 'CA4FEED333FDC6B66E7F4B0D9643B218', null);
-INSERT INTO `students` VALUES ('886', '201610098885', '885', '计算机工程学院', '2016', '软件工程', '2', '1D875AB34CF00AA78313977825B5E108', null);
-INSERT INTO `students` VALUES ('887', '201610098886', '886', '计算机工程学院', '2016', '软件工程', '2', 'F011477F48390AA07C2D5ACB6105F462', null);
-INSERT INTO `students` VALUES ('888', '201610098887', '887', '计算机工程学院', '2016', '软件工程', '2', '1E3C459F4F91C278352EAD347927952F', null);
-INSERT INTO `students` VALUES ('889', '201610098888', '888', '计算机工程学院', '2016', '软件工程', '2', '5645024AF9D4635B312A9F9FBFBA8F9B', null);
-INSERT INTO `students` VALUES ('890', '201610098889', '889', '计算机工程学院', '2016', '软件工程', '2', 'C4ACFC8620BB0BF90FBB1E5B1BE9882D', null);
-INSERT INTO `students` VALUES ('891', '201610098890', '890', '计算机工程学院', '2016', '软件工程', '2', '882393476B1A156B4AFF8C22330D2F74', null);
-INSERT INTO `students` VALUES ('892', '201610098891', '891', '计算机工程学院', '2016', '软件工程', '2', '9672A302C77BE2DCC6299984DEEE8D29', null);
-INSERT INTO `students` VALUES ('893', '201610098892', '892', '计算机工程学院', '2016', '软件工程', '2', '79575586D20054205E19F90E4E1B48D2', null);
-INSERT INTO `students` VALUES ('894', '201610098893', '893', '计算机工程学院', '2016', '软件工程', '2', 'A951EEDB048AF2D42D421E55EB28C722', null);
-INSERT INTO `students` VALUES ('895', '201610098894', '894', '计算机工程学院', '2016', '软件工程', '2', '60D09AA4BF13AF1508D5D819AFA414B6', null);
-INSERT INTO `students` VALUES ('896', '201610098895', '895', '计算机工程学院', '2016', '软件工程', '2', 'E2DE58EF244E1A34B2AA38E102C511C5', null);
-INSERT INTO `students` VALUES ('897', '201610098896', '896', '计算机工程学院', '2016', '软件工程', '2', '7EBE12F221A0B1ECEDAD4F1AAD11E3E7', null);
-INSERT INTO `students` VALUES ('898', '201610098897', '897', '计算机工程学院', '2016', '软件工程', '2', '67D0EC1FA41D0E9FCE8EED7A80524EE9', null);
-INSERT INTO `students` VALUES ('899', '201610098898', '898', '计算机工程学院', '2016', '软件工程', '2', 'FDC89E42BEA14B551D069BC3CAA85DFB', null);
-INSERT INTO `students` VALUES ('900', '201610098899', '899', '计算机工程学院', '2016', '软件工程', '2', 'AACF6AC10F132217EA40FAEB450E9A9A', null);
-INSERT INTO `students` VALUES ('901', '201610098900', '900', '计算机工程学院', '2016', '软件工程', '2', 'F094462292AFA45F07EEA15983532F6F', null);
-INSERT INTO `students` VALUES ('902', '201610098901', '901', '计算机工程学院', '2016', '软件工程', '2', '795D8834AD657758585A19D313551DE4', null);
-INSERT INTO `students` VALUES ('903', '201610098902', '902', '计算机工程学院', '2016', '软件工程', '2', '53D23C41B83428591FBC1A746E0C16C8', null);
-INSERT INTO `students` VALUES ('904', '201610098903', '903', '计算机工程学院', '2016', '软件工程', '2', '188B0ACA333A774C9AA05D25517E8C46', null);
-INSERT INTO `students` VALUES ('905', '201610098904', '904', '计算机工程学院', '2016', '软件工程', '2', 'FD9A9DCB12CECF038ABD6CE53F589FE4', null);
-INSERT INTO `students` VALUES ('906', '201610098905', '905', '计算机工程学院', '2016', '软件工程', '2', '50DBA819E9A059217DE272EFB7B81A57', null);
-INSERT INTO `students` VALUES ('907', '201610098906', '906', '计算机工程学院', '2016', '软件工程', '2', '5D8AB205361E6219E19F30282B7589F2', null);
-INSERT INTO `students` VALUES ('908', '201610098907', '907', '计算机工程学院', '2016', '软件工程', '2', 'A09F173F2363719989BDAC89BA606787', null);
-INSERT INTO `students` VALUES ('909', '201610098908', '908', '计算机工程学院', '2016', '软件工程', '2', 'E1B833DFA2A7125404212D10F6CC0C11', null);
-INSERT INTO `students` VALUES ('910', '201610098909', '909', '计算机工程学院', '2016', '软件工程', '2', '448CA249B5952027E52108A5C9126782', null);
-INSERT INTO `students` VALUES ('911', '201610098910', '910', '计算机工程学院', '2016', '软件工程', '2', '3D311F1A0AD7687B9BFFC18329447DB0', null);
-INSERT INTO `students` VALUES ('912', '201610098911', '911', '计算机工程学院', '2016', '软件工程', '2', '7CEB7549F0EFADE942C32D6CA10601E7', null);
-INSERT INTO `students` VALUES ('913', '201610098912', '912', '计算机工程学院', '2016', '软件工程', '2', 'CAEAF89D57613C8BD9E65987D586ADE3', null);
-INSERT INTO `students` VALUES ('914', '201610098913', '913', '计算机工程学院', '2016', '软件工程', '2', 'D0ADFB5CDA69E24A76015CB73AC68A83', null);
-INSERT INTO `students` VALUES ('915', '201610098914', '914', '计算机工程学院', '2016', '软件工程', '2', '0EF18C948595D3631D0BE80B97F5DB21', null);
-INSERT INTO `students` VALUES ('916', '201610098915', '915', '计算机工程学院', '2016', '软件工程', '2', '8D257A397CD2D4A4D644762A3516CD78', null);
-INSERT INTO `students` VALUES ('917', '201610098916', '916', '计算机工程学院', '2016', '软件工程', '2', '540F6761FC22C6F4FC1FCA3B63AA7B00', null);
-INSERT INTO `students` VALUES ('918', '201610098917', '917', '计算机工程学院', '2016', '软件工程', '2', '6A2D939CA463CEF7B06A188C24531E88', null);
-INSERT INTO `students` VALUES ('919', '201610098918', '918', '计算机工程学院', '2016', '软件工程', '2', 'B65C019B41C2D75E11650869A019F52B', null);
-INSERT INTO `students` VALUES ('920', '201610098919', '919', '计算机工程学院', '2016', '软件工程', '2', '0101675262411E9FB720E78CE7FFB077', null);
-INSERT INTO `students` VALUES ('921', '201610098920', '920', '计算机工程学院', '2016', '软件工程', '2', '829A455904F358D688C48FD954A4DC18', null);
-INSERT INTO `students` VALUES ('922', '201610098921', '921', '计算机工程学院', '2016', '软件工程', '2', '7594394DFBAC0653A4F89C1FA1C77992', null);
-INSERT INTO `students` VALUES ('923', '201610098922', '922', '计算机工程学院', '2016', '软件工程', '2', 'ADF5BDADB7263D85B1287C4E592631A5', null);
-INSERT INTO `students` VALUES ('924', '201610098923', '923', '计算机工程学院', '2016', '软件工程', '2', '11673B6D48743E663027EDF9F6FAA45B', null);
-INSERT INTO `students` VALUES ('925', '201610098924', '924', '计算机工程学院', '2016', '软件工程', '2', 'B696583907DE81EA0584F0E89393E40C', null);
-INSERT INTO `students` VALUES ('926', '201610098925', '925', '计算机工程学院', '2016', '软件工程', '2', '9FBF299C9ABE69EA88C89EC7D58D32E7', null);
-INSERT INTO `students` VALUES ('927', '201610098926', '926', '计算机工程学院', '2016', '软件工程', '2', '1CDBC600FBD53EF1BC5525972848AED2', null);
-INSERT INTO `students` VALUES ('928', '201610098927', '927', '计算机工程学院', '2016', '软件工程', '2', '7C7D425F14A69712F9A2B1C9D6B4C373', null);
-INSERT INTO `students` VALUES ('929', '201610098928', '928', '计算机工程学院', '2016', '软件工程', '2', '4CC2E4A15A318397F7129B51CCEB0821', null);
-INSERT INTO `students` VALUES ('930', '201610098929', '929', '计算机工程学院', '2016', '软件工程', '2', '84D496D8DE0D931E6C3BB3F3D4AFB2E0', null);
-INSERT INTO `students` VALUES ('931', '201610098930', '930', '计算机工程学院', '2016', '软件工程', '2', '03138A6AECDF5E3F5F0291A4BB74D0F3', null);
-INSERT INTO `students` VALUES ('932', '201610098931', '931', '计算机工程学院', '2016', '软件工程', '2', '570A3043A643D5EFA20DF840C4706EA0', null);
-INSERT INTO `students` VALUES ('933', '201610098932', '932', '计算机工程学院', '2016', '软件工程', '2', '5E5CD46DEE924D64326E695DA375B424', null);
-INSERT INTO `students` VALUES ('934', '201610098933', '933', '计算机工程学院', '2016', '软件工程', '2', '080E7BE84458F4B981B55BDAD2486188', null);
-INSERT INTO `students` VALUES ('935', '201610098934', '934', '计算机工程学院', '2016', '软件工程', '2', '9FAB905F9A1773A50431A19F38631F2D', null);
-INSERT INTO `students` VALUES ('936', '201610098935', '935', '计算机工程学院', '2016', '软件工程', '2', 'C3EED5A0CA8F680A5DF156131B2D76FF', null);
-INSERT INTO `students` VALUES ('937', '201610098936', '936', '计算机工程学院', '2016', '软件工程', '2', '9D3B0A7E4CC2421FBB19FC0DDFCB6E76', null);
-INSERT INTO `students` VALUES ('938', '201610098937', '937', '计算机工程学院', '2016', '软件工程', '2', '8E88867327424C0EF9153C36F19B1BC8', null);
-INSERT INTO `students` VALUES ('939', '201610098938', '938', '计算机工程学院', '2016', '软件工程', '2', 'E9B4355E0998A260F45887FE33634238', null);
-INSERT INTO `students` VALUES ('940', '201610098939', '939', '计算机工程学院', '2016', '软件工程', '2', '9F4A8E8CB900EF0419EBD5ADB7AE04D8', null);
-INSERT INTO `students` VALUES ('941', '201610098940', '940', '计算机工程学院', '2016', '软件工程', '2', 'A9D08759D4511E426615757C7CD76078', null);
-INSERT INTO `students` VALUES ('942', '201610098941', '941', '计算机工程学院', '2016', '软件工程', '2', 'F8EEB33E9BECEC62C946C758D582BE8D', null);
-INSERT INTO `students` VALUES ('943', '201610098942', '942', '计算机工程学院', '2016', '软件工程', '2', 'E97205B88B412402D48A2E477F36C61F', null);
-INSERT INTO `students` VALUES ('944', '201610098943', '943', '计算机工程学院', '2016', '软件工程', '2', '3C3188726258268E62D2EA30D436B815', null);
-INSERT INTO `students` VALUES ('945', '201610098944', '944', '计算机工程学院', '2016', '软件工程', '2', '710DAAB97A36265E07CDABF505E654CD', null);
-INSERT INTO `students` VALUES ('946', '201610098945', '945', '计算机工程学院', '2016', '软件工程', '2', 'E0AECADF81D6ED6EC83499EC0554B067', null);
-INSERT INTO `students` VALUES ('947', '201610098946', '946', '计算机工程学院', '2016', '软件工程', '2', '9240D61B91DE869BC6199EE6B49BA5CF', null);
-INSERT INTO `students` VALUES ('948', '201610098947', '947', '计算机工程学院', '2016', '软件工程', '2', 'B61ECCE7E40545FDD7EBF6788C237097', null);
-INSERT INTO `students` VALUES ('949', '201610098948', '948', '计算机工程学院', '2016', '软件工程', '2', '6EA452C5D12AAE3EF46C46750BADC6D9', null);
-INSERT INTO `students` VALUES ('950', '201610098949', '949', '计算机工程学院', '2016', '软件工程', '2', 'A57D2268BCDC129912D38AB9D5D21D28', null);
-INSERT INTO `students` VALUES ('951', '201610098950', '950', '计算机工程学院', '2016', '软件工程', '2', '162AEAF34CFF167952780D53609B2408', null);
-INSERT INTO `students` VALUES ('952', '201610098951', '951', '计算机工程学院', '2016', '软件工程', '2', 'D81F21BCD2FC2EA244CF1CD5F26644D7', null);
-INSERT INTO `students` VALUES ('953', '201610098952', '952', '计算机工程学院', '2016', '软件工程', '2', 'A91683F682C4BE7CA16F715F5E6EB313', null);
-INSERT INTO `students` VALUES ('954', '201610098953', '953', '计算机工程学院', '2016', '软件工程', '2', 'EA771FA18EE74AA719DD3BE7B421E5CD', null);
-INSERT INTO `students` VALUES ('955', '201610098954', '954', '计算机工程学院', '2016', '软件工程', '2', '5B0D1EF1465C8A0759F6D2CFE7545391', null);
-INSERT INTO `students` VALUES ('956', '201610098955', '955', '计算机工程学院', '2016', '软件工程', '2', '3988B1757B4F48D5396946A78AD59260', null);
-INSERT INTO `students` VALUES ('957', '201610098956', '956', '计算机工程学院', '2016', '软件工程', '2', '0070510C08A83BF0770D96AEF3824236', null);
-INSERT INTO `students` VALUES ('958', '201610098957', '957', '计算机工程学院', '2016', '软件工程', '2', 'E4F8AC699CCE0B54C9C60C3F883B8CAB', null);
-INSERT INTO `students` VALUES ('959', '201610098958', '958', '计算机工程学院', '2016', '软件工程', '2', 'F6A5A42FE39FC7EF6AE3FBD2E68A5987', null);
-INSERT INTO `students` VALUES ('960', '201610098959', '959', '计算机工程学院', '2016', '软件工程', '2', '90F8930500497FC84EB176CE8BCDD797', null);
-INSERT INTO `students` VALUES ('961', '201610098960', '960', '计算机工程学院', '2016', '软件工程', '2', '22F04304974F5EDB368935661B686422', null);
-INSERT INTO `students` VALUES ('962', '201610098961', '961', '计算机工程学院', '2016', '软件工程', '2', '4651A8197D84C13905647023F278AEF8', null);
-INSERT INTO `students` VALUES ('963', '201610098962', '962', '计算机工程学院', '2016', '软件工程', '2', '43114C41D71B9FE06048760831294CD4', null);
-INSERT INTO `students` VALUES ('964', '201610098963', '963', '计算机工程学院', '2016', '软件工程', '2', 'AB71D9F2F8C61C9DB61D039FD73B2E5C', null);
-INSERT INTO `students` VALUES ('965', '201610098964', '964', '计算机工程学院', '2016', '软件工程', '2', 'BB3B7FF81D0BB3FCFF9BD132FC0F7164', null);
-INSERT INTO `students` VALUES ('966', '201610098965', '965', '计算机工程学院', '2016', '软件工程', '2', 'E5425FB74045CA17428FDA1334328AEA', null);
-INSERT INTO `students` VALUES ('967', '201610098966', '966', '计算机工程学院', '2016', '软件工程', '2', '8B79EA0E33CEE47B1E76EA7FAE993EC5', null);
-INSERT INTO `students` VALUES ('968', '201610098967', '967', '计算机工程学院', '2016', '软件工程', '2', '03F08B7D192D40D33B2D193B9C20BFE4', null);
-INSERT INTO `students` VALUES ('969', '201610098968', '968', '计算机工程学院', '2016', '软件工程', '2', 'E88CEDB25F0399444683C98426DCCA76', null);
-INSERT INTO `students` VALUES ('970', '201610098969', '969', '计算机工程学院', '2016', '软件工程', '2', '2175E2D2DDE8F02EDA1403DA61C5CAFF', null);
-INSERT INTO `students` VALUES ('971', '201610098970', '970', '计算机工程学院', '2016', '软件工程', '2', '2C2AC1780492451A40AA64138DF10939', null);
-INSERT INTO `students` VALUES ('972', '201610098971', '971', '计算机工程学院', '2016', '软件工程', '2', 'EA04DE2FFC7966305D0E8BACB7A4CEE0', null);
-INSERT INTO `students` VALUES ('973', '201610098972', '972', '计算机工程学院', '2016', '软件工程', '2', 'F61482FF7E3F976A70B4274B4908F54C', null);
-INSERT INTO `students` VALUES ('974', '201610098973', '973', '计算机工程学院', '2016', '软件工程', '2', 'F3454652486F0DA3F05C4ED0AE292FE8', null);
-INSERT INTO `students` VALUES ('975', '201610098974', '974', '计算机工程学院', '2016', '软件工程', '2', 'AEE442ED767F5E8362AD7E81B9B9CB78', null);
-INSERT INTO `students` VALUES ('976', '201610098975', '975', '计算机工程学院', '2016', '软件工程', '2', '6A1AD62905BC656AF16C9BEB125BF7F7', null);
-INSERT INTO `students` VALUES ('977', '201610098976', '976', '计算机工程学院', '2016', '软件工程', '2', '4470618C1D92CD20AD4D647919E29566', null);
-INSERT INTO `students` VALUES ('978', '201610098977', '977', '计算机工程学院', '2016', '软件工程', '2', '8B5BD83DE86639A29CAF327A0813A78A', null);
-INSERT INTO `students` VALUES ('979', '201610098978', '978', '计算机工程学院', '2016', '软件工程', '2', '83BB1B0AC8365F2D42ADE9053C5A2DA6', null);
-INSERT INTO `students` VALUES ('980', '201610098979', '979', '计算机工程学院', '2016', '软件工程', '2', 'A9A25970CF4BB58C4D9264AD0443F079', null);
-INSERT INTO `students` VALUES ('981', '201610098980', '980', '计算机工程学院', '2016', '软件工程', '2', '5630A0DCD01EFB46BD77BBBE58F0547B', null);
-INSERT INTO `students` VALUES ('982', '201610098981', '981', '计算机工程学院', '2016', '软件工程', '2', '72CA7A77C3AD5B3BC9E1ED99873F8C29', null);
-INSERT INTO `students` VALUES ('983', '201610098982', '982', '计算机工程学院', '2016', '软件工程', '2', '555CA7A4F6087A19F5715E7B45AD9734', null);
-INSERT INTO `students` VALUES ('984', '201610098983', '983', '计算机工程学院', '2016', '软件工程', '2', '945BFCB92088215B77A2F9F979388A4C', null);
-INSERT INTO `students` VALUES ('985', '201610098984', '984', '计算机工程学院', '2016', '软件工程', '2', '88DD7F3A167CF60795CF884A2C64ACBA', null);
-INSERT INTO `students` VALUES ('986', '201610098985', '985', '计算机工程学院', '2016', '软件工程', '2', 'EB6F8EE8545B3BFFD6038573016B4E8B', null);
-INSERT INTO `students` VALUES ('987', '201610098986', '986', '计算机工程学院', '2016', '软件工程', '2', 'CC10BCD1892EDF6647A4D81BA6007EF3', null);
-INSERT INTO `students` VALUES ('988', '201610098987', '987', '计算机工程学院', '2016', '软件工程', '2', 'CB3E6898A9EF9955BEA4470676F9070D', null);
-INSERT INTO `students` VALUES ('989', '201610098988', '988', '计算机工程学院', '2016', '软件工程', '2', 'B45A39924D96F9B9BD4ED44D403CC87C', null);
-INSERT INTO `students` VALUES ('990', '201610098989', '989', '计算机工程学院', '2016', '软件工程', '2', '87DE1F29E6452283F8FBFACC1CCB1554', null);
-INSERT INTO `students` VALUES ('991', '201610098990', '990', '计算机工程学院', '2016', '软件工程', '2', '3DF3A372858E05F0C1281E8ACE848C78', null);
-INSERT INTO `students` VALUES ('992', '201610098991', '991', '计算机工程学院', '2016', '软件工程', '2', '6DFB8275877948D0420771E9C4245816', null);
-INSERT INTO `students` VALUES ('993', '201610098992', '992', '计算机工程学院', '2016', '软件工程', '2', '5F8BB14784E74B40F80A17151CA25C6D', null);
-INSERT INTO `students` VALUES ('994', '201610098993', '993', '计算机工程学院', '2016', '软件工程', '2', 'E3230718768BB730DEEDAF96000FBDBF', null);
-INSERT INTO `students` VALUES ('995', '201610098994', '994', '计算机工程学院', '2016', '软件工程', '2', '24C09C3B369DC4138E31DEDD5602E528', null);
-INSERT INTO `students` VALUES ('996', '201610098995', '995', '计算机工程学院', '2016', '软件工程', '2', '7FC870C12C95CE7506B8DC38D30F6ABA', null);
-INSERT INTO `students` VALUES ('997', '201610098996', '996', '计算机工程学院', '2016', '软件工程', '2', 'C4629A63DB0F2EF24F2F6DFE0E9C632E', null);
-INSERT INTO `students` VALUES ('998', '201610098997', '997', '计算机工程学院', '2016', '软件工程', '2', 'CD7C701DF92C4B4068A14CCF072738D6', null);
-INSERT INTO `students` VALUES ('999', '201610098998', '998', '计算机工程学院', '2016', '软件工程', '2', 'E1DEF05FB071D504B88F187199081464', null);
-INSERT INTO `students` VALUES ('1000', '201610098999', '999', '计算机工程学院', '2016', '软件工程', '2', '829205B6341D0391559F0A8E626DF6DF', null);
+INSERT INTO `students` VALUES ('864', '201610098863', '863', '计算机工程学院', '2016', '网络工程', '2', '30986BE4B7733E97B3C8915FD2B48BCC', null);
+INSERT INTO `students` VALUES ('865', '201610098864', '864', '计算机工程学院', '2016', '网络工程', '2', 'F495488A35A52771B21D2169A0E516DD', null);
+INSERT INTO `students` VALUES ('866', '201610098865', '865', '计算机工程学院', '2016', '网络工程', '2', 'D1A0EFF593A56272A5A9F1FDDB767C94', null);
+INSERT INTO `students` VALUES ('867', '201610098866', '866', '计算机工程学院', '2016', '网络工程', '2', '7B6E65B9A7DA1C497D71B585AF054184', null);
+INSERT INTO `students` VALUES ('868', '201610098867', '867', '计算机工程学院', '2016', '网络工程', '2', '5FBB3DA7B84C05E982118B4F1E2491C3', null);
+INSERT INTO `students` VALUES ('869', '201610098868', '868', '计算机工程学院', '2016', '网络工程', '2', '87C6826655C891CEBD7D02B029FDD9B4', null);
+INSERT INTO `students` VALUES ('870', '201610098869', '869', '计算机工程学院', '2016', '网络工程', '2', '1143D0E6160FAC4EBA4A93CD89BDA1EF', null);
+INSERT INTO `students` VALUES ('871', '201610098870', '870', '计算机工程学院', '2016', '网络工程', '2', '93F063FE1C67DA44768DECBC80434F66', null);
+INSERT INTO `students` VALUES ('872', '201610098871', '871', '计算机工程学院', '2016', '网络工程', '2', '8D6A2AD84CB80621A64C6BEFDF63FA27', null);
+INSERT INTO `students` VALUES ('873', '201610098872', '872', '计算机工程学院', '2016', '网络工程', '2', 'DB57EAB088E4EE8DF9E33056A6ED3458', null);
+INSERT INTO `students` VALUES ('874', '201610098873', '873', '计算机工程学院', '2016', '网络工程', '2', '7242C6315199DBFA6A5495FAD049A233', null);
+INSERT INTO `students` VALUES ('875', '201610098874', '874', '计算机工程学院', '2016', '网络工程', '2', '7C3A5FCDB6AAC50FDFB6317E9901E7B3', null);
+INSERT INTO `students` VALUES ('876', '201610098875', '875', '计算机工程学院', '2016', '网络工程', '2', '84DB88180C7A5074D90CAC23F2400FD5', null);
+INSERT INTO `students` VALUES ('877', '201610098876', '876', '计算机工程学院', '2016', '网络工程', '2', '5B1A48B5FFF82D5A4B518153F7EDB6F8', null);
+INSERT INTO `students` VALUES ('878', '201610098877', '877', '计算机工程学院', '2016', '网络工程', '2', '1BAD89F3D6CACBEA10E12C901F358110', null);
+INSERT INTO `students` VALUES ('879', '201610098878', '878', '计算机工程学院', '2016', '网络工程', '2', '01DB8500024133791644404F5C31AB75', null);
+INSERT INTO `students` VALUES ('880', '201610098879', '879', '计算机工程学院', '2016', '网络工程', '2', '2DFE627842E9BC4BB61215B49B313B7D', null);
+INSERT INTO `students` VALUES ('881', '201610098880', '880', '计算机工程学院', '2016', '网络工程', '2', '434AA09C6A91B27BA7B9D3C644D0DB73', null);
+INSERT INTO `students` VALUES ('882', '201610098881', '881', '计算机工程学院', '2016', '网络工程', '2', '54FC8D25E3ECC364514AB7B780F232CB', null);
+INSERT INTO `students` VALUES ('883', '201610098882', '882', '计算机工程学院', '2016', '网络工程', '2', '3E0B3970E2BFE3F883466783CCC5D234', null);
+INSERT INTO `students` VALUES ('884', '201610098883', '883', '计算机工程学院', '2016', '网络工程', '2', '885052F533B5DFC2F226796EB430D336', null);
+INSERT INTO `students` VALUES ('885', '201610098884', '884', '计算机工程学院', '2016', '网络工程', '2', 'CA4FEED333FDC6B66E7F4B0D9643B218', null);
+INSERT INTO `students` VALUES ('886', '201610098885', '885', '计算机工程学院', '2016', '网络工程', '2', '1D875AB34CF00AA78313977825B5E108', null);
+INSERT INTO `students` VALUES ('887', '201610098886', '886', '计算机工程学院', '2016', '网络工程', '2', 'F011477F48390AA07C2D5ACB6105F462', null);
+INSERT INTO `students` VALUES ('888', '201610098887', '887', '计算机工程学院', '2016', '网络工程', '2', '1E3C459F4F91C278352EAD347927952F', null);
+INSERT INTO `students` VALUES ('889', '201610098888', '888', '计算机工程学院', '2016', '网络工程', '2', '5645024AF9D4635B312A9F9FBFBA8F9B', null);
+INSERT INTO `students` VALUES ('890', '201610098889', '889', '计算机工程学院', '2016', '网络工程', '2', 'C4ACFC8620BB0BF90FBB1E5B1BE9882D', null);
+INSERT INTO `students` VALUES ('891', '201610098890', '890', '计算机工程学院', '2016', '网络工程', '2', '882393476B1A156B4AFF8C22330D2F74', null);
+INSERT INTO `students` VALUES ('892', '201610098891', '891', '计算机工程学院', '2016', '网络工程', '2', '9672A302C77BE2DCC6299984DEEE8D29', null);
+INSERT INTO `students` VALUES ('893', '201610098892', '892', '计算机工程学院', '2016', '网络工程', '2', '79575586D20054205E19F90E4E1B48D2', null);
+INSERT INTO `students` VALUES ('894', '201610098893', '893', '计算机工程学院', '2016', '网络工程', '2', 'A951EEDB048AF2D42D421E55EB28C722', null);
+INSERT INTO `students` VALUES ('895', '201610098894', '894', '计算机工程学院', '2016', '网络工程', '2', '60D09AA4BF13AF1508D5D819AFA414B6', null);
+INSERT INTO `students` VALUES ('896', '201610098895', '895', '计算机工程学院', '2016', '网络工程', '2', 'E2DE58EF244E1A34B2AA38E102C511C5', null);
+INSERT INTO `students` VALUES ('897', '201610098896', '896', '计算机工程学院', '2016', '网络工程', '2', '7EBE12F221A0B1ECEDAD4F1AAD11E3E7', null);
+INSERT INTO `students` VALUES ('898', '201610098897', '897', '计算机工程学院', '2016', '网络工程', '2', '67D0EC1FA41D0E9FCE8EED7A80524EE9', null);
+INSERT INTO `students` VALUES ('899', '201610098898', '898', '计算机工程学院', '2016', '网络工程', '2', 'FDC89E42BEA14B551D069BC3CAA85DFB', null);
+INSERT INTO `students` VALUES ('900', '201610098899', '899', '计算机工程学院', '2016', '网络工程', '2', 'AACF6AC10F132217EA40FAEB450E9A9A', null);
+INSERT INTO `students` VALUES ('901', '201610098900', '900', '计算机工程学院', '2016', '网络工程', '2', 'F094462292AFA45F07EEA15983532F6F', null);
+INSERT INTO `students` VALUES ('902', '201610098901', '901', '计算机工程学院', '2016', '网络工程', '2', '795D8834AD657758585A19D313551DE4', null);
+INSERT INTO `students` VALUES ('903', '201610098902', '902', '计算机工程学院', '2016', '网络工程', '2', '53D23C41B83428591FBC1A746E0C16C8', null);
+INSERT INTO `students` VALUES ('904', '201610098903', '903', '计算机工程学院', '2016', '网络工程', '2', '188B0ACA333A774C9AA05D25517E8C46', null);
+INSERT INTO `students` VALUES ('905', '201610098904', '904', '计算机工程学院', '2016', '网络工程', '2', 'FD9A9DCB12CECF038ABD6CE53F589FE4', null);
+INSERT INTO `students` VALUES ('906', '201610098905', '905', '计算机工程学院', '2016', '网络工程', '2', '50DBA819E9A059217DE272EFB7B81A57', null);
+INSERT INTO `students` VALUES ('907', '201610098906', '906', '计算机工程学院', '2016', '网络工程', '2', '5D8AB205361E6219E19F30282B7589F2', null);
+INSERT INTO `students` VALUES ('908', '201610098907', '907', '计算机工程学院', '2016', '网络工程', '2', 'A09F173F2363719989BDAC89BA606787', null);
+INSERT INTO `students` VALUES ('909', '201610098908', '908', '计算机工程学院', '2016', '网络工程', '2', 'E1B833DFA2A7125404212D10F6CC0C11', null);
+INSERT INTO `students` VALUES ('910', '201610098909', '909', '计算机工程学院', '2016', '网络工程', '2', '448CA249B5952027E52108A5C9126782', null);
+INSERT INTO `students` VALUES ('911', '201610098910', '910', '计算机工程学院', '2016', '网络工程', '2', '3D311F1A0AD7687B9BFFC18329447DB0', null);
+INSERT INTO `students` VALUES ('912', '201610098911', '911', '计算机工程学院', '2016', '网络工程', '2', '7CEB7549F0EFADE942C32D6CA10601E7', null);
+INSERT INTO `students` VALUES ('913', '201610098912', '912', '计算机工程学院', '2016', '网络工程', '2', 'CAEAF89D57613C8BD9E65987D586ADE3', null);
+INSERT INTO `students` VALUES ('914', '201610098913', '913', '计算机工程学院', '2016', '网络工程', '2', 'D0ADFB5CDA69E24A76015CB73AC68A83', null);
+INSERT INTO `students` VALUES ('915', '201610098914', '914', '计算机工程学院', '2016', '网络工程', '2', '0EF18C948595D3631D0BE80B97F5DB21', null);
+INSERT INTO `students` VALUES ('916', '201610098915', '915', '计算机工程学院', '2016', '网络工程', '2', '8D257A397CD2D4A4D644762A3516CD78', null);
+INSERT INTO `students` VALUES ('917', '201610098916', '916', '计算机工程学院', '2016', '网络工程', '2', '540F6761FC22C6F4FC1FCA3B63AA7B00', null);
+INSERT INTO `students` VALUES ('918', '201610098917', '917', '计算机工程学院', '2016', '网络工程', '2', '6A2D939CA463CEF7B06A188C24531E88', null);
+INSERT INTO `students` VALUES ('919', '201610098918', '918', '计算机工程学院', '2016', '网络工程', '2', 'B65C019B41C2D75E11650869A019F52B', null);
+INSERT INTO `students` VALUES ('920', '201610098919', '919', '计算机工程学院', '2016', '网络工程', '2', '0101675262411E9FB720E78CE7FFB077', null);
+INSERT INTO `students` VALUES ('921', '201610098920', '920', '计算机工程学院', '2016', '网络工程', '2', '829A455904F358D688C48FD954A4DC18', null);
+INSERT INTO `students` VALUES ('922', '201610098921', '921', '计算机工程学院', '2016', '网络工程', '2', '7594394DFBAC0653A4F89C1FA1C77992', null);
+INSERT INTO `students` VALUES ('923', '201610098922', '922', '计算机工程学院', '2016', '网络工程', '2', 'ADF5BDADB7263D85B1287C4E592631A5', null);
+INSERT INTO `students` VALUES ('924', '201610098923', '923', '计算机工程学院', '2016', '网络工程', '2', '11673B6D48743E663027EDF9F6FAA45B', null);
+INSERT INTO `students` VALUES ('925', '201610098924', '924', '计算机工程学院', '2016', '网络工程', '2', 'B696583907DE81EA0584F0E89393E40C', null);
+INSERT INTO `students` VALUES ('926', '201610098925', '925', '计算机工程学院', '2016', '网络工程', '2', '9FBF299C9ABE69EA88C89EC7D58D32E7', null);
+INSERT INTO `students` VALUES ('927', '201610098926', '926', '计算机工程学院', '2016', '网络工程', '2', '1CDBC600FBD53EF1BC5525972848AED2', null);
+INSERT INTO `students` VALUES ('928', '201610098927', '927', '计算机工程学院', '2016', '网络工程', '2', '7C7D425F14A69712F9A2B1C9D6B4C373', null);
+INSERT INTO `students` VALUES ('929', '201610098928', '928', '计算机工程学院', '2016', '网络工程', '2', '4CC2E4A15A318397F7129B51CCEB0821', null);
+INSERT INTO `students` VALUES ('930', '201610098929', '929', '计算机工程学院', '2016', '网络工程', '2', '84D496D8DE0D931E6C3BB3F3D4AFB2E0', null);
+INSERT INTO `students` VALUES ('931', '201610098930', '930', '计算机工程学院', '2016', '网络工程', '2', '03138A6AECDF5E3F5F0291A4BB74D0F3', null);
+INSERT INTO `students` VALUES ('932', '201610098931', '931', '计算机工程学院', '2016', '网络工程', '2', '570A3043A643D5EFA20DF840C4706EA0', null);
+INSERT INTO `students` VALUES ('933', '201610098932', '932', '计算机工程学院', '2016', '网络工程', '2', '5E5CD46DEE924D64326E695DA375B424', null);
+INSERT INTO `students` VALUES ('934', '201610098933', '933', '计算机工程学院', '2016', '网络工程', '2', '080E7BE84458F4B981B55BDAD2486188', null);
+INSERT INTO `students` VALUES ('935', '201610098934', '934', '计算机工程学院', '2016', '网络工程', '2', '9FAB905F9A1773A50431A19F38631F2D', null);
+INSERT INTO `students` VALUES ('936', '201610098935', '935', '计算机工程学院', '2016', '网络工程', '2', 'C3EED5A0CA8F680A5DF156131B2D76FF', null);
+INSERT INTO `students` VALUES ('937', '201610098936', '936', '计算机工程学院', '2016', '网络工程', '2', '9D3B0A7E4CC2421FBB19FC0DDFCB6E76', null);
+INSERT INTO `students` VALUES ('938', '201610098937', '937', '计算机工程学院', '2016', '网络工程', '2', '8E88867327424C0EF9153C36F19B1BC8', null);
+INSERT INTO `students` VALUES ('939', '201610098938', '938', '计算机工程学院', '2016', '网络工程', '2', 'E9B4355E0998A260F45887FE33634238', null);
+INSERT INTO `students` VALUES ('940', '201610098939', '939', '计算机工程学院', '2016', '网络工程', '2', '9F4A8E8CB900EF0419EBD5ADB7AE04D8', null);
+INSERT INTO `students` VALUES ('941', '201610098940', '940', '计算机工程学院', '2016', '网络工程', '2', 'A9D08759D4511E426615757C7CD76078', null);
+INSERT INTO `students` VALUES ('942', '201610098941', '941', '计算机工程学院', '2016', '网络工程', '2', 'F8EEB33E9BECEC62C946C758D582BE8D', null);
+INSERT INTO `students` VALUES ('943', '201610098942', '942', '计算机工程学院', '2016', '网络工程', '2', 'E97205B88B412402D48A2E477F36C61F', null);
+INSERT INTO `students` VALUES ('944', '201610098943', '943', '计算机工程学院', '2016', '网络工程', '2', '3C3188726258268E62D2EA30D436B815', null);
+INSERT INTO `students` VALUES ('945', '201610098944', '944', '计算机工程学院', '2016', '网络工程', '2', '710DAAB97A36265E07CDABF505E654CD', null);
+INSERT INTO `students` VALUES ('946', '201610098945', '945', '计算机工程学院', '2016', '网络工程', '2', 'E0AECADF81D6ED6EC83499EC0554B067', null);
+INSERT INTO `students` VALUES ('947', '201610098946', '946', '计算机工程学院', '2016', '网络工程', '2', '9240D61B91DE869BC6199EE6B49BA5CF', null);
+INSERT INTO `students` VALUES ('948', '201610098947', '947', '计算机工程学院', '2016', '网络工程', '2', 'B61ECCE7E40545FDD7EBF6788C237097', null);
+INSERT INTO `students` VALUES ('949', '201610098948', '948', '计算机工程学院', '2016', '网络工程', '2', '6EA452C5D12AAE3EF46C46750BADC6D9', null);
+INSERT INTO `students` VALUES ('950', '201610098949', '949', '计算机工程学院', '2016', '网络工程', '2', 'A57D2268BCDC129912D38AB9D5D21D28', null);
+INSERT INTO `students` VALUES ('951', '201610098950', '950', '计算机工程学院', '2016', '网络工程', '2', '162AEAF34CFF167952780D53609B2408', null);
+INSERT INTO `students` VALUES ('952', '201610098951', '951', '计算机工程学院', '2016', '网络工程', '2', 'D81F21BCD2FC2EA244CF1CD5F26644D7', null);
+INSERT INTO `students` VALUES ('953', '201610098952', '952', '计算机工程学院', '2016', '网络工程', '2', 'A91683F682C4BE7CA16F715F5E6EB313', null);
+INSERT INTO `students` VALUES ('954', '201610098953', '953', '计算机工程学院', '2016', '网络工程', '2', 'EA771FA18EE74AA719DD3BE7B421E5CD', null);
+INSERT INTO `students` VALUES ('955', '201610098954', '954', '计算机工程学院', '2016', '网络工程', '2', '5B0D1EF1465C8A0759F6D2CFE7545391', null);
+INSERT INTO `students` VALUES ('956', '201610098955', '955', '计算机工程学院', '2016', '网络工程', '2', '3988B1757B4F48D5396946A78AD59260', null);
+INSERT INTO `students` VALUES ('957', '201610098956', '956', '计算机工程学院', '2016', '网络工程', '2', '0070510C08A83BF0770D96AEF3824236', null);
+INSERT INTO `students` VALUES ('958', '201610098957', '957', '计算机工程学院', '2016', '网络工程', '2', 'E4F8AC699CCE0B54C9C60C3F883B8CAB', null);
+INSERT INTO `students` VALUES ('959', '201610098958', '958', '计算机工程学院', '2016', '网络工程', '2', 'F6A5A42FE39FC7EF6AE3FBD2E68A5987', null);
+INSERT INTO `students` VALUES ('960', '201610098959', '959', '计算机工程学院', '2016', '网络工程', '2', '90F8930500497FC84EB176CE8BCDD797', null);
+INSERT INTO `students` VALUES ('961', '201610098960', '960', '计算机工程学院', '2016', '网络工程', '2', '22F04304974F5EDB368935661B686422', null);
+INSERT INTO `students` VALUES ('962', '201610098961', '961', '计算机工程学院', '2016', '网络工程', '2', '4651A8197D84C13905647023F278AEF8', null);
+INSERT INTO `students` VALUES ('963', '201610098962', '962', '计算机工程学院', '2016', '网络工程', '2', '43114C41D71B9FE06048760831294CD4', null);
+INSERT INTO `students` VALUES ('964', '201610098963', '963', '计算机工程学院', '2016', '网络工程', '2', 'AB71D9F2F8C61C9DB61D039FD73B2E5C', null);
+INSERT INTO `students` VALUES ('965', '201610098964', '964', '计算机工程学院', '2016', '网络工程', '2', 'BB3B7FF81D0BB3FCFF9BD132FC0F7164', null);
+INSERT INTO `students` VALUES ('966', '201610098965', '965', '计算机工程学院', '2016', '网络工程', '2', 'E5425FB74045CA17428FDA1334328AEA', null);
+INSERT INTO `students` VALUES ('967', '201610098966', '966', '计算机工程学院', '2016', '网络工程', '2', '8B79EA0E33CEE47B1E76EA7FAE993EC5', null);
+INSERT INTO `students` VALUES ('968', '201610098967', '967', '计算机工程学院', '2016', '网络工程', '2', '03F08B7D192D40D33B2D193B9C20BFE4', null);
+INSERT INTO `students` VALUES ('969', '201610098968', '968', '计算机工程学院', '2016', '网络工程', '2', 'E88CEDB25F0399444683C98426DCCA76', null);
+INSERT INTO `students` VALUES ('970', '201610098969', '969', '计算机工程学院', '2016', '网络工程', '2', '2175E2D2DDE8F02EDA1403DA61C5CAFF', null);
+INSERT INTO `students` VALUES ('971', '201610098970', '970', '计算机工程学院', '2016', '网络工程', '2', '2C2AC1780492451A40AA64138DF10939', null);
+INSERT INTO `students` VALUES ('972', '201610098971', '971', '计算机工程学院', '2016', '网络工程', '2', 'EA04DE2FFC7966305D0E8BACB7A4CEE0', null);
+INSERT INTO `students` VALUES ('973', '201610098972', '972', '计算机工程学院', '2016', '网络工程', '2', 'F61482FF7E3F976A70B4274B4908F54C', null);
+INSERT INTO `students` VALUES ('974', '201610098973', '973', '计算机工程学院', '2016', '网络工程', '2', 'F3454652486F0DA3F05C4ED0AE292FE8', null);
+INSERT INTO `students` VALUES ('975', '201610098974', '974', '计算机工程学院', '2016', '网络工程', '2', 'AEE442ED767F5E8362AD7E81B9B9CB78', null);
+INSERT INTO `students` VALUES ('976', '201610098975', '975', '计算机工程学院', '2016', '网络工程', '2', '6A1AD62905BC656AF16C9BEB125BF7F7', null);
+INSERT INTO `students` VALUES ('977', '201610098976', '976', '计算机工程学院', '2016', '网络工程', '2', '4470618C1D92CD20AD4D647919E29566', null);
+INSERT INTO `students` VALUES ('978', '201610098977', '977', '计算机工程学院', '2016', '网络工程', '2', '8B5BD83DE86639A29CAF327A0813A78A', null);
+INSERT INTO `students` VALUES ('979', '201610098978', '978', '计算机工程学院', '2016', '网络工程', '2', '83BB1B0AC8365F2D42ADE9053C5A2DA6', null);
+INSERT INTO `students` VALUES ('980', '201610098979', '979', '计算机工程学院', '2016', '网络工程', '2', 'A9A25970CF4BB58C4D9264AD0443F079', null);
+INSERT INTO `students` VALUES ('981', '201610098980', '980', '计算机工程学院', '2016', '网络工程', '2', '5630A0DCD01EFB46BD77BBBE58F0547B', null);
+INSERT INTO `students` VALUES ('982', '201610098981', '981', '计算机工程学院', '2016', '网络工程', '2', '72CA7A77C3AD5B3BC9E1ED99873F8C29', null);
+INSERT INTO `students` VALUES ('983', '201610098982', '982', '计算机工程学院', '2016', '网络工程', '2', '555CA7A4F6087A19F5715E7B45AD9734', null);
+INSERT INTO `students` VALUES ('984', '201610098983', '983', '计算机工程学院', '2016', '网络工程', '2', '945BFCB92088215B77A2F9F979388A4C', null);
+INSERT INTO `students` VALUES ('985', '201610098984', '984', '计算机工程学院', '2016', '网络工程', '2', '88DD7F3A167CF60795CF884A2C64ACBA', null);
+INSERT INTO `students` VALUES ('986', '201610098985', '985', '计算机工程学院', '2016', '网络工程', '2', 'EB6F8EE8545B3BFFD6038573016B4E8B', null);
+INSERT INTO `students` VALUES ('987', '201610098986', '986', '计算机工程学院', '2016', '网络工程', '2', 'CC10BCD1892EDF6647A4D81BA6007EF3', null);
+INSERT INTO `students` VALUES ('988', '201610098987', '987', '计算机工程学院', '2016', '网络工程', '2', 'CB3E6898A9EF9955BEA4470676F9070D', null);
+INSERT INTO `students` VALUES ('989', '201610098988', '988', '计算机工程学院', '2016', '网络工程', '2', 'B45A39924D96F9B9BD4ED44D403CC87C', null);
+INSERT INTO `students` VALUES ('990', '201610098989', '989', '计算机工程学院', '2016', '网络工程', '2', '87DE1F29E6452283F8FBFACC1CCB1554', null);
+INSERT INTO `students` VALUES ('991', '201610098990', '990', '计算机工程学院', '2016', '网络工程', '2', '3DF3A372858E05F0C1281E8ACE848C78', null);
+INSERT INTO `students` VALUES ('992', '201610098991', '991', '计算机工程学院', '2016', '网络工程', '2', '6DFB8275877948D0420771E9C4245816', null);
+INSERT INTO `students` VALUES ('993', '201610098992', '992', '计算机工程学院', '2016', '网络工程', '2', '5F8BB14784E74B40F80A17151CA25C6D', null);
+INSERT INTO `students` VALUES ('994', '201610098993', '993', '计算机工程学院', '2016', '网络工程', '2', 'E3230718768BB730DEEDAF96000FBDBF', null);
+INSERT INTO `students` VALUES ('995', '201610098994', '994', '计算机工程学院', '2016', '网络工程', '2', '24C09C3B369DC4138E31DEDD5602E528', null);
+INSERT INTO `students` VALUES ('996', '201610098995', '995', '计算机工程学院', '2016', '网络工程', '2', '7FC870C12C95CE7506B8DC38D30F6ABA', null);
+INSERT INTO `students` VALUES ('997', '201610098996', '996', '计算机工程学院', '2016', '网络工程', '2', 'C4629A63DB0F2EF24F2F6DFE0E9C632E', null);
+INSERT INTO `students` VALUES ('998', '201610098997', '997', '计算机工程学院', '2016', '网络工程', '2', 'CD7C701DF92C4B4068A14CCF072738D6', null);
+INSERT INTO `students` VALUES ('999', '201610098998', '998', '计算机工程学院', '2016', '网络工程', '2', 'E1DEF05FB071D504B88F187199081464', null);
+INSERT INTO `students` VALUES ('1000', '201610098999', '999', '计算机工程学院', '2016', '网络工程', '2', '829205B6341D0391559F0A8E626DF6DF', null);
+
+
