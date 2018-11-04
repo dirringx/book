@@ -47,6 +47,7 @@
 				<value>com/book/pojos/Student.hbm.xml</value>
 				<value>com/book/pojos/Manager.hbm.xml</value>
 				<value>com/book/pojos/BookType.hbm.xml</value>
+				<value>com/book/pojos/Course.hbm.xml</value>
 			</list>
 		</property>
 	</bean>

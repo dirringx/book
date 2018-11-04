@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.book.pojos.Course" table="courses">
+
+		<!-- 主键 -->
+		<id name="id" column="id">
+			<generator class="uuid.hex" />
+		</id>
+
+		<!-- 姓名 -->
+		<property name="name" column="cou_name" type="java.lang.String"
+			length="10" />
+
+		<!-- 年级 -->
+		<property name="grade" column="cou_grade" type="java.lang.String"
+			length="4" />
+
+		<!-- 专业 -->
+		<property name="major" column="cou_major" type="java.lang.String"
+			length="10" />
+
+		<!-- 学院 -->
+		<property name="college" column="cou_college" type="java.lang.String"
+			length="15" />
+
+	</class>
+</hibernate-mapping>

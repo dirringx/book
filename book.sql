@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2018-11-04 13:32:31
+Date: 2018-11-04 15:02:39
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -36,20 +36,19 @@ CREATE TABLE `books` (
   CONSTRAINT `FK4od1wqphgtj3l6956c6xxkl2t` FOREIGN KEY (`booktype_id`) REFERENCES `booktype` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO `books` VALUES ('4028abf4669084c101669084c71c0000', '软件项目管理与案例分析', '项目管理', 'pasf', '29', '20', '管理', 'img/book.jpg', '978-7-3021-3052-5', '清华大学出版社', '1');
-INSERT INTO `books` VALUES ('4028abf4669084c101669084c7540001', '概率论与数理统计', '概率论', '阳平华', '29', '20', '数学', 'img/book.jpg', '978-7-5165-1661-4', '航空工业出版社', '1');
-INSERT INTO `books` VALUES ('4028abf4669084c101669084c76c0002', 'JavaEE框架应用开发', 'javaEE', 'QST青软', '90', '0.9', 'ssh', 'img/book.jpg', '123-4-5678-9123-4', '清华大学出版社', '1');
-INSERT INTO `books` VALUES ('4028abf4669084c101669084c76c0003', 'UML2基础、建模与设计教程', 'UML建模分析与设计', '杨弘平', '34.5', '24.5', '软件工程书籍', 'img/book.jpg', '978-4-5678-9123-4', '清华大学出版社', '1');
-INSERT INTO `books` VALUES ('4028abf4669084c101669084c76c0004', '计算机操作系统（第二版）', '操作系统', '郁红英、王磊、武磊、李春强', '34.5', '24.5', '计算机专业书籍', 'img/book.jpg', '978-7-5678-9123-2', '清华大学出版社', '1');
-INSERT INTO `books` VALUES ('4028abf4669084c101669084c76c0005', '编译原理（第3版）', '编译原理', '王生原 董渊 张素琴 吕映芝 蒋维杜', '49', '33.0', '计算机专业书籍', 'img/book.jpg', '978-7-1111-9123-2', '清华大学出版社', '1');
-INSERT INTO `books` VALUES ('4028abf4669084c101669084c71c0006', '第一行代码:Android(第2版)', 'Android UI设计', '郭霖', '79', '60.04', '管理', 'img/book.jpg', '978-7-3021-3112-5', '人民邮电出版社', '3');
-INSERT INTO `books` VALUES ('4028abf4669084c101669084c7540007', 'Web前端开发简明教程', '高级网页设计', '阳平华', '39.8', '30.248', 'web', 'img/book.jpg', '978-7-5165-1600-4', '人民邮电出版社', '3');
-INSERT INTO `books` VALUES ('4028abf4669084c101669084c76c0008', '人机交互基础教程（第3版）', '交互技术基础', 'QST青软', '49', '37.24', 'ssh', 'img/book.jpg', '123-4-5678-9023-4', '清华大学出版社', '3');
-INSERT INTO `books` VALUES ('4028abf4669084c101669084c76c0009', 'Cocos2d-x游戏开发实战精解', '二维游戏开发基础', '杨弘平', '69.8', '53.048', '软件工程书籍', 'img/book.jpg', '978-4-5678-9103-4', '清华大学出版社', '3');
-
 -- ----------------------------
 -- Records of books
 -- ----------------------------
+INSERT INTO `books` VALUES ('4028abf4669084c101669084c71c0000', '软件项目管理与案例分析', '项目管理', 'pasf', '29', '20', '管理', 'img/book.jpg', '978-7-3021-3052-5', '清华大学出版社', '1');
+INSERT INTO `books` VALUES ('4028abf4669084c101669084c71c0006', '第一行代码:Android(第2版)', 'Android UI设计', '郭霖', '79', '60.04', '管理', 'img/book.jpg', '978-7-3021-3112-5', '人民邮电出版社', '3');
+INSERT INTO `books` VALUES ('4028abf4669084c101669084c7540001', '概率论与数理统计', '概率论', '阳平华', '29', '20', '数学', 'img/book.jpg', '978-7-5165-1661-4', '航空工业出版社', '1');
+INSERT INTO `books` VALUES ('4028abf4669084c101669084c7540007', 'Web前端开发简明教程', '高级网页设计', '阳平华', '39.8', '30.248', 'web', 'img/book.jpg', '978-7-5165-1600-4', '人民邮电出版社', '3');
+INSERT INTO `books` VALUES ('4028abf4669084c101669084c76c0002', 'JavaEE框架应用开发', 'javaEE', 'QST青软', '90', '0.9', 'ssh', 'img/book.jpg', '123-4-5678-9123-4', '清华大学出版社', '1');
+INSERT INTO `books` VALUES ('4028abf4669084c101669084c76c0003', 'UML2基础、建模与设计教程', 'UML建模分析与设计', '杨弘平', '34.5', '24.5', '软件工程书籍', 'img/book.jpg', '978-4-5678-9123-4', '清华大学出版社', '1');
+INSERT INTO `books` VALUES ('4028abf4669084c101669084c76c0004', '计算机操作系统（第二版）', '操作系统', '郁红英、王磊、武磊、李春强', '34.5', '24.5', '计算机专业书籍', 'img/book.jpg', '978-7-5678-9123-2', '清华大学出版社', '1');
+INSERT INTO `books` VALUES ('4028abf4669084c101669084c76c0005', '编译原理（第3版）', '编译原理', '王生原 董渊 张素琴 吕映芝 蒋维杜', '49', '33', '计算机专业书籍', 'img/book.jpg', '978-7-1111-9123-2', '清华大学出版社', '1');
+INSERT INTO `books` VALUES ('4028abf4669084c101669084c76c0008', '人机交互基础教程（第3版）', '交互技术基础', 'QST青软', '49', '37.24', 'ssh', 'img/book.jpg', '123-4-5678-9023-4', '清华大学出版社', '3');
+INSERT INTO `books` VALUES ('4028abf4669084c101669084c76c0009', 'Cocos2d-x游戏开发实战精解', '二维游戏开发基础', '杨弘平', '69.8', '53.048', '软件工程书籍', 'img/book.jpg', '978-4-5678-9103-4', '清华大学出版社', '3');
 
 -- ----------------------------
 -- Table structure for booktype
@@ -61,15 +60,31 @@ CREATE TABLE `booktype` (
   `grade` varchar(255) DEFAULT NULL,
   `college` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of booktype
 -- ----------------------------
-
 INSERT INTO `booktype` VALUES ('1', '软件工程', '2016', '计算机工程学院');
 INSERT INTO `booktype` VALUES ('2', '网络工程', '2016', '计算机工程学院');
 INSERT INTO `booktype` VALUES ('3', '计算机科学与技术', '2016', '计算机工程学院');
+
+-- ----------------------------
+-- Table structure for courses
+-- ----------------------------
+DROP TABLE IF EXISTS `courses`;
+CREATE TABLE `courses` (
+  `id` varchar(255) NOT NULL,
+  `cou_name` varchar(10) DEFAULT NULL,
+  `cou_grade` varchar(4) DEFAULT NULL,
+  `cou_major` varchar(10) DEFAULT NULL,
+  `cou_college` varchar(15) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of courses
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for mangers
@@ -87,7 +102,6 @@ CREATE TABLE `mangers` (
 -- ----------------------------
 -- Records of mangers
 -- ----------------------------
-
 INSERT INTO `mangers` VALUES ('4028abf4669084c101669084c7850003', 'axc', 'E10ADC3949BA59ABBE56E057F20F883E', '20181001', '1');
 INSERT INTO `mangers` VALUES ('4028abf4669084c101669084c79e0004', 'sdf', 'E10ADC3949BA59ABBE56E057F20F883E', '20181006', '2');
 
@@ -106,12 +120,11 @@ CREATE TABLE `orderitems` (
   KEY `FK4goudlxr1jdchk0pivxaggtrw` (`book_id`),
   CONSTRAINT `FK4goudlxr1jdchk0pivxaggtrw` FOREIGN KEY (`book_id`) REFERENCES `books` (`id`),
   CONSTRAINT `FK90td7v08r46nlwukfklfeaygq` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of orderitems
 -- ----------------------------
-
 INSERT INTO `orderitems` VALUES ('1', '4028abf4669084c101669085294f0005', '4028abf4669084c101669084c71c0000', '1', '20');
 INSERT INTO `orderitems` VALUES ('2', '4028abf4669084c101669085294f0005', '4028abf4669084c101669084c7540001', '2', '0.9');
 INSERT INTO `orderitems` VALUES ('3', '4028abf4669084c101669085294f0005', '4028abf4669084c101669084c76c0002', '2', '20');
@@ -136,7 +149,6 @@ CREATE TABLE `orders` (
 -- ----------------------------
 -- Records of orders
 -- ----------------------------
-
 INSERT INTO `orders` VALUES ('4028abf4669084c101669085294f0005', '234', '111810207927512', '61.8', '\0', '\0', '2018-10-20 16:08:57');
 
 -- ----------------------------
@@ -154,13 +166,11 @@ CREATE TABLE `students` (
   `stu_pwd` varchar(32) DEFAULT NULL,
   `permission` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1001 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of students
 -- ----------------------------
-
-
 INSERT INTO `students` VALUES ('1', '2016100980', '0', '计算机工程学院', '2016', '软件工程', '5', '56D298AA8F02B36879D4FE7EC57E63B1', null);
 INSERT INTO `students` VALUES ('2', '2016100981', '1', '计算机工程学院', '2016', '软件工程', '5', '4F07C2A1C81D1065FEF7AC5DCBF981A4', null);
 INSERT INTO `students` VALUES ('3', '2016100982', '2', '计算机工程学院', '2016', '软件工程', '5', '74B23A8B198982EB7005F266A9F14B51', null);
@@ -1161,5 +1171,3 @@ INSERT INTO `students` VALUES ('997', '201610098996', '996', '计算机工程学
 INSERT INTO `students` VALUES ('998', '201610098997', '997', '计算机工程学院', '2016', '网络工程', '2', 'CD7C701DF92C4B4068A14CCF072738D6', null);
 INSERT INTO `students` VALUES ('999', '201610098998', '998', '计算机工程学院', '2016', '网络工程', '2', 'E1DEF05FB071D504B88F187199081464', null);
 INSERT INTO `students` VALUES ('1000', '201610098999', '999', '计算机工程学院', '2016', '网络工程', '2', '829205B6341D0391559F0A8E626DF6DF', null);
-
-
