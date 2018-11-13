@@ -12,12 +12,12 @@ import com.book.pojos.Order;
 public class OrderDaoImpl extends BaseDaoImpl<Order> implements OrderDao {
 
 	public List<Order> findOrderBystudentID(int id) {
-		String hql = "from Order o where o.student.id = ?";
+		String hql = "from Order o where o.student.id = ? order by o.orderTime desc";
 		return (List<Order>) this.getHibernateTemplate().find(hql, id);
 	}
 
 	public Order findOrderByBookISBN(String ISBN) {
-		String hql = "from Order o where o.ISBN=?";
+		String hql = "from Order o where o.ISBN = ?";
 		List<Order> orders = (List<Order>) this.getHibernateTemplate().find(hql, ISBN);
 		if (orders == null || orders.isEmpty())
 			return null;
@@ -26,7 +26,7 @@ public class OrderDaoImpl extends BaseDaoImpl<Order> implements OrderDao {
 	}
 
 	public Order findByorderNo(String orderNo) {
-		String hql = "from Order o where o.orderNo=?";
+		String hql = "from Order o where o.orderNo = ?";
 		List<Order> orders = (List<Order>) this.getHibernateTemplate().find(hql, orderNo);
 		if (orders == null || orders.isEmpty())
 			return null;

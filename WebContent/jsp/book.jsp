@@ -131,15 +131,17 @@
 			book = [];
 			//循环tr原素
 			$.each(li, function(i, f) {
-				//找到所有input
-				var inputs = $(f).find('input');
-				var b = {};
-				//循环所有inputs，把input中的name和value变成对象中的属性和值
-				for (var j = 0; j < inputs.length; j++) {
-					var o = inputs[j];
-					b[$(o).attr('name')] = $(o).val();
+				if(li[i].children[0].className == 'select-box yes'){
+					//找到所有input
+					var inputs = $(f).find('input');
+					var b = {};
+					//循环所有inputs，把input中的name和value变成对象中的属性和值
+					for (var j = 0; j < inputs.length; j++) {
+						var o = inputs[j];
+						b[$(o).attr('name')] = $(o).val();
+					}
+					book.push(b);
 				}
-				book.push(b);
 			});
 			url = "${ctx}/order/o.action?method=buy";
 			$.ajax({
