@@ -16,16 +16,7 @@ public class BookServiceImpl extends BaseServiceImpl<Book> implements BookServic
 
 	@Resource(name = "bookDao")
 	private BookDao bookDao;
-
-	@Override
-	public void add(Book obj) {
-		bookDao.add(obj);
-	}
-
-	public List<Book> findAll(Class<Book> clazz) {
-		return bookDao.findAll(clazz);
-	}
-
+	
 	public Book findBookByISBN(String ISBN) {
 		return bookDao.findBookByISBN(ISBN);
 	}

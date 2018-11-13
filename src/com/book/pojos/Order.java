@@ -1,7 +1,6 @@
 package com.book.pojos;
 
 import java.io.Serializable;
-import java.util.Comparator;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;

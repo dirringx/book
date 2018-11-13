@@ -17,11 +17,6 @@ public class StudentServiceImpl extends BaseServiceImpl<Student> implements Stud
 	@Resource(name = "studentDao")
 	private StudentDao studentDao;
 
-	@Override
-	public void update(Student obj) {
-		studentDao.update(obj);
-	}
-
 	public List<Student> findStudentByclass(String studentClass) {
 		System.out.println(studentDao.toString());
 		return studentDao.findStudentByclass(studentClass);

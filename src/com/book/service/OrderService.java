@@ -8,7 +8,7 @@ import com.book.pojos.Order;
 public interface OrderService extends BaseService<Order>{
 
 	/**
-	 * 通过学生学号查询该学生下的订单
+	 * 通过学生学号查询该学生下的订单，按照时间降序排列
 	 * 
 	 * @param studentID
 	 *            学号
