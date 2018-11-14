@@ -17,7 +17,7 @@ public interface BookService extends BaseService<Book> {
 	Book findBookByISBN(String ISBN);
 
 	/**
-	 * 通过书籍ISBN码来删除书籍
+	 * 通过国际标准书号来删除书籍
 	 * 
 	 * @param ISBN
 	 */

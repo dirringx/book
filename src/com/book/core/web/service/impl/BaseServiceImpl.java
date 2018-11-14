@@ -10,11 +10,11 @@ import com.book.core.web.service.BaseService;
 
 /**
  * 
- * 用于DB操作的service接口的实现类 <br>
+ * 用于基本DB操作的service接口的实现类 <br>
  * 
  * 本类提供了对于接口<tt>BaseService</tt>的一个骨架实现，它实现了<tt>BaseService</tt>接口。
- * 开发过程中，针对一个dao，需要实现save、update、delete、findByID、findAll等相应的DB操作时，
- * 需要实现<tt>BaseService</tt>接口的时候可以直接继承本类，而不需要再去实现一次接口。
+ * 开发过程中，针对一个dao，为了实现save、update、delete、findByID、findAll等相应的DB操作时，
+ * 进而需要实现<tt>BaseService</tt>接口的时候可以直接继承本类，而不需要再去实现一次接口。
  * 
  */
 public abstract class BaseServiceImpl<T> implements BaseService<T> {

@@ -10,19 +10,19 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.book.core.web.dao.BaseDao;
 
-@Transactional
 public abstract class BaseDaoImpl<T> extends HibernateDaoSupport implements BaseDao<T> {
-	
+
 	@Autowired
 	public void setMySessionFactory(SessionFactory sessionFactory) {
 		super.setSessionFactory(sessionFactory);
 	}
-	
+
 	/**
 	 * 增
 	 * 
 	 * @param object
 	 */
+	@Transactional
 	public void add(T obj) {
 		this.getHibernateTemplate().save(obj);
 	}
@@ -32,6 +32,7 @@ public abstract class BaseDaoImpl<T> extends HibernateDaoSupport implements Base
 	 * 
 	 * @param object
 	 */
+	@Transactional
 	public void delete(T obj) {
 		this.getHibernateTemplate().delete(obj);
 	}
@@ -41,6 +42,7 @@ public abstract class BaseDaoImpl<T> extends HibernateDaoSupport implements Base
 	 * 
 	 * @param object
 	 */
+	@Transactional
 	public void update(T obj) {
 		this.getHibernateTemplate().update(obj);
 	}
