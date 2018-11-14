@@ -15,21 +15,6 @@ public class OrderItemServiceImpl extends BaseServiceImpl<OrderItem> implements 
 	@Resource(name = "orderItemDao")
 	private OrderItemDao orderItemDao;
 
-	@Override
-	public void delete(OrderItem obj) {
-		orderItemDao.delete(obj);
-	}
-	
-	@Override
-	public void update(OrderItem obj) {
-		orderItemDao.update(obj);
-	}
-	
-	@Override
-	public OrderItem findByID(Class<OrderItem> clazz, int id) {
-		return orderItemDao.findByID(clazz, id);
-	}
-	
 	public OrderItem findByBook(String id) {
 		return orderItemDao.findByBook(id);
 	}

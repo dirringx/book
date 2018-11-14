@@ -19,7 +19,7 @@
 	</span>    
       <input id="user" name="studentName" type="text" placeholder="请输入账号" maxlength="12"/>
       <input id="password" name="password" type="password" placeholder="请输入密码" maxlength="16"/>
-      <input id="login" type="submit" value="Login"  />
+      <input id="login" type="submit" value="Login"/>
     </form>
     <footer class="footer">学生购书登录</footer>
     <script src="${ctx}/styles/js/jquery-1.8.0.min.js"></script>

@@ -14,7 +14,7 @@
         <img id="headPortrait" src="${ctx}/styles/img/profile.png" />
         <p id="name">${student.studentName}</p>
         <p id="stuId">${student.studentID}</p>
-        <p id="classes">软件工程${student.studentClass}班</p>
+        <p id="classes">${student.major}${student.studentClass}班</p>
     </div>
     <ul class="list">
         <li id="change">

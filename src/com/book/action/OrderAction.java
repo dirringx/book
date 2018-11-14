@@ -87,7 +87,7 @@ public class OrderAction extends BaseAction {
 			}
 			ActionContextUtils.setAttributeToSession("stu_orders", orders);
 		} catch (Exception e) {
-
+			e.printStackTrace();
 		}
 		return "show";
 	}
@@ -128,7 +128,7 @@ public class OrderAction extends BaseAction {
 	}
 
 	/**
-	 * 显示订单信息
+	 * 管理员显示订单信息
 	 * 
 	 * @return
 	 */
@@ -201,6 +201,10 @@ public class OrderAction extends BaseAction {
 		// 获取前台的书籍列表
 		List<Book> books = JsonUtils.jsonToBeanList(bookJson, Book.class);
 
+		for (Book b : books) {
+			System.out.println(b.getName() + "-->" + b.getNumber());
+		}
+
 		// 创建订单
 		Order order = new Order();
 		// 设置下订单用户信息
@@ -235,7 +239,7 @@ public class OrderAction extends BaseAction {
 					// 订单添加订单项
 					order.getOrderitems().add(orderItem);
 				}
-				if(b.getNumber() < 0){
+				if (b.getNumber() < 0) {
 					totalAmount = -1f;
 					break;
 				}

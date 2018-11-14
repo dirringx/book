@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @SuppressWarnings("serial")
-public class Order implements Serializable {
+public class Order implements Serializable{
 	/** 主键 **/
 	private String id;
 

@@ -17,21 +17,6 @@ public class OrderServiceImpl extends BaseServiceImpl<Order> implements OrderSer
 	@Resource(name = "orderDao")
 	private OrderDao orderDao;
 
-	@Override
-	public void add(Order obj) {
-		orderDao.add(obj);
-	}
-	
-	@Override
-	public void update(Order obj) {
-		orderDao.update(obj);
-	}
-	
-	@Override
-	public Order findByID(Class<Order> clazz, int id) {
-		return orderDao.findByID(clazz, id);
-	}
-	
 	public List<Order> findOrderBystudentID(int id) {
 		return orderDao.findOrderBystudentID(id);
 	}

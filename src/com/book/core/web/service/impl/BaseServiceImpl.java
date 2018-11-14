@@ -1,10 +1,33 @@
 package com.book.core.web.service.impl;
 
+import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.book.core.web.dao.BaseDao;
 import com.book.core.web.service.BaseService;
 
+/**
+ * 
+ * 用于DB操作的service接口的实现类 <br>
+ * 
+ * 本类提供了对于接口<tt>BaseService</tt>的一个骨架实现，它实现了<tt>BaseService</tt>接口。
+ * 开发过程中，针对一个dao，需要实现save、update、delete、findByID、findAll等相应的DB操作时，
+ * 需要实现<tt>BaseService</tt>接口的时候可以直接继承本类，而不需要再去实现一次接口。
+ * 
+ */
 public abstract class BaseServiceImpl<T> implements BaseService<T> {
+
+	@Autowired
+	private BaseDao<T> baseDao;
+
+	private Class<T> clazz = null;
+
+	public BaseServiceImpl() {
+		ParameterizedType pt = (ParameterizedType) this.getClass().getGenericSuperclass();
+		clazz = (Class<T>) pt.getActualTypeArguments()[0];
+	}
 
 	/**
 	 * 增
@@ -12,7 +35,7 @@ public abstract class BaseServiceImpl<T> implements BaseService<T> {
 	 * @param object
 	 */
 	public void add(T obj) {
-		System.err.println("Please Override this method in BeanServiceImpl!");
+		baseDao.add(obj);
 	}
 
 	/**
@@ -21,7 +44,7 @@ public abstract class BaseServiceImpl<T> implements BaseService<T> {
 	 * @param object
 	 */
 	public void delete(T obj) {
-		System.err.println("Please Override this method in BeanServiceImpl!");
+		baseDao.delete(obj);
 	}
 
 	/**
@@ -30,7 +53,7 @@ public abstract class BaseServiceImpl<T> implements BaseService<T> {
 	 * @param object
 	 */
 	public void update(T obj) {
-		System.err.println("Please Override this method in BeanServiceImpl!");
+		baseDao.update(obj);
 	}
 
 	/**
@@ -43,8 +66,7 @@ public abstract class BaseServiceImpl<T> implements BaseService<T> {
 	 * @return
 	 */
 	public T findByID(Class<T> clazz, int id) {
-		System.err.println("Please Override this method in BeanServiceImpl!");
-		return null;
+		return baseDao.findByID(this.clazz, id);
 	}
 
 	/**
@@ -57,8 +79,7 @@ public abstract class BaseServiceImpl<T> implements BaseService<T> {
 	 * @return
 	 */
 	public T findByID(Class<T> clazz, String id) {
-		System.err.println("Please Override this method in BeanServiceImpl!");
-		return null;
+		return baseDao.findByID(this.clazz, id);
 	}
 
 	/**
@@ -67,8 +88,7 @@ public abstract class BaseServiceImpl<T> implements BaseService<T> {
 	 * @return
 	 */
 	public List<T> findAll(Class<T> clazz) {
-		System.err.println("Please Override this method in BeanServiceImpl!");
-		return null;
+		return baseDao.findAll(this.clazz);
 	}
 
 }
