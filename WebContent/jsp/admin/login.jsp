@@ -12,7 +12,7 @@
 <body>
  <div class="wrap">
     <h1 class="title">教材订购系统</h1>
-    	<span>${msg}</span>
+    	<span style="position: absolute;left:150px;top:50px;text-align:center;color:red;">${msg}</span>
       	<form action="${ctx}/admin/a.action?method=login" method="post">
             <div class="user">
                 <label for="username">工号：</label>

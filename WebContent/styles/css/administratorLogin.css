@@ -78,14 +78,13 @@ body{
     text-align: center;
 }
 form{
-    margin: 0 auto;
+    margin: 15px auto;
     width: 400px;
-    /* border: 1px solid red; */
 }
 .user>label,.psd>label,.verification>label{
     display:inline-block;
     margin-top: 30px;
-    width: 100px;
+    width: 80px;
     font-size: 18px;
     text-align: right;
 }
@@ -121,8 +120,8 @@ form{
     text-decoration: underline;
 }
 .startLogin{
-    margin-top: 15px;
-    margin-left: 100px;
+    margin-top: 30px;
+    margin-left: 75px;
     margin-bottom: 15px;
 }
 #login{
@@ -144,7 +143,7 @@ form{
 
 .pos{
 	margin-top:20px;
-    margin-left: 90px;
+    margin-left: 81px;
 }
 #administrator{
     margin-left: 70px;

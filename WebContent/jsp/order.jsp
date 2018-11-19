@@ -38,30 +38,46 @@
 			       <div class="book-list">
 						<img class="book-img" src="${ctx}/styles/${ot.book.bookImage}" /> 
 						<span class="book-name">${ot.book.name}</span> 
-						<span class="price">${ot.book.discount}</span>
+						<span class="price">¥${ot.book.discount}</span>
 						<span class="number">x${ot.quantity}</span>
 					</div>
 			    </c:forEach>
+			    <span id="totalPrice">总价：<span class="money"></span></span>
+			    <button class="pay">支付</button>
 			</li>
 		</s:iterator>
 	</ul>
 	<jsp:include page="/comm/view/NavBar.jsp"></jsp:include>
+	<script type="text/javascript" src="${ctx}/styles/js/jquery-1.8.0.min.js"></script>
 	<script type="text/javascript">
 		var s = location.search;
 		var list = document.getElementById("list");
-		var li = list.getElementsByTagName("li");
+		var listLi = list.getElementsByTagName("li");
 		if(s == "?method=show"){
-			li[0].className="select";
-			li[0].children[0].style.color = "#f6bf68";
+			listLi[0].className="select";
+			listLi[0].children[0].style.color = "#f6bf68";
 		}
 		else if(s == "?method=show&np=1"){
-			li[1].className = "select";
-			li[1].children[0].style.color = "#f6bf68";
+			listLi[1].className = "select";
+			listLi[1].children[0].style.color = "#f6bf68";
 		}
 		else{
-			li[2].className = "select";
-			li[2].children[0].style.color = "#f6bf68";
+			listLi[2].className = "select";
+			listLi[2].children[0].style.color = "#f6bf68";
 		}
+		var li = $("#orderList li");
+        var money =0;
+        for(var i=0;i<li.length;i++){
+            var bookList = $(li.eq(i)).children(".book-list");
+            var money = $(li.eq(i)).find(".money");
+            allMoney =0;
+            for(var j=0;j<bookList.length;j++){
+                var price = $(bookList.eq(j)).children(".price");
+                var number = $(bookList.eq(j)).children(".number");
+                allMoney +=parseFloat(price[0].innerHTML.substring(1,price[0].length))*parseInt(number[0].innerHTML.substring(1,number[0].length)); 
+                money.html("¥"+allMoney.toFixed(2));
+            }
+        }
 	</script>
 </body>
 </html>

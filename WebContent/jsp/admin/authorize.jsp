@@ -12,7 +12,7 @@
     <div class="wrap">
     	<jsp:include page="/comm/view/admin/top.jsp"></jsp:include>
     	<c:if test="${not empty manager.name and manager.name ne 'unseted'}">
-        	<h1 class="title"><a href="${ctx}/admin/auth.action?method=show">授权管理</a></h1>
+        	<h1 class="title">授权管理</h1>
         	<form action="${ctx}/admin/auth.action?method=auth" method="post">
 	        	<div class="lookup">
 	        		<c:if test="${not empty msg and msg ne 'unseted'}">
