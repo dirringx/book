@@ -200,6 +200,7 @@ html,body{
     margin-top: -215px;
     z-index: 1;
     width: 90%;
+    min-width: 600px;
     height: 430px;
     border-radius: 10px;
     background-color: #fff8d0;
@@ -247,6 +248,9 @@ tr>td>input{
     color: #ff2525;
     text-decoration: underline;
     cursor: pointer;
+}
+.delete a:visited{
+	color: #ff2525;
 }
 #modifyTable tr td+td{
     border-left: 1px solid #ffb701;
