@@ -87,7 +87,7 @@ public class OrderAction extends BaseAction {
 			}
 			ActionContextUtils.setAttributeToSession("stu_orders", orders);
 		} catch (Exception e) {
-			e.printStackTrace();
+			
 		}
 		return "show";
 	}

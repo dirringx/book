@@ -14,7 +14,7 @@
     <form class="form" action="${ctx}/stu/l.action?method=login" method="post">
     <span>
 	  <c:if test="${not empty msg and msg ne 'unseted'}">
-	  ${msg }
+	  ${msg}
 	  </c:if>
 	</span>    
       <input id="user" name="studentName" type="text" placeholder="请输入账号" maxlength="12"/>
