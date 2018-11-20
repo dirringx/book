@@ -148,6 +148,10 @@
 			bookType[$('#major').attr('name')] = $('#major').val();
 			book = JSON.stringify(book)
 			bookType = JSON.stringify(bookType)
+			
+			console.log(book)
+			console.log(bookType)
+			
 			url = "${ctx}/book/b.action?method=addBook";
 			$.ajax({
 				url : url,
@@ -191,6 +195,9 @@
 					delbook.push(b);
 				}
 			});
+			
+			console.log(JSON.stringify(delbook))
+			
 			url = "${ctx}/book/b.action?method=delBook";
 			$.ajax({
 				url : url,
