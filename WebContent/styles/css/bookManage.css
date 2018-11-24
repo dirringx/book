@@ -65,12 +65,61 @@ html,body{
     position: relative;
     width: 100%;
     height: 100%;
-    min-width: 1020px;
+    min-width: 1060px;
     min-height: 450px;
+}
+.nav{
+    position: fixed;
+    top:0;
+    left:0;
+    z-index:2;
+    width: 200px;
+    height: 100%;
+    min-height: 450px;
+    text-align: center;
+    /* border-right: 2px solid #43a8f5; */
+    box-shadow: 1px 1px 5px #a3d7ff;
+    background-color: #cbe7fd;
+    background: linear-gradient(#fff,#cbe7fd);
+}
+.nav>img{
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+.nav>a{
+    display: block;
+    height: 60px;
+    line-height: 60px;
+    font-size: 22px;
+    color: #31c5ff;
+    text-align: center;
+}
+.book-manage{
+    background: url(../img/book_manage.png) no-repeat;
+    background-position: 18% center;
+}
+.authorize{
+    background: url(../img/authorize.png) no-repeat;
+    background-position: 18% center;
+}
+.nav>a:visited{
+    color: #31a6ff;
+}
+.bg{
+    background-color: #8acaff;
+    color: #fff!important;
+}
+.nav>a:hover{
+    background-color: #8accff;
+    color: #fff;
+}
+.center{
+    margin-left: 200px;
 }
 .head{
     position: relative;
     padding: 15px 2%;
+    height: 40px;
     text-align: right;
     overflow: hidden;
 }
@@ -108,7 +157,7 @@ html,body{
 }
 .choose{
     /* float: right; */
-    width: 85%;
+    width: 95%;
     margin: 0 auto;
     margin-top: 20px;
     margin-bottom: 15px;
@@ -184,15 +233,14 @@ html,body{
     z-index: -1;
     display: block;
     margin: 0 auto;
-    width: 85%;
+    width: 95%;
     height: 50px;
 }
 
 #table{
-    width: 85%;
+    width: 95%;
     margin: 0 auto;
     margin-top: -50px;
-    margin-bottom: 20px;
     table-layout: fixed;
 }
 #table tr th{
@@ -235,15 +283,28 @@ html,body{
     border-bottom: 1px solid #6fd1ff;
     background-color: #e4f7ff;
 }
+#addBook{
+    display: block;
+    width: 95%;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    height: 40px;
+    font-size: 20px;
+    color: #fff;
+    background-color: #a7e5ff;
+    cursor: pointer;
+}
 
 .btn{
-    width: 85%;
+    position: relative;
+    width: 95%;
     margin: 0 auto;
+    margin-bottom:20px;
     text-align: right;
 }
-#addBook{
+#importBook{
     margin-right: 30px;
-    width: 180px;
+    width: 200px;
     height: 45px;
     line-height: 45px;
     border: 2px solid #ffb701;
@@ -251,16 +312,28 @@ html,body{
     font-size: 22px;
     color: #ffb700;
     text-indent: 1.5em;
-    background: url(../img/add.png) no-repeat 15% center;
+    background: url(../img/add.png) no-repeat 10% center;
     background-color: #fff;
     cursor: pointer;
 }
-#addBook:hover{
+#file:hover+#importBook {
     color: #fff;
-    background: url(../img/add_hover.png) no-repeat 15% center;
+    background: url(../img/add_hover.png) no-repeat 10% center;
     background-color: #ffb701;
 }
-#del-Book{
+#file{
+    position: absolute;
+    right: 155px;
+    width: 200px;
+    height: 45px;
+    border: 1px solid red;
+    font-size: 70px;
+    opacity: 0;
+    filter:alpha(opacity=0);
+    overflow:hidden;
+    cursor: pointer;
+}
+#delBook{
     width: 120px;
     height: 45px;
     line-height: 45px;
@@ -283,13 +356,13 @@ html,body{
     position: absolute;
     top: 50%;
     left: 50%;
-    margin-left: -45%;
-    margin-top: -215px;
+    margin-left: -250px;
+    margin-top: -250px;
     z-index: 1;
-    width: 90%;
-    height: 430px;
+    width: 500px;
+    height: 500px;
     border-radius: 10px;
-    background-color: #fff8d0;
+    background-color: #fcf8e8;
 }
 .tips{
     margin: 15px 0 10px 30px;
@@ -297,66 +370,28 @@ html,body{
     font-weight: bold;
     color: #ffb701;
 }
-.table-box{
-    width: 100%;
-    height: 230px;
-    overflow-y: auto;
+.form{
+    padding: 30px;
+    width: 340px;
+    margin: 0 auto;
+    /* border: 1px solid red; */
 }
-#addTable{
-    width: 100%;
-    table-layout: fixed;
-    background-color: #fff;
-}
-#addTable tr th{
-    height: 45px;
-    line-height: 45px;
-    font-weight: normal;
-    font-size: 18px;
-    border-bottom: 1px solid #ffb701;
-}
-#addTable tr th+th{
-    border-left: 1px solid #ffb701;
-}
-#addTable tr td{
-    height: 45px;
-    text-align: center;
-    border-bottom: 1px solid #ffb701;
-}
-tr>td>input{
-    width: 100%;
-    height: 100%;
-    font-size: 16px;
-    color: #444;
-    text-align: center;
-}
-#addTable tr .delete{
-    color: #ff2525;
-    text-decoration: underline;
-    cursor: pointer;
-}
-#addTable tr td+td{
-    border-left: 1px solid #ffb701;
-}
-
-#addRows{
-    display: block;
-    margin: 10px auto 20px;
-    width: 210px;
-    height: 45px;
-    line-height: 45px;
-    border: 2px solid #ffb701;
-    border-radius: 8px;
-    font-size: 22px;
+.form>label{
+    display: inline-block;
+    margin-bottom: 25px;
+    width: 100px;
+    font-size: 20px;
     color: #ffb700;
-    text-indent: 1.5em;
-    background: url(../img/add.png) no-repeat 10% center;
-    background-color: #fff;
-    cursor: pointer;
+    text-align: right;
+    /* border: 1px solid red; */
 }
-#addRows:hover{
-    color: #fff;
-    background: url(../img/add_hover.png) no-repeat 10% center;
-    background-color: #ffb701;
+.form>input{
+    padding: 5px;
+    width: 200px;
+    height: 20px;
+    font-size: 20px;
+    color: #ffb700;
+    border: 1px solid #ffe4aa;
 }
 
 #cover {

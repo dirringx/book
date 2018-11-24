@@ -93,82 +93,42 @@ for(var i=0;i<tbody.rows.length;i++){
 addBook.onclick = function(){
     cover.className = "db";
     addBox.className = "db";
-    //获取年级、学院、专业
-    for(i=0;i<=3;i++){
-        addTbody.rows[i].cells[0].innerText = grade.value;
-        addTbody.rows[i].cells[1].innerText = college.value;
-        addTbody.rows[i].cells[2].innerText = major.value;
-    }
 }
-/*
+
 //点击删除
 var delBook = document.getElementById("delBook");
-delBook.onclick = function(){
-    if(selected >0){
-        for(var i=0;i<tbody.rows.length;){
-            if(tbody.rows[i].cells[6].className == "select"){
-                thead.rows[0].cells[6].className = "unselect";
-                tbody.removeChild(tbody.rows[i]);
-                selected--;
-            }
-            else
-                i++;
-        }
-    }
-    else{
-        alert("请选择要删除的书籍");
-    }
-}
-//单击增加表格行数
-var addTable = document.getElementById("addTable");
-var addTbody = addTable.getElementsByTagName("tbody")[0];
-var addRows = document.getElementById("addRows");
-addRows.onclick = function(){
-    for(i=0;i<3;i++){
-        var tr = document.createElement("tr");
-        for(var j=0;j<3;j++){
-            var td1 = document.createElement("td");
-            switch(j){
-                case 0:
-                    td1.innerText = grade.value;break;
-                case 1:
-                    td1.innerText = college.value;break;
-                case 2:
-                    td1.innerText = major.value;break;
-            }
-            td1.className = "dn";
-            tr.appendChild(td1);
-        }
-        for(j=0;j<6;j++){
-            var td = document.createElement("td");
-            if(j==0){
-                td.setAttribute("style","border-left:none;");
-            }
-            var input = document.createElement("input");
-            td.appendChild(input);
-            tr.appendChild(td);
-        }
-        var td7 = document.createElement("td");
-        td7.className = "delete";
-        td7.innerText = "删除";
-        tr.appendChild(td7);
-        addTbody.appendChild(tr);
-    }
-    //删除表格某行
-    for(i=0;i<addTbody.rows.length;i++){
-        addTbody.rows[i].cells[9].onclick = function(){
-            addTbody.removeChild(this.parentElement);
-        }
-    }
-}
-//删除表格某行
-for(i=0;i<addTbody.rows.length;i++){
-    addTbody.rows[i].cells[9].onclick = function(){
-        addTbody.removeChild(this.parentElement);
-    }
+delBook.onclick = function(){ 
+	delBook();
+//    if(selected >0){
+//        for(var i=0;i<tbody.rows.length;){
+//            if(tbody.rows[i].cells[6].className == "select"){
+////                thead.rows[0].cells[6].className = "unselect";
+//                tbody.removeChild(tbody.rows[i]);
+//                selected--;
+//            }
+//            else
+//                i++;
+//        }
+       
+//    }
+//    else{
+//        alert("请选择要删除的书籍");
+//    }
 }
 //取消添加
 addCancel.onclick = function(){
     cover.className = "dn";
     addBox.className = "dn";
-}*/
+}
+//确认添加
+addConfirm.onclick = function(){
+    saveBook();
+}
+
+//上传文件
+var btn = document.getElementById("btn");
+var updataFile = document.getElementById("file");
+updataFile.onchange = function(){
+	alert("111");
+	btn.submit();
+}

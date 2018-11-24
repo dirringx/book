@@ -25,6 +25,10 @@
             <span>问题反馈</span>
             <img class="arrow" src="${ctx}/styles/img/arrow.png" />
         </li>
+        <li id="commissary">
+            <a href="classOrder.jsp"><span>学习委员</span></a>
+            <img class="arrow" src="${ctx}/styles/img/arrow.png" />
+        </li>
         <li id="exit">
             <a href="${ctx}/stu/l.action?method=logout"><span>退出登录</span></a>
             <img class="arrow" src="${ctx}/styles/img/arrow.png" />
