@@ -184,6 +184,9 @@
 					delbook.push(b);
 				}
 			});
+			
+			console.log(JSON.stringify(delbook))
+			
 			url = "${ctx}/book/b.action?method=delBook";
 			$.ajax({
 				url : url,
