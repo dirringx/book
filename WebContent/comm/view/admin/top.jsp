@@ -2,9 +2,6 @@
   pageEncoding="utf-8"%>
 <%@include file="/comm/taglibs.jsp"%>
 <div class="head">
-  <a class="home" href="${ctx}/admin/m.action?method=index">
-      <img src="${ctx}/styles/img/home.png" />
-  </a>
   <c:choose>
     <c:when test="${not empty manager.name and manager.name ne 'unseted'}">
       <span class="teacher">欢迎您，${manager.name}</span>

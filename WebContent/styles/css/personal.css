@@ -110,6 +110,9 @@ html,body{
     color: #444;
     text-indent: 3em;
 }
+.list>li>a{
+	color: #444;
+}
 .list a:visited{
 	color: #444;
 }
@@ -119,10 +122,13 @@ html,body{
 #problem{
     background: url(../img/feedback.png) no-repeat;
 }
+#commissary{
+    background: url(../img/profile.png) no-repeat;
+}
 #exit{
     background: url(../img/exit.png) no-repeat;
 }
-#change,#problem,#exit{
+#change,#problem,#exit,#commissary{
     background-position: 1em 50%;
     background-size: 1.3em 1.3em;
 }
