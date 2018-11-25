@@ -30,7 +30,7 @@
 		<property name="orderTime" column="order_time" type="timestamp"
 			length="15" />
 
-		<set name="orderitems" cascade="save-update" lazy="false" inverse="true"
+		<set name="orderitems" cascade="save-update" lazy="false"
 			table="orderItems">
 			<key column="order_id" />
 			<one-to-many class="com.book.pojos.OrderItem" />

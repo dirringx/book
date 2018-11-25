@@ -44,4 +44,6 @@ public interface StudentDao extends BaseDao<Student> {
 	 * @return
 	 */
 	List<Student> findStudentByPermission(String permission);
+	
+	Student findStudentByPermission(String id, String permission);
 }

@@ -10,7 +10,7 @@
 		<!-- 全局结果转发 -->
 		<global-results>
 			<result name="index">/jsp/book.jsp</result>
-			<result name="error">/comm/error/error.jsp</result>
+			<result name="error">/comm/error/404.jsp</result>
 			<result name="login">/jsp/login.jsp</result>
 			<!-- 后台json数据返回页面 -->
 			<result name="ajaxReturn">/comm/ajaxReturn.jsp</result>
@@ -39,6 +39,7 @@
 			<result name="admin">/jsp/admin/order.jsp</result>
 			<result name="show">/jsp/order.jsp</result>
 			<result name="login">/jsp/login.jsp</result>
+			<result name="classOrder">/jsp/classOrder.jsp</result>
 		</action>
 	</package>
 
@@ -52,16 +53,19 @@
 	<!-- 管理员 -->
 	<package name="manager" extends="book-default" namespace="/admin">
 		<action name="a" class="com.book.login.ManagerLoginAction">
-			<result name="jwy">/jsp/admin/operation.jsp</result>
+			<result name="jwy">/jsp/admin/book.jsp</result>
 			<result name="gly">/jsp/admin/order.jsp</result>
 			<result name="toLogin">/jsp/admin/login.jsp</result>
 		</action>
 		<action name="m" class="com.book.action.ManagerAction">
-			<result>/jsp/admin/operation.jsp</result>
+			<result>/jsp/admin/book.jsp</result>
 			<result name="toLogin">/jsp/admin/login.jsp</result>
 			<result name="order">/jsp/admin/order.jsp</result>
 			<result name="book">/jsp/admin/book.jsp</result>
 			<result name="mam">/jsp/admin/order.jsp</result>
+			<result name="classOrder" type="redirect">
+				/order/o.action?method=classOrder
+			</result>
 			<result name="authorize" type="redirect">
 				/admin/auth.action?method=show
 			</result>
@@ -79,5 +83,4 @@
 			<result>/jsp/admin/authorize.jsp</result>
 		</action>
 	</package>
-
 </struts>

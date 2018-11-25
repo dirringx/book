@@ -17,6 +17,7 @@ import com.book.core.web.service.BaseService;
  * 进而需要实现<tt>BaseService</tt>接口的时候可以直接继承本类，而不需要再去实现一次接口。
  * 
  */
+@SuppressWarnings("unchecked")
 public abstract class BaseServiceImpl<T> implements BaseService<T> {
 
 	@Autowired

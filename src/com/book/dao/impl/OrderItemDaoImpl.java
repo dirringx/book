@@ -9,6 +9,7 @@ import com.book.dao.OrderItemDao;
 import com.book.pojos.OrderItem;
 
 @Repository(value="orderItemDao")
+@SuppressWarnings("unchecked")
 public class OrderItemDaoImpl extends BaseDaoImpl<OrderItem> implements OrderItemDao{
 	
 	public OrderItem findByBook(String id) {

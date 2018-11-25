@@ -6,7 +6,7 @@ import java.util.Set;
 
 @SuppressWarnings("serial")
 public class Student implements Serializable {
-	/** ID **/
+
 	private int id;
 
 	/** 学号 **/

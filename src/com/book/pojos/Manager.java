@@ -6,18 +6,27 @@ import java.io.Serializable;
 public class Manager implements Serializable {
 
 	private String id;
-	
+
 	/** 名字 **/
 	private String name;
-	
+
 	/** 工号 **/
 	private String workNumber;
-	
+
 	/** 密码 **/
 	private String password;
-	
+
 	/** 权限 **/
 	private int permission;
+
+	public Manager() {}
+
+	public Manager(String name, String workNumber, String password, int permission) {
+		this.name = name;
+		this.workNumber = workNumber;
+		this.password = password;
+		this.permission = permission;
+	}
 
 	public String getId() {
 		return id;

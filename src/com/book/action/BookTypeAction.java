@@ -1,30 +1,38 @@
 package com.book.action;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.Resource;
 
-import com.book.pojos.BookType;
+import com.book.service.BookItemService;
 import com.book.service.BookService;
-import com.book.service.BookTypeService;
+import com.book.service.CourseService;
 import com.book.core.util.ActionContextUtils;
 import com.book.core.web.action.BaseAction;
-
+import com.book.pojos.Book;
+import com.book.pojos.BookItem;
+import com.book.pojos.Course;
 import com.opensymphony.xwork2.ModelDriven;
 
-public class BookTypeAction extends BaseAction implements ModelDriven<BookType> {
+public class BookTypeAction extends BaseAction implements ModelDriven<Course> {
 	private static final long serialVersionUID = 1L;
 
-	@Resource(name = "bookTypeService")
-	private BookTypeService bookTypeService;
+	@Resource(name = "courseService")
+	private CourseService courseService;
 
 	@Resource(name = "bookService")
 	private BookService bookService;
 
-	private BookType bookType;
+	@Resource(name = "bookItemService")
+	private BookItemService bookItemService;
 
-	public BookType getModel() {
-		if (bookType == null)
-			bookType = new BookType();
-		return bookType;
+	private Course course;
+
+	public Course getModel() {
+		if (course == null)
+			course = new Course();
+		return course;
 	}
 
 	/**
@@ -34,9 +42,21 @@ public class BookTypeAction extends BaseAction implements ModelDriven<BookType> 
 	 */
 	public String find() {
 		ActionContextUtils.removeAttrFromSession("books");
-		BookType bt = bookTypeService.findBookByType(bookType.getMajor(), bookType.getGrade());
-		if (bt != null)
-			ActionContextUtils.setAttributeToSession("books", bookService.findBookByType(bt.getId()));
+		List<Book> books = new ArrayList<Book>();
+		List<Course> courses = courseService.findCourseByGradeAndMajor(course.getGrade(), course.getMajor());
+		for (Course c : courses) {
+			List<BookItem> bookItems = bookItemService.findByCourseID(c.getId());
+			if (bookItems.size() == 0)
+				continue;
+			for (BookItem bt : bookItems) {
+				if(bt.getBook() != null){
+					books.add(bt.getBook());
+				}else{
+					bookItemService.delete(bt);
+				}
+			}
+		}
+		ActionContextUtils.setAttributeToSession("books", books);
 		return "book";
 	}
 }

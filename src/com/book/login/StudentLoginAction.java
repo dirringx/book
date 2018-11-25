@@ -75,6 +75,7 @@ public class StudentLoginAction extends BaseAction implements ModelDriven<Studen
 	 */
 	public String logout() {
 		ActionContextUtils.removeAttrFromSession("student");
+		ActionContextUtils.removeAttrFromSession("co");;
 		return INDEX;
 	}
 }

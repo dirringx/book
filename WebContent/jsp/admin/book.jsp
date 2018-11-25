@@ -12,11 +12,13 @@
 </head>
 <body>
 	<div class="wrap">
+		<c:if test="${not empty manager.name and manager.name ne 'unseted'}">
 		<nav class="nav">
 	        <img src="${ctx}/styles/img/home.png" />
 	        <a class="book-manage bg" href="${ctx}/admin/m.action?method=book">教材管理</a>
 	        <a class="authorize" href="${ctx}/admin/m.action?method=authorize">学委管理</a>
 	    </nav>
+	    </c:if>
 		<div class="center">
 			<jsp:include page="/comm/view/admin/top.jsp"></jsp:include>
 			<c:if test="${not empty manager.name and manager.name ne 'unseted'}">
@@ -87,9 +89,9 @@
 					</tbody>
 				</table>
 				<button id="addBook">添加数据</button>
-		        <form id="btn" class="btn" method="POST" action="http://bookexcel.yogasol.xin/api/send" enctype="multipart/form-data">
+		        <form id="btn" class="btn" enctype="multipart/form-data">
 		               <input id="file" type="file" name="data" multiple="multiple" value="请选择文件"/>
-		               <input id="importBook" type="button" value="导入excel表" />
+		               <input id="importBook" type="button"  value="导入excel表" />
 		               <input id="delBook" type="button" value="删除" />
 		        </form>
 				<div class="dn" id="addBox">
@@ -130,9 +132,14 @@
 		    var input = $(form).find("input");
 		    //新建对象
 		    book = {};
+		    className = '';
 		    //循环所有inputs，把input中的name和value变成对象中的属性和值
 		    for (var j = 0; j < input.length; j++) {
 		        var o = input[j];
+		        if($(o).attr('name') == 'className'){
+		        	className = $(o).val();
+		        	continue;
+		        }
 		        book[$(o).attr('name')] = $(o).val();
 		    }
 		    bookType = {}
@@ -146,7 +153,8 @@
 		        url : url,
 		        data : {
 		            bookJson : book,
-		            bookTypeJson : bookType
+		            bookTypeJson : bookType,
+		            className : className
 		        },
 		        dataType : "JSON",
 		        type : "POST",
