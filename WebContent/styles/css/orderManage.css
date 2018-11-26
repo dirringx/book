@@ -67,6 +67,7 @@ html,body{
 .head{
     position: relative;
     padding: 15px 2%;
+    height:40px;
     text-align: right;
     overflow: hidden;
 }

@@ -129,6 +129,5 @@ addConfirm.onclick = function(){
 var btn = document.getElementById("btn");
 var updataFile = document.getElementById("file");
 updataFile.onchange = function(){
-	alert("111");
 	btn.submit();
 }

@@ -214,10 +214,9 @@ html,body{
     border-bottom: 1px solid #6fd1ff;
     background-color: #e4f7ff;
 }
-.cancel{
-    color: #ff2525!important;
-    text-decoration: underline;
-    cursor: pointer;
+.cancel>a{
+	color: #ff2525!important;
+	text-decoration: underline;
 }
 .cancel>a:visited{
     color: #ff2525;

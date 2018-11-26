@@ -12,11 +12,11 @@
 </head>
 <body>
 	<div class="wrap">
-		<nav class="nav">
+		<div class="nav">
 	        <img src="${ctx}/styles/img/home.png" />
 	        <a class="book-manage bg" href="${ctx}/admin/m.action?method=book">教材管理</a>
 	        <a class="authorize" href="${ctx}/admin/m.action?method=authorize">学委管理</a>
-	    </nav>
+	    </div>
 		<div class="center">
 			<jsp:include page="/comm/view/admin/top.jsp"></jsp:include>
 			<c:if test="${not empty manager.name and manager.name ne 'unseted'}">
@@ -184,9 +184,6 @@
 					delbook.push(b);
 				}
 			});
-			
-			console.log(JSON.stringify(delbook))
-			
 			url = "${ctx}/book/b.action?method=delBook";
 			$.ajax({
 				url : url,
@@ -198,7 +195,6 @@
 				cache : false,
 				async : false,
 				success : function(result) {
-					alert(result);
 					if (typeof (result) != undefined && result.status == '200') {
 						alert(result.message);
 						window.location.href = returnURL;
