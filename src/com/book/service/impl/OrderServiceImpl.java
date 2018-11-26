@@ -29,4 +29,8 @@ public class OrderServiceImpl extends BaseServiceImpl<Order> implements OrderSer
 		return orderDao.findByorderNo(orderNo);
 	}
 
+	public List<Order> findClassOrderByStudentID(int id) {
+		return orderDao.findClassOrderByStudentID(id);
+	}
+
 }

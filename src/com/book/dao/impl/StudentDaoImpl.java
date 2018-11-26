@@ -9,6 +9,7 @@ import com.book.dao.StudentDao;
 import com.book.pojos.Student;
 
 @Repository("studentDao")
+@SuppressWarnings("unchecked")
 public class StudentDaoImpl extends BaseDaoImpl<Student> implements StudentDao {
 
 	public List<Student> findStudentByclass(String studentClass) {
@@ -35,5 +36,13 @@ public class StudentDaoImpl extends BaseDaoImpl<Student> implements StudentDao {
 	public List<Student> findStudentByPermission(String permission) {
 		String hql = "from Student s where s.permission = ?";
 		return (List<Student>) this.getHibernateTemplate().find(hql, permission);
+	}
+
+	public Student findStudentByPermission(String id, String permission) {
+		String hql = "from Student s where s.id = ? and s.permission = ?";
+		List<Student> students = (List<Student>) this.getHibernateTemplate().find(hql, id, permission);
+		if (students == null || students.isEmpty())
+			return null;
+		return students.get(0);
 	}
 }

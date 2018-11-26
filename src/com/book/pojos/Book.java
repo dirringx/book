@@ -7,48 +7,62 @@ import java.util.Set;
 @SuppressWarnings("serial")
 public class Book implements Serializable {
 
-	/* 主键 */
 	private String id;
 
-	/* 教材名 */
+	/** 教材名 **/
 	private String name;
 
-	/* 作者 */
+	/** 作者 **/
 	private String author;
 
-	/* 所属课程 */
-	private String className;
-
-	/* 原价格 */
+	/** 原价格 **/
 	private Float price;
 
-	/* 折扣价格 */
+	/** 折扣价格 **/
 	private Float discount;
 
-	/* 教材简介 */
+	/** 教材简介 **/
 	private String description;
 
-	/* 教材图片 */
+	/** 教材图片 **/
 	private String bookImage;
 
-	/* ISBN */
+	/** ISBN **/
 	private String ISBN;
 
-	/* 出版社 */
+	/** 出版社 **/
 	private String press;
-
-	private BookType bookType;
 
 	/**
 	 * 用于记录订单中书籍数量
 	 */
 	private int number;
 
+	public Book() {}
+	
+	public Book(String ISBN, String name, String author, Float price, Float discount, String description,
+			String bookImage, String press) {
+		this.ISBN = ISBN;
+		this.name = name;
+		this.author = author;
+		this.price = price;
+		this.discount = discount;
+		this.description = description;
+		this.bookImage = bookImage;
+		this.press = press;
+	}
+
 	/* 订单单向集合 */
 	private Set<OrderItem> orderitems = new HashSet<OrderItem>(0);
 
-	public BookType getBookType() {
-		return bookType;
+	private Set<BookItem> bookItems = new HashSet<BookItem>(0);
+
+	public Set<BookItem> getBookItems() {
+		return bookItems;
+	}
+
+	public void setBookItems(Set<BookItem> bookItems) {
+		this.bookItems = bookItems;
 	}
 
 	public int getNumber() {
@@ -57,10 +71,6 @@ public class Book implements Serializable {
 
 	public void setNumber(int number) {
 		this.number = number;
-	}
-
-	public void setBookType(BookType bookType) {
-		this.bookType = bookType;
 	}
 
 	public Float getPrice() {
@@ -77,14 +87,6 @@ public class Book implements Serializable {
 
 	public void setDiscount(Float discount) {
 		this.discount = discount;
-	}
-
-	public String getClassName() {
-		return className;
-	}
-
-	public void setClassName(String className) {
-		this.className = className;
 	}
 
 	public String getISBN() {

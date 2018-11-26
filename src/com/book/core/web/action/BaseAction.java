@@ -38,6 +38,7 @@ import com.opensymphony.xwork2.ActionSupport;
  * 默认情况下，会抛出系统异常. <br/>
  * 系统中的所有getMessage方法处理国际化信息，从而使得Struts2和Spring的国际化信息完全一致. 国际化文件只加载一遍即可.
  */
+@SuppressWarnings({ "unchecked", "rawtypes" })
 public abstract class BaseAction extends ActionSupport {
 	private static final long serialVersionUID = 1L;
 	/**

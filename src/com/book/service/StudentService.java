@@ -44,4 +44,6 @@ public interface StudentService extends BaseService<Student> {
 	 * @return
 	 */
 	List<Student> findStudentByPermission(String permission);
+	
+	Student findStudentByPermission(String id, String permission);
 }

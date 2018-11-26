@@ -9,6 +9,7 @@ import com.book.dao.ManagerDao;
 import com.book.pojos.Manager;
 
 @Repository(value="managerDao")
+@SuppressWarnings("unchecked")
 public class ManagerDaoImpl extends BaseDaoImpl<Manager> implements ManagerDao {
 
 	public Manager findManagerBywordNumber(String workNumber) {

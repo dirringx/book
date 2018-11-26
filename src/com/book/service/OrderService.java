@@ -14,7 +14,7 @@ public interface OrderService extends BaseService<Order>{
 	 *            学号
 	 * @return
 	 */
-	public List<Order> findOrderBystudentID(int id) ;
+	List<Order> findOrderBystudentID(int id) ;
 
 	/**
 	 * 通过书籍查询订单
@@ -23,7 +23,7 @@ public interface OrderService extends BaseService<Order>{
 	 *            书籍的ISBN号
 	 * @return
 	 */
-	public Order findOrderByBookISBN(String ISBN) ;
+	Order findOrderByBookISBN(String ISBN) ;
 	
 	/**
 	 * 通过订单编号查找
@@ -32,6 +32,7 @@ public interface OrderService extends BaseService<Order>{
 	 *            订单编号
 	 * @return
 	 */	
-	public Order findByorderNo(String orderNo);
+	Order findByorderNo(String orderNo);
 	
+	List<Order> findClassOrderByStudentID(int id);
 }

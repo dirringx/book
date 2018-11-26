@@ -159,6 +159,7 @@
 				url : url,
 				data : {
 					orderItemJson : JSON.stringify(bookItem),
+					orderNo : ${order.orderNo}
 				},
 				dataType : "JSON",
 				type : "POST",

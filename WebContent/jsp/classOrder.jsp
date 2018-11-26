@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <%@include file="/comm/taglibs.jsp"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 	<%@include file="/comm/base.jsp"%>
@@ -15,55 +15,43 @@
         <h1 class="title">班级订单列表</h1>
     </div>
     <ul id="list">
-        <li><a href="#">未提交</a></li>
-        <li><a href="#">已提交</a></li>
-        <li><a href="#">已领取</a></li>
-    </ul>
+		<li><a href="${ctx}/order/o.action?method=classOrder">全部订单</a></li>
+		<li><a href="${ctx}/order/o.action?method=classOrder&np=1">待付款</a></li>
+		<li><a href="${ctx}/order/o.action?method=classOrder&np=2">已完成</a></li>
+	</ul>
     <ul id="orderList">
-        <li>
-            <div class="details">
-                <span class="order-number">订单编号：1009635620189222323</span>
-                <span class="order-date">下单日期：2018-09-21  23:00:00</span>
-                <span class="order-status">未提交</span>
-            </div>
-            <div class="book-list">
-                <img class="book-img" src="${ctx}/styles/img/book.jpg" />
-                <span class="book-name">概率论与数理统计</span>
-                <span class="price">¥32.68</span>
-                <span class="number">x1</span>
-            </div>
-            <div class="book-list">
-                <img class="book-img" src="${ctx}/styles/img/book.jpg" />
-                <span class="book-name">概率论与数理统计</span>
-                <span class="price">¥3</span>
-                <span class="number">x4</span>
-            </div>
-            <span id="totalNumber">书籍总数：<span class="book-nember"></span></span>
-            <span id="totalPrice">总价：<span class="money"></span></span>
-            <button class="submit">提交</button>
-        </li>
-        <li>
-            <div class="details">
-                <span class="order-number">订单编号：1009635620189222323</span>
-                <span class="order-date">下单日期：2018-09-21  23:00:00</span>
-                <span class="order-status">未提交</span>
-            </div>
-            <div class="book-list">
-                <img class="book-img" src="${ctx}/styles/img/book.jpg" />
-                <span class="book-name">概率论与数理统计</span>
-                <span class="price">¥32.68</span>
-                <span class="number">x5</span>
-            </div>
-            <div class="book-list">
-                <img class="book-img" src="${ctx}/styles/img/book.jpg" />
-                <span class="book-name">概率论与数理统计</span>
-                <span class="price">¥32.68</span>
-                <span class="number">x1</span>
-            </div>
-            <span id="totalNumber">书籍总数：<span class="book-nember"></span></span>
-            <span id="totalPrice">总价：<span class="money"></span></span>
-            <button class="submit">提交</button>
-        </li>
+    	<s:iterator value="#session.class_orders" var="co">
+	        <li>
+	            <div class="details">
+	                <span class="order-number">订单编号：${co.orderNo}</span>
+	                <span class="order-date">下单日期：
+						<fmt:formatDate value="${co.orderTime}" pattern="yyyy-MM-dd HH:mm:ss" />
+					</span>
+					<c:if test="${so.pay==true}">
+						<span class="order-status">已提交</span>
+					</c:if>
+					<c:if test="${so.pay==false}">
+						<span class="order-status">未提交</span>
+					</c:if>
+	            </div>
+	            <c:forEach items="${co.orderitems}" var="ot">
+			       <div class="book-list">
+						<img class="book-img" src="${ctx}/styles/${ot.book.bookImage}" /> 
+						<span class="book-name">${ot.book.name}</span> 
+						<span class="price">¥${ot.book.discount}</span>
+						<span class="number">x${ot.quantity}</span>
+					</div>
+	            </c:forEach>
+	            <span id="totalNumber">书籍总数：<span class="book-nember"></span></span>
+	            <span id="totalPrice">总价：<span class="money"></span></span>
+	            <form action="${ctx}/order/o.action?method=pay&classOrder=1" method="post">
+			   		<input type="hidden" name="orderNo" value="${co.orderNo}">
+			    	<c:if test="${co.pay==false}">
+			    		<button class="submit">提交</button>
+			    	</c:if>
+			    </form>
+	        </li>
+        </s:iterator>
     </ul>
     <script type="text/javascript" src="${ctx}/styles/js/jquery-1.8.0.min.js"></script>
     <script>

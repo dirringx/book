@@ -43,7 +43,12 @@
 					</div>
 			    </c:forEach>
 			    <span id="totalPrice">总价：<span class="money"></span></span>
-			    <button class="pay">支付</button>
+			    <form action="${ctx}/order/o.action?method=pay" method="post">
+			   		<input type="hidden" name="orderNo" value="${so.orderNo}">
+			    	<c:if test="${so.pay==false}">
+			    		<button class="pay" type="submit">支付</button>
+			    	</c:if>
+			    </form>
 			</li>
 		</s:iterator>
 	</ul>
