@@ -8,16 +8,16 @@ authorize.onclick = function(){
         cover.className = "db";
     }
 }
-var confirm = document.getElementById("confirm");
-var cancel = document.getElementById("cancel");
+//var confirm = document.getElementById("confirm");
+//var cancel = document.getElementById("cancel");
 var cover = document.getElementById("cover");
 var pop = document.getElementById("pop");
 
 //确定授权
-confirm.onclick = function(){
-
-}
-cancel.onclick = function(){
-    cover.className = "dn";
-    pop.className = "dn";
-}
+//confirm.onclick = function(){
+//
+//}
+//cancel.onclick = function(){
+//    cover.className = "dn";
+//    pop.className = "dn";
+//}

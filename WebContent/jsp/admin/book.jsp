@@ -192,9 +192,6 @@
 					delbook.push(b);
 				}
 			});
-			
-			console.log(JSON.stringify(delbook))
-			
 			url = "${ctx}/book/b.action?method=delBook";
 			$.ajax({
 				url : url,
@@ -206,7 +203,6 @@
 				cache : false,
 				async : false,
 				success : function(result) {
-					alert(result);
 					if (typeof (result) != undefined && result.status == '200') {
 						alert(result.message);
 						window.location.href = returnURL;

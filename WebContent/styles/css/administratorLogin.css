@@ -93,6 +93,7 @@ form{
     padding: 5px;
     width: 250px;
     height: 25px;
+    line-height:25px;
     border: 1px solid #ccc;
 }
 .verification{
@@ -143,14 +144,14 @@ form{
 
 .pos{
 	margin-top:20px;
-    margin-left: 81px;
-}
-#administrator{
     margin-left: 70px;
+}
+#administrator,#commissary{
+    margin-left: 20px;
 }
 .pos input{
     display: inline-block;
-    width: 40px;
+    width: 20px;
     font-size: 20px;
     height:18px; 
     vertical-align:-3px; 
