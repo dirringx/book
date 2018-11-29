@@ -155,8 +155,7 @@
 				async : false,
 				success : function(result) {
 					if (typeof (result) != undefined && result.status == '200') {
-						alert(result.message);
-						window.location.href = "${ctx}/book/b.action?method=bookList";
+						window.location.href = "${ctx}/jsp/success.jsp";
 					}
 					if(typeof (result) != undefined && result.status == '-1'){
 						alert(result.message);
