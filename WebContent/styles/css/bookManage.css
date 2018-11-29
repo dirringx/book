@@ -353,14 +353,14 @@ html,body{
 }
 
 #addBox{
-    position: absolute;
+    position: fixed;
     top: 50%;
     left: 50%;
     margin-left: -250px;
-    margin-top: -250px;
-    z-index: 1;
+    margin-top: -261.5px;
+    z-index: 4;
     width: 500px;
-    height: 500px;
+    height: 523px;
     border-radius: 10px;
     background-color: #fcf8e8;
 }
@@ -397,6 +397,7 @@ html,body{
 #cover {
     position: fixed;
     top: 0;
+    z-index:3;
     width: 100%;
     height: 100%;
     background-color: #000;

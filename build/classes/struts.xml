@@ -40,6 +40,7 @@
 			<result name="show">/jsp/order.jsp</result>
 			<result name="login">/jsp/login.jsp</result>
 			<result name="classOrder">/jsp/classOrder.jsp</result>
+			<result name="buySuccess">/jsp/success.jsp</result>
 		</action>
 	</package>
 
@@ -64,7 +65,7 @@
 			<result name="book">/jsp/admin/book.jsp</result>
 			<result name="mam">/jsp/admin/order.jsp</result>
 			<result name="classOrder" type="redirect">
-				/order/o.action?method=classOrder
+				/order/o.action?method=count
 			</result>
 			<result name="authorize" type="redirect">
 				/admin/auth.action?method=show

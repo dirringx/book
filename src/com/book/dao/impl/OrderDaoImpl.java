@@ -34,9 +34,12 @@ public class OrderDaoImpl extends BaseDaoImpl<Order> implements OrderDao {
 		return orders.get(0);
 	}
 
-	public List<Order> findClassOrderByStudentID(int id) {
+	public Order findClassOrderByStudentID(int id) {
 		String hql = "from Order o where o.groupOrder = true and o.student.id = ?";
-		return (List<Order>) this.getHibernateTemplate().find(hql, id);
+		List<Order> orders = (List<Order>) this.getHibernateTemplate().find(hql, id);
+		if (orders == null || orders.isEmpty())
+			return null;
+		return orders.get(0);
 	}
 
 }

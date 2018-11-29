@@ -35,6 +35,8 @@
                 <label for="dean">教务员</label>
                 <input id="administrator" name="permission" type="radio" value="2" >
                 <label for="administrator">管理员</label>
+                <input id="commissary" name="permission" type="radio" value="3" >
+                <label for="commissary">学习委员</label>
             </div>
             <div class="startLogin">
                 <input id="login" type="submit" value="登录">

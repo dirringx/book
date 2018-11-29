@@ -34,5 +34,5 @@ public interface OrderService extends BaseService<Order>{
 	 */	
 	Order findByorderNo(String orderNo);
 	
-	List<Order> findClassOrderByStudentID(int id);
+	Order findClassOrderByStudentID(int id);
 }

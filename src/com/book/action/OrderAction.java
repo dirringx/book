@@ -2,8 +2,10 @@ package com.book.action;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -43,7 +45,7 @@ public class OrderAction extends BaseAction {
 	private String orderNo;
 
 	private String classOrder;
-	
+
 	private String price;
 
 	private String isbn;
@@ -52,6 +54,10 @@ public class OrderAction extends BaseAction {
 	 * 购买状态
 	 */
 	private String np;
+
+	public String buySuccess() {
+		return "buySuccess";
+	}
 
 	/**
 	 * 显示学生下的订单信息
@@ -178,7 +184,7 @@ public class OrderAction extends BaseAction {
 		}
 
 		Float totalAmount = 0f;
-		
+
 		for (OrderItem ot : orderItems) {
 			OrderItem orderItem = orderItemService.findByID(OrderItem.class, ot.getId());
 			orderItem.setQuantity(ot.getQuantity());
@@ -189,9 +195,9 @@ public class OrderAction extends BaseAction {
 		}
 
 		Order order = orderService.findByorderNo(orderNo);
-		order.setPrice(totalAmount);;
+		order.setPrice(totalAmount);
 		orderService.update(order);
-		
+
 		cg.setMessage("订单修改成功！");
 		cg.setStatus("200");
 		cg.setData("NULL");
@@ -291,9 +297,9 @@ public class OrderAction extends BaseAction {
 			order.setPay(true);
 			orderService.update(order);
 		}
-		if("1".equals(this.classOrder)){
+		if ("1".equals(this.classOrder)) {
 			return classOrder();
-		}else{
+		} else {
 			return show();
 		}
 	}
@@ -304,7 +310,8 @@ public class OrderAction extends BaseAction {
 			return "login";
 		Order order = null;
 		try {
-			List<Order> orders = orderService.findClassOrderByStudentID(student.getId());
+			List<Order> orders = new ArrayList<Order>();
+			orders.add(orderService.findClassOrderByStudentID(student.getId()));
 			// 未完成订单集合
 			if ("1".equals(this.np)) {
 				Iterator<Order> ordersIterator = orders.iterator();
@@ -313,7 +320,6 @@ public class OrderAction extends BaseAction {
 					if (order.getPay())
 						ordersIterator.remove();
 				}
-				System.out.println(orders);
 			}
 			// 已经完成订单集合
 			if ("2".equals(this.np)) {
@@ -323,13 +329,97 @@ public class OrderAction extends BaseAction {
 					if (!order.getPay())
 						ordersIterator.remove();
 				}
-				System.out.println(orders);
 			}
 			ActionContextUtils.setAttributeToSession("class_orders", orders);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return "classOrder";
+	}
+
+	/**
+	 * 统计班级订单
+	 * 
+	 * @return
+	 */
+	public String count() {
+		Student student = studentService.findStudentBystudentID("201610098000");
+		Order classOrder = orderService.findClassOrderByStudentID(student.getId());
+		Boolean flag = false;
+		if (classOrder != null) {
+			List<OrderItem> ots = new ArrayList<OrderItem>(classOrder.getOrderitems());
+			for (OrderItem ot : ots)
+				orderItemService.delete(ot);
+			flag = true;
+		} else {
+			classOrder = new Order();
+		}
+
+		// 设置下订单用户信息
+		classOrder.setStudent(student);
+		// 创建订单编号
+		classOrder.setOrderNo(StringUtils.createOrderNumber(1, 1));
+		// 订单产生时间
+		classOrder.setOrderTime(new Date());
+		// 订单付款状态，默认未付款false
+		classOrder.setPay(false);
+		// 班级订单
+		classOrder.setGroupOrder(true);
+		// 订单总金额
+		Float totalAmount = 0f;
+		List<Student> students = studentService.findStudentByclass(student.getStudentClass());
+		Map<String, Book> bookMap = new HashMap<String, Book>();
+		for (Student stu : students) {
+			List<Order> os = orderService.findOrderBystudentID(stu.getId());
+			for (Order o : os) {
+				if (o.getGroupOrder())
+					continue;
+				for (OrderItem ot : o.getOrderitems()) {
+					String ISBN = ot.getBook().getISBN();
+					Integer quantity = ot.getQuantity();
+					Book b = bookMap.get(ISBN);
+					if (b == null) {
+						ot.getBook().setNumber(quantity);
+						bookMap.put(ISBN, ot.getBook());
+					} else {
+						b.setNumber(quantity + b.getNumber());
+						bookMap.put(ISBN, b);
+					}
+				}
+			}
+
+		}
+		for (Map.Entry<String, Book> entry : bookMap.entrySet()) {
+			System.out.println("Key = " + entry.getKey() + ", Value = " + entry.getValue().getNumber());
+			Book b = entry.getValue();
+			// 创建订单项
+			OrderItem orderItem = new OrderItem();
+			// 设置订单
+			orderItem.setOrder(classOrder);
+			// 设置订单项中书籍
+			orderItem.setBook(b);
+			// 设置数量
+			orderItem.setQuantity(b.getNumber());
+			// 设置购买时价格
+			orderItem.setPurchasePrice(b.getDiscount());
+			// 计算总金额
+			totalAmount += b.getDiscount() * b.getNumber();
+			orderItemService.add(orderItem);
+		}
+		try {
+			if (flag == false && totalAmount > 0) {
+				// 订单总金额
+				classOrder.setPrice(totalAmount);
+				orderService.add(classOrder);
+			} else {
+				// 订单总金额
+				classOrder.setPrice(totalAmount);
+				orderService.update(classOrder);
+			}
+		} catch (Exception e) {
+		
+		}
+		return this.classOrder();
 	}
 
 	public String getOrderItemJson() {
@@ -387,5 +477,5 @@ public class OrderAction extends BaseAction {
 	public void setClassOrder(String classOrder) {
 		this.classOrder = classOrder;
 	}
-	
+
 }

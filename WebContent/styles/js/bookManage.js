@@ -94,27 +94,25 @@ addBook.onclick = function(){
     cover.className = "db";
     addBox.className = "db";
 }
-
 //点击删除
-var delBook = document.getElementById("delBook");
-delBook.onclick = function(){ 
-	delBook();
-//    if(selected >0){
-//        for(var i=0;i<tbody.rows.length;){
-//            if(tbody.rows[i].cells[6].className == "select"){
-////                thead.rows[0].cells[6].className = "unselect";
-//                tbody.removeChild(tbody.rows[i]);
-//                selected--;
-//            }
-//            else
-//                i++;
-//        }
-       
-//    }
-//    else{
-//        alert("请选择要删除的书籍");
-//    }
-}
+// var delBook = document.getElementById("delBook");
+// delBook.onclick = function(){
+//     if(selected >0){
+//         for(var i=0;i<tbody.rows.length;){
+//             if(tbody.rows[i].cells[6].className == "select"){
+//                 thead.rows[0].cells[6].className = "unselect";
+//                 tbody.removeChild(tbody.rows[i]);
+//                 selected--;
+//             }
+//             else
+//                 i++;
+//         }
+//     }
+//     else{
+//         alert("请选择要删除的书籍");
+//     }
+// }
+
 //取消添加
 addCancel.onclick = function(){
     cover.className = "dn";
@@ -124,23 +122,99 @@ addCancel.onclick = function(){
 addConfirm.onclick = function(){
     saveBook();
 }
-
-//上传文件
-var btn = document.getElementById("btn");
-var updataFile = document.getElementById("file");
-
-updataFile.onchange = function(){
-	var data = new FormData(btn[0]);
-	console.log(data);
-	 $.ajax({
-	    url : "http://bookexcel.yogasol.xin/api/send",
-		data : data,
-		dataType : "JSON",
-		type : "POST",
-	    cache : false,
-	    async : false,
-	    success : function(result) {
-	       console.log(result);
-	    }
-	});
+var form = addBox.getElementsByTagName("form");
+function saveBook() {
+    //获取input
+    var input = $(form).find("input");
+    //新建对象
+    book = {};
+    //循环所有inputs，把input中的name和value变成对象中的属性和值
+    for (var j = 0; j < input.length; j++) {
+        var o = input[j];
+        book[$(o).attr('name')] = $(o).val();
+    }
+    bookType = {}
+    bookType["college"] = $('#college').val();
+    bookType["grade"] = $('#grade').val();
+    bookType["major"] = $('#major').val();
+    book = JSON.stringify(book)
+    bookType = JSON.stringify(bookType)
+    url = "${ctx}/book/b.action?method=addBook";
+    alert(book);
+    alert(bookType);
+    $.ajax({
+        url : url,
+        data : {
+            bookJson : book,
+            bookTypeJson : bookType
+        },
+        dataType : "JSON",
+        type : "POST",
+        cache : false,
+        async : false,
+        success : function(result) {
+            if (typeof (result) != undefined && result.status == '200') {
+                alert(result.message);
+                window.location.href = returnURL;
+            }
+            if (typeof (result) != undefined && result.status == '-1') {
+                alert(result.message);
+                window.location.href = returnURL;
+            }
+        }
+    });
 }
+//上传cexel
+ var updataFile = document.getElementById("file");
+ console.log(updataFile);
+ updataFile.onchange = function(){
+     //加载中...
+     var opts = {
+         lines: 13,
+         length: 20,
+         width: 10,
+         radius: 30,
+         corners: 1,
+         rotate: 0,
+         direction: 1,
+         color: '#dcdcdc',
+         speed: 1,
+         trail: 60,
+         shadow: false,
+         hwaccel: false,
+         className: 'spinner',
+         zIndex: 2e9,
+         top: '50%',
+         left: '50%'
+     };
+
+     var excelNmae = updataFile.value;
+     console.log(excelNmae)
+     var fileTarr = excelNmae.split(".");
+     console.log(fileTarr)
+     //切割出后缀文件名
+     var filetype = fileTarr[fileTarr.length-1];
+     console.log(filetype)
+     if(filetype == "xlsx" || filetype == "xls"){
+         cover.className="db";
+         var spinner = new Spinner(opts).spin(cover);
+         //传文件
+         $.ajaxFileUpload({
+             url:'http://bookexcel.yogasol.xin/api/send',
+             type:'POST',
+             secureuri: false,
+             fileElementId:'file',
+             dataType:'json',
+             cache : false,
+		     async : false,
+             success:function(result){
+            	 alert(result)
+             },
+             error : function(){
+             }
+         })
+     }
+     else{
+         alert("请上传正确的excel文件");
+     }
+ }
