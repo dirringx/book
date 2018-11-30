@@ -20,7 +20,6 @@
 		onload = function() {
 			setInterval(go, 1000);
 		};
-
 		var x = 3; //利用了全局变量来执行 
 		function go() {
 			x--;

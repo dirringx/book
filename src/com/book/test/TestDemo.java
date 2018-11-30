@@ -4,6 +4,7 @@ import java.util.Date;
 
 import javax.annotation.Resource;
 
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
@@ -48,14 +49,13 @@ public class TestDemo extends AbstractJUnit4SpringContextTests {
 	@Resource(name = "orderItemDao")
 	private OrderItemDao orderItemDao;
 
-	
+	@Test
 	public void Init() {
 		testAddManager();
 		testAddStudent();
 		testAddBook();
 		test1BookToNCourse();
 	}
-
 	
 	public void testAddManager() {
 		Manager manager = new Manager("admin", "20161001", new MD5().getMD5ofStr("123456"), 1);

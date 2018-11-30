@@ -9,6 +9,9 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.hibernate.HibernateException;
+import org.springframework.orm.hibernate5.HibernateOptimisticLockingFailureException;
+
 import com.book.core.util.ActionContextUtils;
 import com.book.core.util.CommonMsg;
 import com.book.core.util.JsonUtils;
@@ -404,7 +407,15 @@ public class OrderAction extends BaseAction {
 			orderItem.setPurchasePrice(b.getDiscount());
 			// 计算总金额
 			totalAmount += b.getDiscount() * b.getNumber();
-			orderItemService.add(orderItem);
+			
+			if (flag == false) {
+				classOrder.getOrderitems().add(orderItem);
+			}
+			
+			if(flag == true){
+				orderItemService.add(orderItem);
+			}
+			
 		}
 		try {
 			if (flag == false && totalAmount > 0) {
@@ -416,8 +427,10 @@ public class OrderAction extends BaseAction {
 				classOrder.setPrice(totalAmount);
 				orderService.update(classOrder);
 			}
-		} catch (Exception e) {
-		
+		} catch (HibernateOptimisticLockingFailureException e) {
+			System.out.println("主表主键异常");
+		}catch(HibernateException he){
+			he.printStackTrace();
 		}
 		return this.classOrder();
 	}
