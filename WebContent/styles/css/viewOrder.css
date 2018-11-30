@@ -1,0 +1,179 @@
+html,
+body,
+div,
+ul,
+li,
+span,
+img,
+a,
+button,
+input,
+select,
+table,
+td,
+tr,
+th,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+header,
+section {
+    margin: 0;
+    padding: 0;
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+img {
+    border: 0;
+}
+
+input,
+button,
+select,
+a {
+    outline: 0;
+    border: 0;
+}
+
+.clear {
+    clear: both;
+}
+.dn{
+    display: none;
+}
+.db{
+    display: block;
+}
+
+html,body{
+    width: 100%;
+    height: 100%;
+    font-family: "微软雅黑";
+}
+.wrap{
+    width: 100%;
+    height: 100%;
+    min-width: 1060px;
+    min-height: 450px;
+}
+.head{
+    position: relative;
+    padding: 15px 2%;
+    height: 40px;
+    text-align: right;
+    overflow: hidden;
+}
+.home{
+    float: left;
+}
+.home>img{
+    width: 50px;
+}
+.teacher{
+    margin-right: 20px;
+    font-size: 16px;
+    color: #444;
+}
+.loginout{
+    display: inline-block;
+    width: 58px;
+    font-size: 18px;
+    color: #2397ee;
+    text-indent: 1.2em;
+    background:url(../img/loginout.png) no-repeat center left;
+}
+.border{
+    position: absolute;
+    bottom: 10px;
+    right: 2%;
+}
+
+.title{
+    margin-top: 10px;
+    font-weight: normal;
+    font-size: 25px;
+    color: #ff6761;
+    text-align: center;
+}
+.summary{
+    width: 95%;
+    margin: 10px auto;
+    height: 40px;
+    line-height: 40px;
+    overflow: hidden;
+    /* border: 1px solid red; */
+}
+.total-num,.total-money{
+    margin-right: 40px;
+    font-size: 18px;
+    color: #444;
+}
+#totalNum,#totalMoney{
+    font-size: 22px;
+    font-weight: bold;
+    color: #ffc917;
+}
+#totalMoney{
+    color: #ff312a;
+}
+#download{
+    float: right;
+    width: 180px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #ff8080;
+    border-radius: 5px;
+    cursor: pointer;
+}
+#download:hover{
+    background-color: #f85151;
+    color: #fff;
+}
+
+#table{
+    width: 95%;
+    margin: 0 auto;
+    table-layout: fixed;
+}
+.tr-bg{
+    background-color: #ffe6e6;
+}
+#table tr th{
+    height: 50px;
+    font-weight: normal;
+    font-size: 18px;
+    color: #fff;
+    background-color: #ffa9a9;
+}
+tr th+th,tr td+td{
+    border-left: 1px solid #ff554f;
+}
+#table tr td{
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    color: #444;
+    border-bottom: 1px solid #ff9c9c;
+}
+.stu-id{
+    width: 13%;
+}
+.stu-name{
+    width: 10%;
+}
+.number,.money{
+    width: 7%;
+}

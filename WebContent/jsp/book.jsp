@@ -23,7 +23,7 @@
                 <span class="price">${book.discount}</span>
                 <p class="front">折前：<span class="front-price">${book.price}</span></p>
                 <span class="number-text">数量：</span>
-                <input class="number" name="number" type="number" value="1"/>
+                <input class="number" name="number" type="number" min="0" value="1"/>
             </div>
         </li>
         </s:iterator>
@@ -115,14 +115,30 @@
 	    })
 		
 	    //书的数量改变
-	    book_number.change(function(){
-	        if(select_box[this.index].className == "select-box yes"){
-	            all_money -= parseFloat(price[this.index].innerHTML)*book_number[this.index].count;
+//	    book_number.change(function(){
+//	        if(select_box[this.index].className == "select-box yes"){
+//	            all_money -= parseFloat(price[this.index].innerHTML)*book_number[this.index].count;
+//	            all_money += parseFloat(price[this.index].innerHTML)*parseInt(book_number[this.index].value);
+//	            book_number[this.index].count = parseInt(book_number[this.index].value);
+//	        }        
+//	        money.html("¥"+all_money.toFixed(2));
+//	    })
+	    //书的数量改变
+        book_number.change(function(){
+        	//如果输入小于0的数量
+        	if(parseInt(book_number[this.index].value)<0){
+        		book_number[this.index].value = Math.abs(parseInt(book_number[this.index].value));
+        	}
+        	else if(book_number[this.index].value == ""){
+        		book_number[this.index].value = 0;
+        	}
+            if(select_box[this.index].className == "select-box yes"){
+            	all_money -= parseFloat(price[this.index].innerHTML)*book_number[this.index].count;
 	            all_money += parseFloat(price[this.index].innerHTML)*parseInt(book_number[this.index].value);
-	            book_number[this.index].count = parseInt(book_number[this.index].value);
-	        }        
-	        money.html("¥"+all_money.toFixed(2));
-	    })
+            }
+            book_number[this.index].count = parseInt(book_number[this.index].value);
+            money.html("¥"+all_money.toFixed(2));
+        })
 	    
 	    function buyBook() {
 	    	//获取tbody下的所有tr原素
