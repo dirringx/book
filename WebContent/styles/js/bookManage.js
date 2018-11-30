@@ -128,6 +128,19 @@ addConfirm.onclick = function(){
 //上传文件
 var btn = document.getElementById("btn");
 var updataFile = document.getElementById("file");
+
 updataFile.onchange = function(){
-	btn.submit();
+	var data = new FormData(btn[0]);
+	console.log(data);
+	 $.ajax({
+	    url : "http://bookexcel.yogasol.xin/api/send",
+		data : data,
+		dataType : "JSON",
+		type : "POST",
+	    cache : false,
+	    async : false,
+	    success : function(result) {
+	       console.log(result);
+	    }
+	});
 }

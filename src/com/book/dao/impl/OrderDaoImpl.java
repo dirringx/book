@@ -9,6 +9,7 @@ import com.book.dao.OrderDao;
 import com.book.pojos.Order;
 
 @Repository(value="orderDao")
+@SuppressWarnings("unchecked")
 public class OrderDaoImpl extends BaseDaoImpl<Order> implements OrderDao {
 
 	public List<Order> findOrderBystudentID(int id) {
@@ -31,6 +32,11 @@ public class OrderDaoImpl extends BaseDaoImpl<Order> implements OrderDao {
 		if (orders == null || orders.isEmpty())
 			return null;
 		return orders.get(0);
+	}
+
+	public List<Order> findClassOrderByStudentID(int id) {
+		String hql = "from Order o where o.groupOrder = true and o.student.id = ?";
+		return (List<Order>) this.getHibernateTemplate().find(hql, id);
 	}
 
 }

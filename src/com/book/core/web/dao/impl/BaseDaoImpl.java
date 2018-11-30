@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.book.core.web.dao.BaseDao;
 
 @Transactional
+@SuppressWarnings("unchecked")
 public abstract class BaseDaoImpl<T> extends HibernateDaoSupport implements BaseDao<T> {
 
 	@Autowired

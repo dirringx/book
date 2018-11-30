@@ -9,6 +9,7 @@ import com.opensymphony.xwork2.ActionContext;
 /**
  * 处理ActionContext中的关于request,session,application等范围对象中的方法。
  */
+@SuppressWarnings({ "unchecked", "rawtypes" })
 public final class ActionContextUtils {
 
 	private ActionContextUtils() {

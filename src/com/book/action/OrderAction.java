@@ -42,6 +42,8 @@ public class OrderAction extends BaseAction {
 
 	private String orderNo;
 
+	private String classOrder;
+	
 	private String price;
 
 	private String isbn;
@@ -64,16 +66,19 @@ public class OrderAction extends BaseAction {
 			return "login";
 
 		Order order = null;
+
 		try {
 			List<Order> orders = orderService.findOrderBystudentID(student.getId());
+
 			// 未完成订单集合
 			if ("1".equals(this.np)) {
 				Iterator<Order> ordersIterator = orders.iterator();
 				while (ordersIterator.hasNext()) {
 					order = ordersIterator.next();
 					if (order.getPay())
-						orders.remove(order);
+						ordersIterator.remove();
 				}
+				System.out.println(orders);
 			}
 
 			// 已经完成订单集合
@@ -82,12 +87,14 @@ public class OrderAction extends BaseAction {
 				while (ordersIterator.hasNext()) {
 					order = ordersIterator.next();
 					if (!order.getPay())
-						orders.remove(order);
+						ordersIterator.remove();
 				}
+				System.out.println(orders);
 			}
+
 			ActionContextUtils.setAttributeToSession("stu_orders", orders);
 		} catch (Exception e) {
-			
+			e.printStackTrace();
 		}
 		return "show";
 	}
@@ -170,13 +177,21 @@ public class OrderAction extends BaseAction {
 			}
 		}
 
+		Float totalAmount = 0f;
+		
 		for (OrderItem ot : orderItems) {
 			OrderItem orderItem = orderItemService.findByID(OrderItem.class, ot.getId());
 			orderItem.setQuantity(ot.getQuantity());
-			orderItem.setPurchasePrice(orderItem.getPurchasePrice() * ot.getQuantity());
+			Float f = orderItem.getPurchasePrice() * ot.getQuantity();
+			orderItem.setPurchasePrice(f);
+			totalAmount += f;
 			orderItemService.update(orderItem);
 		}
 
+		Order order = orderService.findByorderNo(orderNo);
+		order.setPrice(totalAmount);;
+		orderService.update(order);
+		
 		cg.setMessage("订单修改成功！");
 		cg.setStatus("200");
 		cg.setData("NULL");
@@ -215,6 +230,7 @@ public class OrderAction extends BaseAction {
 		order.setOrderTime(new Date());
 		// 订单付款状态，默认未付款false
 		order.setPay(false);
+		order.setGroupOrder(false);
 		// 订单总金额
 		Float totalAmount = 0f;
 
@@ -269,6 +285,53 @@ public class OrderAction extends BaseAction {
 		return "ajaxReturn";
 	}
 
+	public String pay() {
+		Order order = orderService.findByorderNo(this.orderNo);
+		if (order != null) {
+			order.setPay(true);
+			orderService.update(order);
+		}
+		if("1".equals(this.classOrder)){
+			return classOrder();
+		}else{
+			return show();
+		}
+	}
+
+	public String classOrder() {
+		Student student = (Student) ActionContextUtils.getAttribute("student", "session");
+		if (student == null)
+			return "login";
+		Order order = null;
+		try {
+			List<Order> orders = orderService.findClassOrderByStudentID(student.getId());
+			// 未完成订单集合
+			if ("1".equals(this.np)) {
+				Iterator<Order> ordersIterator = orders.iterator();
+				while (ordersIterator.hasNext()) {
+					order = ordersIterator.next();
+					if (order.getPay())
+						ordersIterator.remove();
+				}
+				System.out.println(orders);
+			}
+			// 已经完成订单集合
+			if ("2".equals(this.np)) {
+				Iterator<Order> ordersIterator = orders.iterator();
+				while (ordersIterator.hasNext()) {
+					order = ordersIterator.next();
+					if (!order.getPay())
+						ordersIterator.remove();
+				}
+				System.out.println(orders);
+			}
+			ActionContextUtils.setAttributeToSession("class_orders", orders);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "classOrder";
+	}
+
 	public String getOrderItemJson() {
 		return orderItemJson;
 	}
@@ -316,4 +379,13 @@ public class OrderAction extends BaseAction {
 	public void setOrderNo(String orderNo) {
 		this.orderNo = orderNo;
 	}
+
+	public String getClassOrder() {
+		return classOrder;
+	}
+
+	public void setClassOrder(String classOrder) {
+		this.classOrder = classOrder;
+	}
+	
 }

@@ -7,7 +7,7 @@ import java.util.Set;
 
 @SuppressWarnings("serial")
 public class Order implements Serializable{
-	/** 主键 **/
+
 	private String id;
 
 	/** 学生 **/

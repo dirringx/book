@@ -34,4 +34,9 @@ public class StudentServiceImpl extends BaseServiceImpl<Student> implements Stud
 		return studentDao.findStudentByPermission(permission);
 	}
 
+	@Override
+	public Student findStudentByPermission(String id, String permission) {
+		return studentDao.findStudentByPermission(id, permission);
+	}
+
 }

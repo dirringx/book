@@ -14,10 +14,6 @@
 		<property name="name" column="book_name" type="java.lang.String"
 			length="20" />
 
-		<!-- 所属课程 -->
-		<property name="className" column="book_class_name" type="java.lang.String"
-			length="20" />
-
 		<!-- 作者 -->
 		<property name="author" column="book_author" type="java.lang.String"
 			length="20" />
@@ -44,15 +40,19 @@
 		<property name="press" column="book_press" type="java.lang.String"
 			length="50" />
 
-		<many-to-one name="bookType" column="booktype_id" cascade="save-update"
-			class="com.book.pojos.BookType" />
-
 		<!-- 1-N关系 -->
-		<set name="orderitems" inverse="true" lazy="false" cascade="save-update"
+		<set name="orderitems" lazy="false" cascade="save-update"
 			table="orderItems">
 			<key column="book_id" />
 			<one-to-many class="com.book.pojos.OrderItem" />
 		</set>
-
+		
+		<!-- 1-N关系 -->
+		<set name="bookItems"  lazy="false" cascade="save-update"
+			table="book_item">
+			<key column="book_id" />
+			<one-to-many class="com.book.pojos.BookItem" />
+		</set>
+		
 	</class>
 </hibernate-mapping>

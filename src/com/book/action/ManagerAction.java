@@ -2,26 +2,23 @@ package com.book.action;
 
 import javax.annotation.Resource;
 
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Controller;
-
+import com.book.core.util.ActionContextUtils;
 import com.book.core.web.action.BaseAction;
-import com.book.service.ManagerService;
+import com.book.pojos.Student;
+import com.book.service.StudentService;
 
-@Controller(value = "managerAction")
-@Scope(value = "prototype")
 public class ManagerAction extends BaseAction {
 	private static final long serialVersionUID = 1L;
 
-	@Resource(name = "managerService")
-	private ManagerService managerService;
+	@Resource(name = "studentService")
+	private StudentService studentService;
+	
+	public String index() {
+		return SUCCESS;
+	}
 
 	public String toLogin() {
 		return "toLogin";
-	}
-
-	public String index() {
-		return SUCCESS;
 	}
 
 	public String book() {
@@ -34,5 +31,17 @@ public class ManagerAction extends BaseAction {
 
 	public String order() {
 		return "order";
+	}
+
+	public String classManager() {
+		Student student = (Student) ActionContextUtils.getAttribute("student", "session");
+		if (student == null)
+			return "login";
+		
+		if("1".equals(student.getPermission())){
+			return "classOrder";
+		}else{
+			return "login";
+		}
 	}
 }

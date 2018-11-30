@@ -12,6 +12,7 @@ import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import net.sf.json.JsonConfig;
 
+@SuppressWarnings("unchecked")
 public class JsonUtils {
 
 	/**
@@ -23,6 +24,7 @@ public class JsonUtils {
 	 *            对象Class类
 	 * @return java对象
 	 */
+	
 	public static <T> T jsonToBean(String jsonString, Class<T> beanCalss) {
 		JSONObject jsonObject = JSONObject.fromObject(jsonString);
 		T bean = (T) JSONObject.toBean(jsonObject, beanCalss);

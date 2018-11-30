@@ -18,7 +18,7 @@
 	<!-- 配置C3P0数据库连接池 -->
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
 		<property name="driverClass" value="com.mysql.jdbc.Driver" />
-		<property name="jdbcUrl" value="jdbc:mysql://127.0.0.1:3306/book" />
+		<property name="jdbcUrl" value="jdbc:mysql://127.0.0.1:3306/book?useUnicode=true&amp;characterEncoding=utf8&amp;useSSL=false" />
 		<property name="user" value="root" />
 		<property name="password" value="123456" />
 	</bean>
@@ -29,13 +29,15 @@
 		<property name="dataSource" ref="dataSource" />
 		<property name="hibernateProperties">
 			<props>
-				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL55Dialect</prop>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</prop>
 				<prop key="hibernate.show_sql">true</prop>
 				<prop key="hibernate.use_sql_comments">update</prop>
 				<prop key="hibernate.temp.use_jdbc_metadata_defaults">false</prop>
 				<prop key="cache.use_second_level_catch">false</prop>
 				<prop key="connection.autocommit">true</prop>
-				<prop key="hibernate.hbm2ddl.auto">update</prop>
+				<!--
+				<prop key="hibernate.hbm2ddl.auto">create</prop>
+				 -->
 			</props>
 		</property>
 		<!-- 映入实体映射文件 -->
@@ -44,9 +46,9 @@
 				<value>com/book/pojos/Book.hbm.xml</value>
 				<value>com/book/pojos/OrderItem.hbm.xml</value>
 				<value>com/book/pojos/Order.hbm.xml</value>
+				<value>com/book/pojos/BookItem.hbm.xml</value>
 				<value>com/book/pojos/Student.hbm.xml</value>
 				<value>com/book/pojos/Manager.hbm.xml</value>
-				<value>com/book/pojos/BookType.hbm.xml</value>
 				<value>com/book/pojos/Course.hbm.xml</value>
 			</list>
 		</property>
@@ -57,7 +59,5 @@
 		class="org.springframework.orm.hibernate5.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
-
 	<tx:annotation-driven transaction-manager="transactionManager" />
-
 </beans>
