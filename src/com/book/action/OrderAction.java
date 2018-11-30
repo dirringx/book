@@ -190,16 +190,15 @@ public class OrderAction extends BaseAction {
 		}
 
 		Float totalAmount = 0f;
-
+		
 		for (OrderItem ot : orderItems) {
 			OrderItem orderItem = orderItemService.findByID(OrderItem.class, ot.getId());
 			orderItem.setQuantity(ot.getQuantity());
-			Float f = orderItem.getPurchasePrice() * ot.getQuantity();
+			Float f = ot.getQuantity() * orderItem.getBook().getDiscount();
 			orderItem.setPurchasePrice(f);
 			totalAmount += f;
 			orderItemService.update(orderItem);
 		}
-
 		Order order = orderService.findByorderNo(orderNo);
 		order.setPrice(totalAmount);
 		orderService.update(order);
@@ -227,11 +226,6 @@ public class OrderAction extends BaseAction {
 
 		// 获取前台的书籍列表
 		List<Book> books = JsonUtils.jsonToBeanList(bookJson, Book.class);
-
-		for (Book b : books) {
-			System.out.println(b.getName() + "-->" + b.getNumber());
-		}
-
 		// 创建订单
 		Order order = new Order();
 		// 设置下订单用户信息
@@ -276,7 +270,6 @@ public class OrderAction extends BaseAction {
 
 		// 订单总金额
 		order.setPrice(totalAmount);
-		System.out.println(totalAmount);
 		if (totalAmount > 0) {
 			// 添加订单
 			orderService.add(order);
@@ -317,11 +310,7 @@ public class OrderAction extends BaseAction {
 		Order order = null;
 		try {
 			List<Order> orders = new ArrayList<Order>();
-
 			Order o = orderService.findClassOrderByStudentID(student.getId());
-			
-			System.out.println(o.getOrderNo() + "--" + o.getOrderitems().size());
-			
 			if (o.getOrderitems().size() > 0) {
 				orders.add(o);
 			} else {
@@ -352,6 +341,56 @@ public class OrderAction extends BaseAction {
 		return "classOrder";
 	}
 
+	public String viewOrder() {
+		try{
+			Student student = (Student) ActionContextUtils.getAttribute("m_student", "session");
+			if (student == null)
+				return "adminlogin";
+			Order classOrder = orderService.findClassOrderByStudentID(student.getId());
+			ActionContextUtils.setAttributeToSession("v_classOrder", classOrder);
+//			Map<String, Book> bookMap = new HashMap<String, Book>();
+			if (classOrder != null) {
+				List<OrderItem> ots = new ArrayList<OrderItem>(classOrder.getOrderitems());
+//				for(OrderItem orderItem : ots)
+//					bookMap.put(orderItem.getBook().getISBN(), orderItem.getBook());
+				ActionContextUtils.setAttributeToSession("c_orderItems", ots);
+			}
+			List<Student> students = studentService.findStudentByclass(student.getStudentClass());
+			List<Order> orders = new ArrayList<Order>();
+			for (Student stu : students) {
+				List<Order> os = orderService.findOrderBystudentID(stu.getId());
+				Iterator<Order> ordersIterator = os.iterator();
+				Order order = null;
+				while (ordersIterator.hasNext()) {
+					order = ordersIterator.next();
+					if (order.getGroupOrder()){
+						ordersIterator.remove();
+					}
+//					List<OrderItem> ots = new ArrayList<OrderItem>(order.getOrderitems());
+//					Iterator<OrderItem> otsIterator = ots.iterator();
+//					while(otsIterator.hasNext()){
+//						OrderItem orderItem = otsIterator.next();
+//						for (Map.Entry<String, Book> entry : bookMap.entrySet()) {
+//							if(orderItem.getBook().getISBN().equals(entry.getValue().getISBN()))
+//								continue;
+//							OrderItem oi = new OrderItem();
+//							oi.setBook(entry.getValue());
+//							oi.setQuantity(0);
+//							ots.add(oi);
+//							order.getOrderitems().add(oi);
+//						}
+//					}
+					order.setStudent(stu);
+				}
+				orders.addAll(os);
+			}
+			ActionContextUtils.setAttributeToSession("v_orders", orders);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "viewOrder";
+	}
+
 	/**
 	 * 统计班级订单
 	 * 
@@ -360,12 +399,14 @@ public class OrderAction extends BaseAction {
 	public String count() {
 		Student student = studentService.findStudentBystudentID("201610098000");
 		Order classOrder = orderService.findClassOrderByStudentID(student.getId());
+		String coNo = null;
 		Boolean flag = false;
 		if (classOrder != null) {
 			List<OrderItem> ots = new ArrayList<OrderItem>(classOrder.getOrderitems());
 			for (OrderItem ot : ots)
 				orderItemService.delete(ot);
 			flag = true;
+			coNo = classOrder.getOrderNo();
 		} else {
 			classOrder = new Order();
 		}
@@ -402,8 +443,11 @@ public class OrderAction extends BaseAction {
 				}
 			}
 		}
+		
+		if(bookMap.size() == 0)
+			return this.classOrder();
+		
 		for (Map.Entry<String, Book> entry : bookMap.entrySet()) {
-			System.out.println("Key = " + entry.getKey() + ", Value = " + entry.getValue().getNumber());
 			Book b = entry.getValue();
 			// 创建订单项
 			OrderItem orderItem = new OrderItem();
@@ -419,24 +463,26 @@ public class OrderAction extends BaseAction {
 			totalAmount += b.getDiscount() * b.getNumber();
 			if (flag == false)
 				classOrder.getOrderitems().add(orderItem);
-			else{
+			else {
 				orderItemService.add(orderItem);
 			}
 		}
+		
 		try {
 			if (flag == false && totalAmount > 0) {
 				// 订单总金额
 				classOrder.setPrice(totalAmount);
 				orderService.add(classOrder);
 			} else {
+				Order co = orderService.findByorderNo(coNo);
 				// 订单总金额
-				classOrder.setPrice(totalAmount);
-				orderService.update(classOrder);
+				co.setPrice(totalAmount);
+				orderService.update(co);
 			}
 		} catch (HibernateOptimisticLockingFailureException e) {
-			System.out.println("主表主键异常");
+			System.out.println("!");
 		} catch (HibernateException he) {
-			he.printStackTrace();
+			System.out.println("?");
 		}
 		return this.classOrder();
 	}

@@ -16,11 +16,11 @@
       	<form action="${ctx}/admin/a.action?method=login" method="post">
             <div class="user">
                 <label for="username">工号：</label>
-                <input type="text" id="username" name="workNumber" class="required" maxlength="8">
+                <input type="text" id="username" name="workNumber" class="required" maxlength="12">
             </div>
             <div class="psd">
                 <label for="psd">密码：</label>
-                <input type="password" id="psd" name="password" class="required" maxlength="8">
+                <input type="password" id="psd" name="password" class="required" maxlength="16">
             </div>
             <!-- 
 	            <div class="verification">

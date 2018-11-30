@@ -93,7 +93,7 @@
 		        <form id="btn" class="btn" enctype="multipart/form-data">
 		               <input id="file" type="file" name="data" multiple="multiple" value="请选择文件"/>
 		               <input id="importBook" type="button"  value="导入excel表" />
-		               <input id="delBook" type="button" value="删除" />
+		        	   <input id="delBook" type="button" onclick="delBook()" value="删除" />
 		        </form>
 				<div class="dn" id="addBox">
 		               <p class="tips">请输入以下教材信息</p>

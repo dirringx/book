@@ -18,7 +18,6 @@ public class StudentServiceImpl extends BaseServiceImpl<Student> implements Stud
 	private StudentDao studentDao;
 
 	public List<Student> findStudentByclass(String studentClass) {
-		System.out.println(studentDao.toString());
 		return studentDao.findStudentByclass(studentClass);
 	}
 

@@ -37,7 +37,6 @@
                             <th class="money">金额</th>
                         </tr>
                     </thead>
-                    
                     <tbody>
                     	<s:iterator value="#session.orderBookList" var="item">
                         <tr>

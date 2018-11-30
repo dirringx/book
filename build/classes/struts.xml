@@ -40,6 +40,8 @@
 			<result name="show">/jsp/order.jsp</result>
 			<result name="login">/jsp/login.jsp</result>
 			<result name="classOrder">/jsp/classOrder.jsp</result>
+			<result name="viewOrder">/jsp/admin/viewOrder.jsp</result>
+			<result name="adminlogin">/jsp/admin/login.jsp</result>
 			<result name="buySuccess">/jsp/success.jsp</result>
 		</action>
 	</package>
@@ -56,6 +58,7 @@
 		<action name="a" class="com.book.login.ManagerLoginAction">
 			<result name="jwy">/jsp/admin/book.jsp</result>
 			<result name="gly">/jsp/admin/order.jsp</result>
+			<result name="xs" type="redirect">/order/o.action?method=viewOrder</result>
 			<result name="toLogin">/jsp/admin/login.jsp</result>
 		</action>
 		<action name="m" class="com.book.action.ManagerAction">

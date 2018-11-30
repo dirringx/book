@@ -7,8 +7,9 @@ import com.book.core.util.MD5;
 import com.book.core.util.StringUtils;
 import com.book.core.web.action.BaseAction;
 import com.book.pojos.Manager;
+import com.book.pojos.Student;
 import com.book.service.ManagerService;
-
+import com.book.service.StudentService;
 import com.opensymphony.xwork2.ModelDriven;
 
 public class ManagerLoginAction extends BaseAction implements ModelDriven<Manager> {
@@ -16,6 +17,9 @@ public class ManagerLoginAction extends BaseAction implements ModelDriven<Manage
 
 	@Resource(name = "managerService")
 	private ManagerService managerService;
+
+	@Resource(name = "studentService")
+	private StudentService studentService;
 
 	/** 登陆页面 **/
 	private static final String LOGIN = "toLogin";
@@ -25,6 +29,9 @@ public class ManagerLoginAction extends BaseAction implements ModelDriven<Manage
 
 	/** 管理员操作页面 **/
 	private static final String GLY = "gly";
+
+	/** 学生操作页面 **/
+	private static final String XS = "xs";
 
 	private Manager manager;
 
@@ -48,6 +55,26 @@ public class ManagerLoginAction extends BaseAction implements ModelDriven<Manage
 		if (StringUtils.isEmpty(manager.getPassword())) {
 			ActionContextUtils.setAtrributeToRequest("msg", "密码不能为空或者出现非法字符!");
 			return LOGIN;
+		}
+
+		if (manager.getPermission() == 3) {
+			// 获取学生信息
+			Student stu = studentService.findStudentBystudentID(manager.getWorkNumber());
+
+			if (stu == null) {
+				ActionContextUtils.setAtrributeToRequest("msg", "账号不存在!");
+				return LOGIN;
+			}
+
+			// 验证密码
+			if (!new MD5().getMD5ofStr(manager.getPassword()).equals(stu.getPassword())) {
+				ActionContextUtils.setAtrributeToRequest("msg", "密码错误!");
+				return LOGIN;
+			}
+
+			// 用户登陆保存信息
+			ActionContextUtils.setAttributeToSession("m_student", stu);
+			return XS;
 		}
 
 		// 获取管理员信息
@@ -86,6 +113,8 @@ public class ManagerLoginAction extends BaseAction implements ModelDriven<Manage
 	 */
 	public String logout() {
 		ActionContextUtils.removeAttrFromSession("manager");
+		ActionContextUtils.removeAttrFromSession("m_student");
 		return LOGIN;
 	}
+
 }
