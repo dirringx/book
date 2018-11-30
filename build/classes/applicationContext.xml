@@ -30,10 +30,10 @@
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</prop>
-				<prop key="hibernate.show_sql">true</prop>
-				<prop key="hibernate.use_sql_comments">update</prop>
 				<prop key="hibernate.temp.use_jdbc_metadata_defaults">false</prop>
 				<prop key="cache.use_second_level_catch">false</prop>
+				<prop key="hibernate.use_sql_comments">update</prop>
+				<prop key="hibernate.show_sql">true</prop>
 				<prop key="connection.autocommit">true</prop>
 				<!--
 				<prop key="hibernate.hbm2ddl.auto">create</prop>

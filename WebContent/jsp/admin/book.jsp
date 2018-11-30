@@ -8,6 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" type="text/css"
 	href="${ctx}/styles/css/bookManage.css" />
+	
 <title>教材管理</title>
 </head>
 <body>
@@ -120,8 +121,8 @@
 	</div>
 	<div id="cover" class="dn"></div>
 	<script type="text/javascript" src="${ctx}/styles/js/jquery-1.8.0.min.js"></script>
-	<!-- <script type="text/javascript" src="${ctx}/styles/js/ajaxfileupload.js"></script> -->
-    <!-- <script type="text/javascript" src="${ctx}/styles/js/spin.min.js"></script> -->
+	<script type="text/javascript" src="${ctx}/styles/js/ajaxfileupload.js"></script>
+    <script type="text/javascript" src="${ctx}/styles/js/spin.min.js"></script>
 	<script type="text/javascript" src="${ctx}/styles/js/bookManage.js"></script>
 	
 	<script>

@@ -39,7 +39,7 @@
 
 		<!-- 1-N关系 -->
 		<set name="bookItems" lazy="false" cascade="save-update"
-			table="book_item">
+			table="bookitems">
 			<key column="course_id" />
 			<one-to-many class="com.book.pojos.BookItem" />
 		</set>

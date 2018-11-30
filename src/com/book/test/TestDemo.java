@@ -4,6 +4,7 @@ import java.util.Date;
 
 import javax.annotation.Resource;
 
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
@@ -15,6 +16,7 @@ import com.book.dao.BookItemDao;
 import com.book.dao.CourseDao;
 import com.book.dao.ManagerDao;
 import com.book.dao.OrderDao;
+import com.book.dao.OrderItemDao;
 import com.book.dao.StudentDao;
 import com.book.pojos.Book;
 import com.book.pojos.BookItem;
@@ -44,10 +46,17 @@ public class TestDemo extends AbstractJUnit4SpringContextTests {
 	@Resource(name = "managerDao")
 	private ManagerDao managerDao;
 
-	public void test() {
-		
-	}
+	@Resource(name = "orderItemDao")
+	private OrderItemDao orderItemDao;
 
+	@Test
+	public void Init() {
+		testAddManager();
+		testAddStudent();
+		testAddBook();
+		test1BookToNCourse();
+	}
+	
 	public void testAddManager() {
 		Manager manager = new Manager("admin", "20161001", new MD5().getMD5ofStr("123456"), 1);
 		managerDao.add(manager);
@@ -95,6 +104,15 @@ public class TestDemo extends AbstractJUnit4SpringContextTests {
 		stu.setCollege("计算机工程学院");
 		stu.setStudentClass("1");
 		stu.setPermission("");
+		studentDao.add(stu);
+
+		stu.setStudentName("stu004");
+		stu.setStudentID("201610098004");
+		stu.setPassword(new MD5().getMD5ofStr("201610098004"));
+		stu.setMajor("软件工程");
+		stu.setGrade("2016");
+		stu.setCollege("计算机工程学院");
+		stu.setStudentClass("5");
 		studentDao.add(stu);
 	}
 
@@ -194,7 +212,6 @@ public class TestDemo extends AbstractJUnit4SpringContextTests {
 		Course course = new Course();
 		course.setName("软件项目管理");
 		course.setGrade("2016");
-		// course.setTerm(1);
 		course.setMajor("软件工程");
 		course.setCollege("计算机工程学院");
 		course.setCreateTime(new Date());
@@ -204,7 +221,6 @@ public class TestDemo extends AbstractJUnit4SpringContextTests {
 		Course course1 = new Course();
 		course1.setName("软件项目管理");
 		course1.setGrade("2016");
-		// course1.setTerm(1);
 		course1.setMajor("计算机科学与技术");
 		course1.setCollege("计算机工程学院");
 		course1.setCreateTime(new Date());
@@ -228,7 +244,6 @@ public class TestDemo extends AbstractJUnit4SpringContextTests {
 		Course course2 = new Course();
 		course2.setName("软件项目管理");
 		course2.setGrade("2016");
-		// course2.setTerm(1);
 		course2.setMajor("信息与计算科学");
 		course2.setCollege("计算机工程学院");
 		course2.setCreateTime(new Date());
