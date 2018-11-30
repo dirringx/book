@@ -336,7 +336,6 @@ public class OrderAction extends BaseAction {
 			}
 			ActionContextUtils.setAttributeToSession("class_orders", orders);
 		} catch (Exception e) {
-			e.printStackTrace();
 		}
 		return "classOrder";
 	}
@@ -386,7 +385,6 @@ public class OrderAction extends BaseAction {
 			}
 			ActionContextUtils.setAttributeToSession("v_orders", orders);
 		}catch (Exception e) {
-			e.printStackTrace();
 		}
 		return "viewOrder";
 	}
@@ -480,9 +478,7 @@ public class OrderAction extends BaseAction {
 				orderService.update(co);
 			}
 		} catch (HibernateOptimisticLockingFailureException e) {
-			System.out.println("!");
 		} catch (HibernateException he) {
-			System.out.println("?");
 		}
 		return this.classOrder();
 	}

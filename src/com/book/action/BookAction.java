@@ -161,7 +161,6 @@ public class BookAction extends BaseAction {
 
 		if (books.size() > 0) {
 			for (Book b : books) {
-				System.out.println(b.getISBN());
 				if(b.getBookItems() != null){
 					for(BookItem bookItem : b.getBookItems())
 						bookItemService.delete(bookItem);

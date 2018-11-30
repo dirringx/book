@@ -95,8 +95,9 @@ addBook.onclick = function(){
     addBox.className = "db";
 }
 //点击删除
-// var delBook = document.getElementById("delBook");
-// delBook.onclick = function(){
+ var delBook = document.getElementById("delBook");
+ delBook.onclick = function(){
+	 delBook();
 //     if(selected >0){
 //         for(var i=0;i<tbody.rows.length;){
 //             if(tbody.rows[i].cells[6].className == "select"){
@@ -111,7 +112,7 @@ addBook.onclick = function(){
 //     else{
 //         alert("请选择要删除的书籍");
 //     }
-// }
+ }
 
 //取消添加
 addCancel.onclick = function(){
