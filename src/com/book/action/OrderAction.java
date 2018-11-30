@@ -78,29 +78,32 @@ public class OrderAction extends BaseAction {
 
 		try {
 			List<Order> orders = orderService.findOrderBystudentID(student.getId());
+			Iterator<Order> ordersIterator = orders.iterator();
+			while (ordersIterator.hasNext()) {
+				order = ordersIterator.next();
+				if (order.getGroupOrder())
+					ordersIterator.remove();
+			}
 
 			// 未完成订单集合
 			if ("1".equals(this.np)) {
-				Iterator<Order> ordersIterator = orders.iterator();
+				ordersIterator = orders.iterator();
 				while (ordersIterator.hasNext()) {
 					order = ordersIterator.next();
 					if (order.getPay())
 						ordersIterator.remove();
 				}
-				System.out.println(orders);
 			}
 
 			// 已经完成订单集合
 			if ("2".equals(this.np)) {
-				Iterator<Order> ordersIterator = orders.iterator();
+				ordersIterator = orders.iterator();
 				while (ordersIterator.hasNext()) {
 					order = ordersIterator.next();
 					if (!order.getPay())
 						ordersIterator.remove();
 				}
-				System.out.println(orders);
 			}
-
 			ActionContextUtils.setAttributeToSession("stu_orders", orders);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -314,7 +317,16 @@ public class OrderAction extends BaseAction {
 		Order order = null;
 		try {
 			List<Order> orders = new ArrayList<Order>();
-			orders.add(orderService.findClassOrderByStudentID(student.getId()));
+
+			Order o = orderService.findClassOrderByStudentID(student.getId());
+			
+			System.out.println(o.getOrderNo() + "--" + o.getOrderitems().size());
+			
+			if (o.getOrderitems().size() > 0) {
+				orders.add(o);
+			} else {
+				orders = null;
+			}
 			// 未完成订单集合
 			if ("1".equals(this.np)) {
 				Iterator<Order> ordersIterator = orders.iterator();
@@ -357,7 +369,6 @@ public class OrderAction extends BaseAction {
 		} else {
 			classOrder = new Order();
 		}
-
 		// 设置下订单用户信息
 		classOrder.setStudent(student);
 		// 创建订单编号
@@ -375,7 +386,7 @@ public class OrderAction extends BaseAction {
 		for (Student stu : students) {
 			List<Order> os = orderService.findOrderBystudentID(stu.getId());
 			for (Order o : os) {
-				if (o.getGroupOrder())
+				if (o.getGroupOrder() || !o.getPay())
 					continue;
 				for (OrderItem ot : o.getOrderitems()) {
 					String ISBN = ot.getBook().getISBN();
@@ -390,7 +401,6 @@ public class OrderAction extends BaseAction {
 					}
 				}
 			}
-
 		}
 		for (Map.Entry<String, Book> entry : bookMap.entrySet()) {
 			System.out.println("Key = " + entry.getKey() + ", Value = " + entry.getValue().getNumber());
@@ -407,15 +417,11 @@ public class OrderAction extends BaseAction {
 			orderItem.setPurchasePrice(b.getDiscount());
 			// 计算总金额
 			totalAmount += b.getDiscount() * b.getNumber();
-			
-			if (flag == false) {
+			if (flag == false)
 				classOrder.getOrderitems().add(orderItem);
-			}
-			
-			if(flag == true){
+			else{
 				orderItemService.add(orderItem);
 			}
-			
 		}
 		try {
 			if (flag == false && totalAmount > 0) {
@@ -429,7 +435,7 @@ public class OrderAction extends BaseAction {
 			}
 		} catch (HibernateOptimisticLockingFailureException e) {
 			System.out.println("主表主键异常");
-		}catch(HibernateException he){
+		} catch (HibernateException he) {
 			he.printStackTrace();
 		}
 		return this.classOrder();
@@ -490,5 +496,4 @@ public class OrderAction extends BaseAction {
 	public void setClassOrder(String classOrder) {
 		this.classOrder = classOrder;
 	}
-
 }
